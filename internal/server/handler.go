@@ -20,6 +20,7 @@ func GetUsersHandler(c *gin.Context) {
 // we will get just only the given user & their details with this function
 func GetUsersByIDHandler(c *gin.Context) {
 	//trimming leading '/'
+	//prevents errors in type conversion ('1' instead of '/1')
 	idFromUrl := strings.TrimPrefix(c.Param("id"), "/")
 	//converting given id to integer
 	id, err := strconv.Atoi(idFromUrl)
