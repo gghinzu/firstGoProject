@@ -4,14 +4,14 @@ import (
 	"errors"
 )
 
-// person structure
+// person structure, ok for json usage
 type Person struct {
-	ID        int
-	Name      string
-	Surname   string
-	Age       int
-	Gender    string
-	Education string
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Surname   string `json:"surname"`
+	Age       int    `json:"age"`
+	Gender    string `json:"gender"`
+	Education string `json:"education"`
 }
 
 // user list with mock data
