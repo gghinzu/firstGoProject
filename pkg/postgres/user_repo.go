@@ -36,10 +36,21 @@ func (r *UserRepository) GetUserByID(ID int) (*entity.User, error) {
 	return nil, errors.New("user not found")
 }
 
+// DeleteUserByID to delete a specific user by the given id
 func (r *UserRepository) DeleteUserByID(ID int) error {
 	for index, user := range Users {
 		if user.ID == ID {
 			Users = append(Users[:index], Users[index+1:]...)
+			return nil
+		}
+	}
+	return errors.New("user not found")
+}
+
+func (r *UserRepository) UpdateUserByID(id int, updatedUser entity.User) error {
+	for i, user := range Users {
+		if user.ID == id {
+			Users[i] = updatedUser
 			return nil
 		}
 	}

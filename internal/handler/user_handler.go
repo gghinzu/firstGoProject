@@ -11,6 +11,7 @@ type UserHandler struct {
 	service service.UserServicePort
 }
 
+// NewUserHandler is for initialization
 func NewUserHandler(service *service.UserService) *UserHandler {
 	return &UserHandler{service: service}
 }

@@ -7,4 +7,5 @@ type UserRepositoryPort interface {
 	GetAllUsers() []entity.User
 	GetUserByID(id int) (*entity.User, error)
 	DeleteUserByID(ID int) error
+	UpdateUserByID(ID int, newUser entity.User) error
 }
