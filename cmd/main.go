@@ -10,19 +10,22 @@ import (
 
 func main() {
 	// using gin framework
+	//grouping
 	router := gin.Default()
 
 	// dependency injection
 	repo := postgres.NewUserRepository()
-	serv := service.NewUserService(repo)
-	hand := handler.NewUserHandler(serv)
+
+	userService := service.NewUserService(repo)
+	userHandler := handler.NewUserHandler(userService)
 
 	// manipulating the url with gin
-	router.GET("/user-list", hand.GetUsersHandler)
+	router.GET("", userHandler.GetUsersHandler)
 	// we are using '/' notation in url convention instead of other special characters
 	// here, '*' is for capturing values for 'id'
 	// it will be shown like that -> http://localhost:3000/get-user-by-id/1
-	router.GET("/get-user-by-id/*id", hand.GetUserByIDHandler)
+	router.GET("/:id", userHandler.GetUserByIDHandler)
+	router.DELETE("/*id", userHandler.DeleteUserByIDHandler)
 
 	// validation
 	fmt.Println("Server is running on http://localhost:3000")

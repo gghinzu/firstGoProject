@@ -1,31 +1,16 @@
 package service
 
 import (
-	"errors"
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/repository"
+	"firstGoProject/pkg/postgres"
 )
 
 // UserServicePort is an interface, acts as a port to communicate with other layers
 type UserServicePort interface {
 	GetAllUsers() []entity.User
 	GetUserByID(id int) (*entity.User, error)
-}
-
-// GetAllUsers gets all users using an instance of UserService
-// (implementation of the interface UserServicePort)
-func (s *UserService) GetAllUsers() []entity.User {
-	return s.repo.FetchAllUsers()
-}
-
-// GetUserByID gets specified user with the given id using an instance of UserService
-// (implementation of the interface UserServicePort)
-func (s *UserService) GetUserByID(id int) (*entity.User, error) {
-	user, err := s.repo.FetchUserByID(id)
-	if err != nil {
-		return nil, errors.New("user not found")
-	}
-	return user, nil
+	DeleteUserByID(id int) error
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface
@@ -36,6 +21,6 @@ type UserService struct {
 // NewUserService to create a new instance, instead of directly initializing UserRepository
 // instead of returning *UserRepository, it returns the interface UserRepositoryPort
 // so that service layer doesn't need to know the exact struct
-func NewUserService(repo repository.UserRepositoryPort) UserServicePort {
+func NewUserService(repo *postgres.UserRepository) *UserService {
 	return &UserService{repo: repo}
 }

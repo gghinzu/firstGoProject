@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="gin framework is added and all the files edited according to it&#10;now, outputs are no longer plain-text, they are all json">
-      <change afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="tried to apply hexagonal architecture to the directory structure&#10;handlers, local repos, external repos and services are seperated now&#10;interfaces and structures are implemented&#10;updated main&#10;tidied up mod file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/person/person.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/server/handler.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/user_repo.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +149,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="a go project which is displaying the written user-list (in the code) as plain text &amp; parsing id value from url, given id helps to display specific user with details." />
     <MESSAGE value="gin framework is added and all the files edited according to it&#10;now, outputs are no longer plain-text, they are all json" />
-    <option name="LAST_COMMIT_MESSAGE" value="gin framework is added and all the files edited according to it&#10;now, outputs are no longer plain-text, they are all json" />
+    <MESSAGE value="tried to apply hexagonal architecture to the directory structure&#10;handlers, local repos, external repos and services are seperated now&#10;interfaces and structures are implemented&#10;updated main&#10;tidied up mod file" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried to apply hexagonal architecture to the directory structure&#10;handlers, local repos, external repos and services are seperated now&#10;interfaces and structures are implemented&#10;updated main&#10;tidied up mod file" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

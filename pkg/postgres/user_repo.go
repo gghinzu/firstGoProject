@@ -3,7 +3,6 @@ package postgres
 import (
 	"errors"
 	"firstGoProject/internal/domain/entity"
-	"firstGoProject/internal/domain/repository"
 )
 
 // Users list with mock data
@@ -18,21 +17,31 @@ var Users = []entity.User{
 // UserRepository is used since Go does not have explicit 'implements' keyword, an empty struct is used to implicitly implement interfaces
 type UserRepository struct{}
 
-func NewUserRepository() repository.UserRepositoryPort {
+func NewUserRepository() *UserRepository {
 	return &UserRepository{}
 }
 
-// FetchAllUsers for displaying all the users
-func (r *UserRepository) FetchAllUsers() []entity.User {
+// GetAllUsers for displaying all the users
+func (r *UserRepository) GetAllUsers() []entity.User {
 	return Users
 }
 
-// FetchUserByID to get a specific user's details
-func (r *UserRepository) FetchUserByID(ID int) (*entity.User, error) {
+// GetUserByID to get a specific user's details
+func (r *UserRepository) GetUserByID(ID int) (*entity.User, error) {
 	for _, user := range Users {
 		if user.ID == ID {
 			return &user, nil
 		}
 	}
 	return nil, errors.New("user not found")
+}
+
+func (r *UserRepository) DeleteUserByID(ID int) error {
+	for index, user := range Users {
+		if user.ID == ID {
+			Users = append(Users[:index], Users[index+1:]...)
+			return nil
+		}
+	}
+	return errors.New("user not found")
 }
