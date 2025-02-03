@@ -5,27 +5,28 @@ import (
 	"firstGoProject/internal/domain/entity"
 )
 
-func (service *UserService) UpdateUserByID(id int, updatedUser entity.User) error {
-	existingUser, err := service.repo.GetUserByID(id)
-	if err != nil {
+func (s *UserService) UpdateUserByID(id int, updatedUser *entity.UserDTO) error {
+	existingUser := s.repo.GetUserByID(id)
+
+	if existingUser == nil {
 		return errors.New("user not found")
-	}
+	} else {
+		if &updatedUser.Name != nil {
+			existingUser.Name = updatedUser.Name
+		}
+		if &updatedUser.Surname != nil {
+			existingUser.Surname = updatedUser.Surname
+		}
+		if updatedUser.Age > 0 && &updatedUser.Age != nil {
+			existingUser.Age = updatedUser.Age
+		}
+		if &updatedUser.Gender != nil {
+			existingUser.Gender = updatedUser.Gender
+		}
+		if &updatedUser.Education != nil {
+			existingUser.Education = updatedUser.Education
+		}
 
-	if updatedUser.Name != "" {
-		existingUser.Name = updatedUser.Name
+		return s.repo.UpdateUserByID(id, existingUser)
 	}
-	if updatedUser.Surname != "" {
-		existingUser.Surname = updatedUser.Surname
-	}
-	if updatedUser.Age > 0 {
-		existingUser.Age = updatedUser.Age
-	}
-	if updatedUser.Gender != "" {
-		existingUser.Gender = updatedUser.Gender
-	}
-	if updatedUser.Education != "" {
-		existingUser.Education = updatedUser.Education
-	}
-
-	return service.repo.UpdateUserByID(id, *existingUser)
 }

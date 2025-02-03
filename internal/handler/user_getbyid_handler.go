@@ -10,15 +10,13 @@ import (
 func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 	idStr := strings.TrimPrefix(c.Param("id"), "/")
 	id, err := strconv.Atoi(idStr)
+
 	if err != nil {
 		c.JSON(404, gin.H{"error": "Invalid ID"})
 		return
 	}
 
-	user, err := h.service.GetUserByID(id)
-	if err != nil {
-		c.JSON(404, gin.H{"error": "User not found"})
-		return
-	}
+	user := h.service.GetUserByID(id)
+
 	c.JSON(200, user)
 }

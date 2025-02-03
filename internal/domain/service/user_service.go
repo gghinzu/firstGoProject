@@ -9,9 +9,9 @@ import (
 // UserServicePort is an interface, acts as a port to communicate with other layers
 type UserServicePort interface {
 	GetAllUsers() []entity.User
-	GetUserByID(id int) (*entity.User, error)
+	GetUserByID(id int) *entity.User
 	DeleteUserByID(id int) error
-	UpdateUserByID(id int, newUser entity.User) error
+	UpdateUserByID(id int, updatedUser *entity.UserDTO) error
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface

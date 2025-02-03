@@ -27,13 +27,13 @@ func (r *UserRepository) GetAllUsers() []entity.User {
 }
 
 // GetUserByID to get a specific user's details
-func (r *UserRepository) GetUserByID(ID int) (*entity.User, error) {
+func (r *UserRepository) GetUserByID(ID int) *entity.User {
 	for _, user := range Users {
 		if user.ID == ID {
-			return &user, nil
+			return &user
 		}
 	}
-	return nil, errors.New("user not found")
+	return nil
 }
 
 // DeleteUserByID to delete a specific user by the given id
@@ -47,12 +47,11 @@ func (r *UserRepository) DeleteUserByID(ID int) error {
 	return errors.New("user not found")
 }
 
-func (r *UserRepository) UpdateUserByID(id int, updatedUser entity.User) error {
+func (r *UserRepository) UpdateUserByID(id int, updatedUser *entity.User) error {
 	for i, user := range Users {
 		if user.ID == id {
-			Users[i] = updatedUser
-			return nil
+			Users[i] = *updatedUser
 		}
 	}
-	return errors.New("user not found")
+	return nil
 }
