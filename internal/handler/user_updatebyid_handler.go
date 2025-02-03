@@ -2,7 +2,6 @@ package handler
 
 import (
 	"firstGoProject/internal/domain/entity"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -23,7 +22,6 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 	var updatedUser *entity.UserDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
-		fmt.Println("Error binding JSON:", err)
 		c.JSON(400, gin.H{"error": "Invalid request body"})
 		return
 	}

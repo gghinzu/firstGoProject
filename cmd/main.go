@@ -24,6 +24,7 @@ func main() {
 		users.GET("/:id", userHandler.GetUserByIDHandler)
 		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
+		users.POST("", userHandler.InsertNewUserHandler)
 	}
 
 	// validation

@@ -55,3 +55,13 @@ func (r *UserRepository) UpdateUserByID(id int, updatedUser *entity.User) error 
 	}
 	return nil
 }
+
+func (r *UserRepository) InsertNewUser(newUser *entity.User) error {
+	for _, user := range Users {
+		if user.ID == newUser.ID {
+			return errors.New("user is already exists")
+		}
+	}
+	Users = append(Users, *newUser)
+	return nil
+}

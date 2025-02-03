@@ -8,4 +8,5 @@ type UserRepositoryPort interface {
 	GetUserByID(id int) *entity.User
 	DeleteUserByID(ID int) error
 	UpdateUserByID(ID int, updatedUser *entity.User) error
+	InsertNewUser(newUser *entity.User) error
 }

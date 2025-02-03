@@ -12,6 +12,7 @@ type UserServicePort interface {
 	GetUserByID(id int) *entity.User
 	DeleteUserByID(id int) error
 	UpdateUserByID(id int, updatedUser *entity.UserDTO) error
+	InsertNewUser(newUser *entity.UserDTO) error
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface
