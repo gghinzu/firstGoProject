@@ -3,7 +3,7 @@ package main
 import (
 	"firstGoProject/internal/domain/service"
 	"firstGoProject/internal/handler"
-	"firstGoProject/pkg/postgres"
+	"firstGoProject/pkg/postgre"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -13,18 +13,20 @@ func main() {
 	router := gin.Default()
 
 	// dependency injections
-	userRepository := postgres.NewUserRepository()
+	userRepository := postgre.NewUserRepository()
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
 
+	userRepository.DB = postgre.Connection()
+
 	// router grouping
-	users := router.Group("/users")
+	users := router.Group("/user")
 	{
 		users.GET("", userHandler.GetUsersHandler)
 		users.GET("/:id", userHandler.GetUserByIDHandler)
 		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
-		users.POST("", userHandler.InsertNewUserHandler)
+		users.POST("", userHandler.CreateUserHandler)
 	}
 
 	// validation

@@ -4,17 +4,16 @@ import (
 	"firstGoProject/internal/domain/entity"
 )
 
-func (s *UserService) InsertNewUser(newUser *entity.UserDTO) error {
-	converted, err := ConvertToUser(newUser)
+func (s *UserService) CreateUser(newUser *entity.CreateUserDTO) error {
+	converted, err := CreateConvertToUser(newUser)
 	if err != nil {
 		return err
 	}
-	return s.repo.InsertNewUser(converted)
+	return s.repo.CreateUser(converted)
 }
 
-func ConvertToUser(dto *entity.UserDTO) (*entity.User, error) {
+func CreateConvertToUser(dto *entity.CreateUserDTO) (*entity.User, error) {
 	user := &entity.User{
-		ID:        dto.ID,
 		Name:      dto.Name,
 		Surname:   dto.Surname,
 		Age:       dto.Age,

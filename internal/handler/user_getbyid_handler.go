@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// GetUserByIDHandler uses the service layer's methods using their instances
+// GetUserByIDHandler uses the s layer's methods using their instances
 func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 	idStr := strings.TrimPrefix(c.Param("id"), "/")
 	id, err := strconv.Atoi(idStr)
@@ -16,7 +16,7 @@ func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	user := h.service.GetUserByID(id)
+	user, _ := h.s.GetUserByID(id)
 
 	c.JSON(200, user)
 }

@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetUsersHandler uses the service layer's methods using their instances
+// GetUsersHandler uses the s layer's methods using their instances
 func (h *UserHandler) GetUsersHandler(c *gin.Context) {
-	users := h.service.GetAllUsers()
+	users := h.s.GetAllUsers()
 	c.JSON(200, users)
 }

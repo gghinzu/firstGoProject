@@ -1,8 +1,7 @@
 package entity
 
-// User structure, ok for json usage
 type User struct {
-	ID        int    `json:"id"`
+	ID        int    `json:"id" gorm:"primaryKey;autoIncrement:true;unique"`
 	Name      string `json:"name"`
 	Surname   string `json:"surname"`
 	Age       int    `json:"age"`
@@ -10,9 +9,16 @@ type User struct {
 	Education string `json:"education"`
 }
 
-type UserDTO struct {
-	ID        int    `json:"id"`
+type CreateUserDTO struct {
 	Name      string `json:"name"`
+	Surname   string `json:"surname"`
+	Age       int    `json:"age"`
+	Gender    string `json:"gender"`
+	Education string `json:"education"`
+}
+
+type UpdateUserDTO struct {
+	Name      string `json:"name" `
 	Surname   string `json:"surname"`
 	Age       int    `json:"age"`
 	Gender    string `json:"gender"`

@@ -19,14 +19,14 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	var updatedUser *entity.UserDTO
+	var updatedUser *entity.UpdateUserDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
 		c.JSON(400, gin.H{"error": "Invalid request body"})
 		return
 	}
 
-	err = h.service.UpdateUserByID(id, updatedUser)
+	err = h.s.UpdateUserByID(id, updatedUser)
 
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
