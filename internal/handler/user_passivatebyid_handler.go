@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
+func (h *UserHandler) PassivateUserByIDHandler(c *gin.Context) {
 	idStr := c.Param("id")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
@@ -15,23 +15,23 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 	}
 
 	if c.Request.Body == nil {
-		c.JSON(400, gin.H{"error": "Request body is empty"})
+		c.JSON(400, gin.H{"error": "request body is empty"})
 		return
 	}
 
-	var updatedUser *entity.UpdateUserDTO
+	var updatedUser *entity.ActivatePassivateUserDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid request body"})
+		c.JSON(400, gin.H{"error": "invalid request body"})
 		return
 	}
 
-	err = h.s.UpdateUserByID(id, updatedUser)
+	err = h.s.PassivateUserByID(id, updatedUser)
 
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 	}
 
 	// OK
-	c.JSON(200, gin.H{"message": "user is updated successfully"})
+	c.JSON(200, gin.H{"message": "user is passivated successfully"})
 }

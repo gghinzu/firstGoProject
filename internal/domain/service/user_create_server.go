@@ -4,6 +4,8 @@ import (
 	"firstGoProject/internal/domain/entity"
 )
 
+// CreateUser gets its own DTO, converts it to entity and sends the data to the repository
+// uses the instance of UserService (it connects the service with the repo)
 func (s *UserService) CreateUser(newUser *entity.CreateUserDTO) error {
 	converted, err := CreateConvertToUser(newUser)
 	if err != nil {

@@ -6,6 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
+// Connection method returns a postgres connection using GORM
 func Connection() *gorm.DB {
 	dsn := "host=localhost user=postgres password=mysecretpassword dbname=postgres port=5432 sslmode=disable"
 

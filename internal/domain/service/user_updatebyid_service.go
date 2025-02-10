@@ -4,6 +4,8 @@ import (
 	"firstGoProject/internal/domain/entity"
 )
 
+// UpdateUserByID gets an id and UserDTO as parameters, converts the DTO into the entity and sends it to database
+// uses the instance of UserService (it connects the service with the repo)
 func (s *UserService) UpdateUserByID(id int, updatedUser *entity.UpdateUserDTO) error {
 	converted, err := UpdateConvertToUser(updatedUser)
 	if err != nil {

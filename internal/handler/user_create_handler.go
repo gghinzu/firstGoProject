@@ -5,8 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Handlers connect HTTP layer with the service layer
+// arrange requests, validations and errors
 func (h *UserHandler) CreateUserHandler(c *gin.Context) {
-
 	if c.Request.Body == nil {
 		c.JSON(400, gin.H{"error": "Request body is empty"})
 		return

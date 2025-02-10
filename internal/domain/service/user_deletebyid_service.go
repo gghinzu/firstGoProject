@@ -1,7 +1,7 @@
 package service
 
-// DeleteUserByID gets all users using an instance of UserService
-// (implementation of the interface UserServicePort)
+// DeleteUserByID gets an id and deletes the user with this id, from database
+// uses the instance of UserService (it connects the service with the repo)
 func (s *UserService) DeleteUserByID(id int) error {
 	user, err := s.repo.GetUserByID(id)
 	if err != nil {
