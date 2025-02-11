@@ -1,24 +1,30 @@
 package service
 
 import (
+	"errors"
 	"firstGoProject/internal/domain/entity"
+	"fmt"
 )
 
 // UpdateUserByID gets an id and UserDTO as parameters, converts the DTO into the entity and sends it to database
 // uses the instance of UserService (it connects the service with the repo)
 func (s *UserService) UpdateUserByID(id int, updatedUser *entity.UpdateUserDTO) error {
-	converted, err := UpdateConvertToUser(updatedUser)
+	user, err := s.GetUserByID(id)
 	if err != nil {
-		return err
+		return fmt.Errorf("%v", err)
 	}
-	var user, errID = s.GetUserByID(id)
-	if errID != nil {
-		return err
+	converted := UpdateConvertToUser(updatedUser)
+	if converted == nil {
+		return errors.New("dto to entity conversion failed")
 	}
-	return s.repo.UpdateUserByID(user.ID, converted)
+	if user.Deleted != true {
+		return s.repo.UpdateUserByID(user.ID, converted)
+	} else {
+		return errors.New("user cannot be updated because it is soft deleted")
+	}
 }
 
-func UpdateConvertToUser(dto *entity.UpdateUserDTO) (*entity.User, error) {
+func UpdateConvertToUser(dto *entity.UpdateUserDTO) *entity.User {
 	user := &entity.User{
 		Name:      dto.Name,
 		Surname:   dto.Surname,
@@ -26,5 +32,5 @@ func UpdateConvertToUser(dto *entity.UpdateUserDTO) (*entity.User, error) {
 		Gender:    dto.Gender,
 		Education: dto.Education,
 	}
-	return user, nil
+	return user
 }

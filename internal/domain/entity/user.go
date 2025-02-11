@@ -10,6 +10,7 @@ type User struct {
 	Gender    string          `json:"gender" gorm:"not null"`
 	Education string          `json:"education" gorm:"not null"`
 	Status    enum.UserStatus `json:"status" gorm:"not null;default:1"`
+	Deleted   bool            `json:"deleted" gorm:"default:false"`
 }
 
 // for user creation, DTO

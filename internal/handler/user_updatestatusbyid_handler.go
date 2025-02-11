@@ -28,9 +28,6 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	err = h.s.UpdateUserStatusByID(id, userStat)
 
 	if err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(500, gin.H{"message": err.Error()})
 	}
-
-	// OK
-	c.JSON(200, gin.H{"message": "user is passivated successfully"})
 }

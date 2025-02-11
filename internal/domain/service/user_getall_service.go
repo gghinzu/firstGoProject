@@ -6,6 +6,6 @@ import (
 
 // GetAllUsers returns all the users in the database
 // uses the instance of UserService (it connects the service with the repo)
-func (s *UserService) GetAllUsers() *[]entity.User {
+func (s *UserService) GetAllUsers() (*[]entity.User, error) {
 	return s.repo.GetAllUsers()
 }

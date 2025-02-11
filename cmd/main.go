@@ -38,6 +38,7 @@ func main() {
 		users.PUT("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
 		users.POST("", userHandler.CreateUserHandler)
 		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
+		users.GET("/soft/:id", userHandler.SoftDeleteUserByIDHandler)
 	}
 
 	// validation

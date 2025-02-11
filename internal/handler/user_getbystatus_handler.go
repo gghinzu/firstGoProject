@@ -18,12 +18,12 @@ func (h *UserHandler) GetUsersByStatusHandler(c *gin.Context) {
 	case "deleted":
 		sts = enum.Deleted
 	default:
-		c.JSON(404, gin.H{"error": "invalid status"})
+		c.JSON(400, gin.H{"error": "invalid status"})
 	}
 
 	users, err := h.s.GetUsersByStatus(sts)
 	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
+		c.JSON(500, gin.H{"message": err.Error()})
 	}
 
 	c.JSON(200, users)

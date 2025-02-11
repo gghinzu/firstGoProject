@@ -10,8 +10,11 @@ func (h *UserHandler) SearchHandler(c *gin.Context) {
 
 	users, err := h.s.SearchUser(searchStr)
 
+	if users == nil {
+		c.JSON(404, gin.H{"message": "no user found"})
+	}
 	if err != nil {
-		c.JSON(404, gin.H{"message": "user not found"})
+		c.JSON(500, gin.H{"message": err.Error()})
 	}
 
 	c.JSON(200, users)
