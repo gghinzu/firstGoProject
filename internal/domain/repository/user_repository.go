@@ -13,6 +13,6 @@ type UserRepositoryPort interface {
 	UpdateUserByID(id int, updatedUser *entity.User) error
 	CreateUser(newUser *entity.User) error
 	GetUsersByStatus(status enum.UserStatus) (*[]entity.User, error)
-	ActivateUserByID(id int, user *entity.User) error
-	PassivateUserByID(id int, user *entity.User) error
+	UpdateUserStatusByID(id int, userStatus enum.UserStatus) error
+	SearchUser(searchStr string) (*[]entity.User, error)
 }

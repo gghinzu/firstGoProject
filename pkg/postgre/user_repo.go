@@ -85,6 +85,7 @@ func (r *UserRepository) CreateUser(newUser *entity.User) error {
 	return nil
 }
 
+// GetUsersByStatus lists all users according to their status
 func (r *UserRepository) GetUsersByStatus(status enum.UserStatus) (*[]entity.User, error) {
 	var userList *[]entity.User
 	err := r.db.Order("id").Where("status = ?", status).Find(&userList).Error
@@ -96,27 +97,34 @@ func (r *UserRepository) GetUsersByStatus(status enum.UserStatus) (*[]entity.Use
 	return userList, nil
 }
 
-func (r *UserRepository) ActivateUserByID(id int, updatedUser *entity.User) error {
-	err := r.UpdateUserByID(id, updatedUser)
-	if err != nil {
+// UpdateUserStatusByID updates users' statuses
+func (r *UserRepository) UpdateUserStatusByID(id int, userStatus enum.UserStatus) error {
+	user, _ := r.GetUserByID(id)
+	if user.Status == enum.Active && userStatus == enum.Active {
+		err := errors.New("user is already active")
 		return err
-	}
-	// using 'Update' explicitly because assignment with zero might be misunderstood in go
-	err = r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", updatedUser.Status).Error
-	if err != nil {
+	} else if user.Status == enum.Passive && userStatus == enum.Passive {
+		err := errors.New("user is already passive")
 		return err
+	} else {
+		// using 'Update' explicitly because assignment with zero might be misunderstood in go
+		err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", userStatus).Error
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
-func (r *UserRepository) PassivateUserByID(id int, updatedUser *entity.User) error {
-	err := r.UpdateUserByID(id, updatedUser)
+// SearchUser searches for a specific string in users' names
+func (r *UserRepository) SearchUser(searchString string) (*[]entity.User, error) {
+	var userList *[]entity.User
+	err := r.db.Where("name LIKE ?", "%"+searchString+"%").Or("surname LIKE ?", "%"+searchString+"%").Find(&userList).Error
+	//err := r.db.Order("id").Where("(name, surname) IN ?", [][]interface{}{{searchString, searchString}}).Find(&userList).Error
 	if err != nil {
-		return err
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			panic("user not found")
+		}
 	}
-	err = r.db.Model(&entity.User{}).Where("id = ?", id).Error
-	if err != nil {
-		return err
-	}
-	return nil
+	return userList, nil
 }

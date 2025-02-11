@@ -29,7 +29,3 @@ type UpdateUserDTO struct {
 	Gender    string `json:"gender"`
 	Education string `json:"education"`
 }
-
-type ActivatePassivateUserDTO struct {
-	Status enum.UserStatus `json:"status"`
-}

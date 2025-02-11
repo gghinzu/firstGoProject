@@ -33,9 +33,9 @@ func main() {
 		users.GET("", userHandler.GetUsersHandler)
 		users.GET("/:id", userHandler.GetUserByIDHandler)
 		users.GET("/status/:status", userHandler.GetUsersByStatusHandler)
+		users.GET("/search/:search", userHandler.SearchHandler)
 		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
-		users.PUT("/activate/:id", userHandler.ActivateUserByIDHandler)
-		users.PUT("/passivate/:id", userHandler.PassivateUserByIDHandler)
+		users.PUT("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
 		users.POST("", userHandler.CreateUserHandler)
 		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 	}
