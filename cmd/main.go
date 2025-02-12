@@ -33,7 +33,7 @@ func main() {
 		users.GET("", userHandler.GetUsersHandler)
 		users.GET("/:id", userHandler.GetUserByIDHandler)
 		users.GET("/status/:status", userHandler.GetUsersByStatusHandler)
-		users.GET("/search/:search", userHandler.SearchHandler)
+		users.GET("/search", userHandler.SearchHandler)
 		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
 		users.PUT("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
 		users.POST("", userHandler.CreateUserHandler)

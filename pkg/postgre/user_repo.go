@@ -84,10 +84,16 @@ func (r *UserRepository) UpdateUserStatusByID(id int, userStatus enum.UserStatus
 	return nil
 }
 
-// SearchUser searches for a specific string in users' names
-func (r *UserRepository) SearchUser(searchString string) (*[]entity.User, error) {
+// SearchUser searches for a specific string in users' info
+func (r *UserRepository) SearchUser(name, status, gender string) (*[]entity.User, error) {
 	var userList *[]entity.User
-	err := r.db.Where("name LIKE ?", "%"+searchString+"%").Or("surname LIKE ?", "%"+searchString+"%").Find(&userList).Error
+	query := r.db.Where("lower(name) LIKE lower(?) OR lower(surname) LIKE lower(?)", "%"+name+"%", "%"+name+"%")
+	if status != "" {
+		query = query.Where("lower(status) = lower(?)", "%"+status+"%")
+	} else if gender != "" {
+		query = query.Where("lower(gender) LIKE lower(?)", "%"+gender+"%")
+	}
+	err := query.Find(&userList).Error
 	if err != nil {
 		return nil, gError
 	}
