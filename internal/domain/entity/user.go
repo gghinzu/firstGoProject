@@ -11,30 +11,3 @@ type User struct {
 	Education string          `json:"education" gorm:"not null"`
 	Status    enum.UserStatus `json:"status" gorm:"not null;default:0"`
 }
-
-// for user creation, DTO
-type CreateUserDTO struct {
-	Name      string          `json:"name"`
-	Surname   string          `json:"surname"`
-	Age       int             `json:"age"`
-	Gender    enum.UserGender `json:"gender"`
-	Education string          `json:"education"`
-}
-
-// for updating user, DTO
-type UpdateUserDTO struct {
-	Name      string          `json:"name" `
-	Surname   string          `json:"surname"`
-	Age       int             `json:"age"`
-	Gender    enum.UserGender `json:"gender"`
-	Education string          `json:"education"`
-}
-
-type SearchUserDTO struct {
-	Name      string          `json:"name"`
-	Surname   string          `json:"surname"`
-	Age       int             `json:"age"`
-	Gender    enum.UserGender `json:"gender"`
-	Education string          `json:"education"`
-	Status    enum.UserStatus `json:"status"`
-}

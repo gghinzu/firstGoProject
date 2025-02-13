@@ -23,7 +23,7 @@ func (h *UserHandler) GetUsersByStatusHandler(c *gin.Context) {
 
 	users, err := h.s.GetUsersByStatus(sts)
 	if err != nil {
-		c.JSON(500, gin.H{"message": err.Error()})
+		c.JSON(404, gin.H{"error": "no user found"})
 	}
 
 	c.JSON(200, users)

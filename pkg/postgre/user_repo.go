@@ -83,26 +83,26 @@ func (r *UserRepository) UpdateUserStatusByID(id int, userStatus enum.UserStatus
 }
 
 // SearchUser searches for a specific value in users' info and lists users
-func (r *UserRepository) SearchUser(info *entity.SearchUserDTO) (*[]entity.User, error) {
+func (r *UserRepository) SearchUser(info entity.SearchUserDTO) (*[]entity.User, error) {
 	var users *[]entity.User
 	query := r.db
 
-	if info.Name != "" {
-		query = query.Where("name ILIKE ?", "%"+info.Name+"%")
+	if info.Name != nil {
+		query = query.Where("name ILIKE ?", info.Name)
 	}
-	if info.Surname != "" {
-		query = query.Where("surname ILIKE ?", "%"+info.Surname+"%")
+	if info.Surname != nil {
+		query = query.Where("surname ILIKE ?", info.Surname)
 	}
-	if info.Education != "" {
-		query = query.Where("education ILIKE ?", "%"+info.Education+"%")
+	if info.Education != nil {
+		query = query.Where("education ILIKE ?", info.Education)
 	}
-	if info.Gender != "" {
+	if info.Gender != nil {
 		query = query.Where("gender ILIKE ?", info.Gender)
 	}
-	if info.Age > 0 {
+	if info.Age != nil {
 		query = query.Where("age = ?", info.Age)
 	}
-	if info.Status != enum.NotInitialized {
+	if info.Status != nil {
 		query = query.Where("status = ?", info.Status)
 	}
 

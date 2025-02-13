@@ -4,17 +4,18 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)">
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="gender is turned into an enum&#10;searchdto is added&#10;search part is updated (handler, service and repo layers use searchdto to make the process easier and flexible)&#10;softdelete is updated (it uses 'status' instead of 'deleted' attribute of user entity)&#10;error handling is updated in the repository part to see the errors clearly (if any)&#10;new userstatus is added to enums (not initialized)&#10;general bug fixes &amp; tidying up">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/entity/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_status.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_status.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_search_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_search_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_softdeletebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_softdeletebyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_getbystatus_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getbystatus_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_search_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_search_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/postgre/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgre/user_repo.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,7 +183,8 @@
     <MESSAGE value="searching for name option is added, but it's case-sensitive&#10;updating status option is improved (activate and passivate are not seperated now)" />
     <MESSAGE value="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users" />
     <MESSAGE value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
-    <option name="LAST_COMMIT_MESSAGE" value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
+    <MESSAGE value="gender is turned into an enum&#10;searchdto is added&#10;search part is updated (handler, service and repo layers use searchdto to make the process easier and flexible)&#10;softdelete is updated (it uses 'status' instead of 'deleted' attribute of user entity)&#10;error handling is updated in the repository part to see the errors clearly (if any)&#10;new userstatus is added to enums (not initialized)&#10;general bug fixes &amp; tidying up" />
+    <option name="LAST_COMMIT_MESSAGE" value="gender is turned into an enum&#10;searchdto is added&#10;search part is updated (handler, service and repo layers use searchdto to make the process easier and flexible)&#10;softdelete is updated (it uses 'status' instead of 'deleted' attribute of user entity)&#10;error handling is updated in the repository part to see the errors clearly (if any)&#10;new userstatus is added to enums (not initialized)&#10;general bug fixes &amp; tidying up" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

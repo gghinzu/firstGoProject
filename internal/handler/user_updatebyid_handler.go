@@ -28,7 +28,7 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 
 	err = h.s.UpdateUserByID(id, updatedUser)
 	if err != nil {
-		c.JSON(500, gin.H{"message": err.Error()})
+		c.JSON(404, gin.H{"error": "user cannot be found & updated"})
 		return
 	}
 }

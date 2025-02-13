@@ -22,7 +22,7 @@ func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 		return
 	}
 	if errUser != nil {
-		c.JSON(500, gin.H{"message": errUser.Error()})
+		c.JSON(500, gin.H{"error": errUser.Error()})
 		return
 	}
 
