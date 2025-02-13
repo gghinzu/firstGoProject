@@ -16,14 +16,12 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db}
 }
 
-var gError = errors.New("record not found")
-
 // GetAllUsers for displaying all the users
 func (r *UserRepository) GetAllUsers() (*[]entity.User, error) {
 	var userList *[]entity.User
 	err := r.db.Order("id").Find(&userList).Error
 	if err != nil {
-		return nil, gError
+		return nil, err
 	}
 	return userList, nil
 }
@@ -32,8 +30,8 @@ func (r *UserRepository) GetAllUsers() (*[]entity.User, error) {
 func (r *UserRepository) GetUserByID(id int) (*entity.User, error) {
 	var user *entity.User
 	err := r.db.Where("id = ?", id).First(&user).Error
-	if err != nil {
-		return nil, gError
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
 	}
 	return user, nil
 }
@@ -42,7 +40,7 @@ func (r *UserRepository) GetUserByID(id int) (*entity.User, error) {
 func (r *UserRepository) DeleteUserByID(id int) error {
 	err := r.db.Delete(&entity.User{}, id).Error
 	if err != nil {
-		return gError
+		return err
 	}
 	return nil
 }
@@ -51,7 +49,7 @@ func (r *UserRepository) DeleteUserByID(id int) error {
 func (r *UserRepository) UpdateUserByID(id int, updatedUser *entity.User) error {
 	err := r.db.Where("id = ?", id).Updates(&updatedUser).Error
 	if err != nil {
-		return gError
+		return err
 	}
 	return nil
 }
@@ -70,7 +68,7 @@ func (r *UserRepository) GetUsersByStatus(status enum.UserStatus) (*[]entity.Use
 	var userList *[]entity.User
 	err := r.db.Order("id").Where("status = ?", status).Find(&userList).Error
 	if err != nil {
-		return nil, gError
+		return nil, err
 	}
 	return userList, nil
 }
@@ -79,31 +77,48 @@ func (r *UserRepository) GetUsersByStatus(status enum.UserStatus) (*[]entity.Use
 func (r *UserRepository) UpdateUserStatusByID(id int, userStatus enum.UserStatus) error {
 	err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", userStatus).Error
 	if err != nil {
-		return errors.New("user cannot be updated")
+		return err
 	}
 	return nil
 }
 
-// SearchUser searches for a specific string in users' info
-func (r *UserRepository) SearchUser(name, status, gender string) (*[]entity.User, error) {
-	var userList *[]entity.User
-	query := r.db.Where("lower(name) LIKE lower(?) OR lower(surname) LIKE lower(?)", "%"+name+"%", "%"+name+"%")
-	if status != "" {
-		query = query.Where("lower(status) = lower(?)", "%"+status+"%")
-	} else if gender != "" {
-		query = query.Where("lower(gender) LIKE lower(?)", "%"+gender+"%")
+// SearchUser searches for a specific value in users' info and lists users
+func (r *UserRepository) SearchUser(info *entity.SearchUserDTO) (*[]entity.User, error) {
+	var users *[]entity.User
+	query := r.db
+
+	if info.Name != "" {
+		query = query.Where("name ILIKE ?", "%"+info.Name+"%")
 	}
-	err := query.Find(&userList).Error
+	if info.Surname != "" {
+		query = query.Where("surname ILIKE ?", "%"+info.Surname+"%")
+	}
+	if info.Education != "" {
+		query = query.Where("education ILIKE ?", "%"+info.Education+"%")
+	}
+	if info.Gender != "" {
+		query = query.Where("gender ILIKE ?", info.Gender)
+	}
+	if info.Age > 0 {
+		query = query.Where("age = ?", info.Age)
+	}
+	if info.Status != enum.NotInitialized {
+		query = query.Where("status = ?", info.Status)
+	}
+
+	err := query.Find(&users).Error
 	if err != nil {
-		return nil, gError
+		return nil, err
 	}
-	return userList, nil
+
+	return users, nil
 }
 
+// SoftDeleteUserByID disables user and their chances except their statuses
 func (r *UserRepository) SoftDeleteUserByID(id int) error {
-	err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("deleted", true).Error
+	err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", enum.Deleted).Error
 	if err != nil {
-		return gError
+		return err
 	}
 	return nil
 }

@@ -14,6 +14,6 @@ type UserRepositoryPort interface {
 	CreateUser(newUser *entity.User) error
 	GetUsersByStatus(status enum.UserStatus) (*[]entity.User, error)
 	UpdateUserStatusByID(id int, userStatus enum.UserStatus) error
-	SearchUser(name, status, gender string) (*[]entity.User, error)
+	SearchUser(info *entity.SearchUserDTO) (*[]entity.User, error)
 	SoftDeleteUserByID(id int) error
 }

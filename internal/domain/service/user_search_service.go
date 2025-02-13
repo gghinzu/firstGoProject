@@ -1,7 +1,9 @@
 package service
 
-import "firstGoProject/internal/domain/entity"
+import (
+	"firstGoProject/internal/domain/entity"
+)
 
-func (s *UserService) SearchUser(name, status, gender string) (*[]entity.User, error) {
-	return s.repo.SearchUser(name, status, gender)
+func (s *UserService) SearchUser(info *entity.SearchUserDTO) (*[]entity.User, error) {
+	return s.repo.SearchUser(info)
 }

@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users">
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/entity/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_status.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_status.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_search_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_search_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_softdeletebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_softdeletebyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_search_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_search_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/postgre/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgre/user_repo.go" afterDir="false" />
     </list>
@@ -177,13 +181,21 @@
     <MESSAGE value="active and passive statuses are added to entity&#10;activate and passivate processes are added&#10;enums are implemented&#10;displaying all the active/all the passive users are implemented&#10;users are being added as passive in the creation phase" />
     <MESSAGE value="searching for name option is added, but it's case-sensitive&#10;updating status option is improved (activate and passivate are not seperated now)" />
     <MESSAGE value="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users" />
-    <option name="LAST_COMMIT_MESSAGE" value="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users" />
+    <MESSAGE value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
+    <option name="LAST_COMMIT_MESSAGE" value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/cmd/main.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>

@@ -6,4 +6,5 @@ const (
 	Active UserStatus = iota
 	Passive
 	Deleted
+	NotInitialized
 )

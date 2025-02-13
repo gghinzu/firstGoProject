@@ -3,6 +3,7 @@ package service
 import (
 	"errors"
 	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/domain/enum"
 	"fmt"
 )
 
@@ -17,7 +18,7 @@ func (s *UserService) UpdateUserByID(id int, updatedUser *entity.UpdateUserDTO) 
 	if converted == nil {
 		return errors.New("dto to entity conversion failed")
 	}
-	if user.Deleted != true {
+	if user.Status != enum.Deleted {
 		return s.repo.UpdateUserByID(user.ID, converted)
 	} else {
 		return errors.New("user cannot be updated because it is soft deleted")
