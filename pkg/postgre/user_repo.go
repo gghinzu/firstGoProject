@@ -13,6 +13,11 @@ type UserRepository struct {
 	db *gorm.DB
 }
 
+type paginate struct {
+	limit int
+	page  int
+}
+
 func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db}
 }
@@ -20,7 +25,7 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 // GetAllUsers for displaying all the users
 func (r *UserRepository) GetAllUsers() (*[]entity.User, error) {
 	var userList *[]entity.User
-	err := r.db.Order("id").Find(&userList).Error
+	err := r.db.Order("name").Find(&userList).Error
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +45,6 @@ func (r *UserRepository) GetUserByID(id uuid.UUID) (*entity.User, error) {
 
 // DeleteUserByID to delete a specific user by the given id
 func (r *UserRepository) DeleteUserByID(id uuid.UUID) error {
-	//id=id
 	err := r.db.Delete(&entity.User{}, id).Error
 	if err != nil {
 		return err
@@ -99,16 +103,23 @@ func (r *UserRepository) SearchUser(info entity.SearchUserDTO) (*[]entity.User, 
 	if info.Status != nil {
 		query = query.Where("status = ?", info.Status)
 	}
+	if info.Limit != nil && info.Page != nil {
+		query = query.Scopes(newPaginate(*info.Limit, *info.Page).paginatedResult).Find(&users)
+	}
 
 	err := query.Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
 
-	allUsers, _ := r.GetAllUsers()
-	if query == r.db {
-		return allUsers, nil
-	}
-
 	return users, nil
+}
+
+func newPaginate(limit int, page int) *paginate {
+	return &paginate{limit: limit, page: page}
+}
+
+func (p *paginate) paginatedResult(db *gorm.DB) *gorm.DB {
+	offset := (p.page - 1) * p.limit
+	return db.Offset(offset).Limit(p.limit)
 }

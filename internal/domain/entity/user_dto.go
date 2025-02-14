@@ -28,4 +28,6 @@ type SearchUserDTO struct {
 	Gender    *enum.UserGender `json:"gender" form:"gender"`
 	Education *string          `json:"education" form:"education"`
 	Status    *enum.UserStatus `json:"status" form:"status"`
+	Page      *int             `json:"page" form:"page"`
+	Limit     *int             `json:"limit" form:"limit"`
 }
