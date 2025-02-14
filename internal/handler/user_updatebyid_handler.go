@@ -3,16 +3,10 @@ package handler
 import (
 	"firstGoProject/internal/domain/entity"
 	"github.com/gin-gonic/gin"
-	"strconv"
 )
 
 func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
-	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
-	if err != nil {
-		c.JSON(400, gin.H{"error": "id should be numeric"})
-		return
-	}
+	id := c.Param("id")
 
 	if c.Request.Body == nil {
 		c.JSON(400, gin.H{"error": "request body is empty"})
@@ -26,7 +20,7 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	err = h.s.UpdateUserByID(id, updatedUser)
+	err := h.s.UpdateUserByID(id, updatedUser)
 	if err != nil {
 		c.JSON(404, gin.H{"error": "user cannot be found & updated"})
 		return

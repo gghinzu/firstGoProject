@@ -5,7 +5,6 @@ import (
 	"firstGoProject/internal/domain/service"
 	"firstGoProject/internal/handler"
 	"firstGoProject/pkg/postgre"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,19 +29,14 @@ func main() {
 	// router grouping
 	users := router.Group("/user")
 	{
-		users.GET("", userHandler.GetUsersHandler)
 		users.GET("/:id", userHandler.GetUserByIDHandler)
-		users.GET("/status/:status", userHandler.GetUsersByStatusHandler)
-		users.GET("/search", userHandler.SearchHandler)
+		users.GET("", userHandler.SearchHandler)
 		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
+		//dto may be used for updating the statuses
 		users.PUT("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
 		users.POST("", userHandler.CreateUserHandler)
 		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
-		users.GET("/soft/:id", userHandler.SoftDeleteUserByIDHandler)
 	}
-
-	// validation
-	fmt.Println("Server is running on http://localhost:3000")
 
 	// the specific port that we want to work with & error handling
 	err = router.Run(":3000")

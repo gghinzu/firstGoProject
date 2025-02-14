@@ -7,27 +7,30 @@ import (
 )
 
 func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
-	idStr := c.Param("id")
-	id, err := strconv.Atoi(idStr)
-	if err != nil {
-		c.JSON(400, gin.H{"error": "invalid id"})
-		return
+	id := c.Param("id")
+
+	status := c.Param("status")
+	var userStat enum.UserStatus
+	userStatus, errStat := strconv.Atoi(status)
+	if errStat != nil {
+		c.JSON(400, gin.H{"error": "invalid status"})
 	}
 
-	userStatus := c.Param("status")
-	var userStat enum.UserStatus
 	switch userStatus {
-	case "passivate":
-		userStat = enum.Passive
-	case "activate":
+	case 0:
 		userStat = enum.Active
+	case 1:
+		userStat = enum.Passive
+	case 2:
+		userStat = enum.Deleted
 	default:
 		c.JSON(400, gin.H{"error": "invalid status"})
 	}
 
-	err = h.s.UpdateUserStatusByID(id, userStat)
-
+	err := h.s.UpdateUserStatusByID(id, userStat)
 	if err != nil {
-		c.JSON(500, gin.H{"message": err.Error()})
+		c.JSON(404, gin.H{"error": err.Error()})
 	}
+
+	c.JSON(200, userStat)
 }

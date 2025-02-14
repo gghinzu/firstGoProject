@@ -20,7 +20,7 @@ type UpdateUserDTO struct {
 	Education string          `json:"education"`
 }
 
-// should bind (form)
+// should bind (form) usage
 type SearchUserDTO struct {
 	Name      *string          `json:"name" form:"name"`
 	Surname   *string          `json:"surname" form:"surname"`
