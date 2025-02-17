@@ -13,4 +13,6 @@ type User struct {
 	Gender    enum.UserGender `json:"gender" gorm:"not null"`
 	Education string          `json:"education" gorm:"not null"`
 	Status    enum.UserStatus `json:"status" gorm:"not null;default:0"`
+	RoleID    uuid.UUID       `json:"role_id" gorm:"type:uuid;not null"`
+	Role      UserRole        `json:"role" gorm:"not null;foreignKey:RoleID;references:RoleId"`
 }

@@ -11,9 +11,9 @@
 4||10|c|G
 4||10|C|G
 4||10|T|G</Grants>
-      <IntrospectionStateNumber>761</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1622</IntrospectionStateNumber>
       <ServerVersion>17.2</ServerVersion>
-      <StartupTime>1738654574</StartupTime>
+      <StartupTime>1739773475</StartupTime>
       <TimeZones>true ACDT
 true ACSST
 false ACST
@@ -1408,57 +1408,57 @@ false posixrules
 13219||10|C|G
 13219||-9223372036854775808|U|G
 13219||10|U|G</Grants>
-      <IntrospectionStateNumber>761</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1622</IntrospectionStateNumber>
       <ObjectId>5</ObjectId>
       <OwnerName>postgres</OwnerName>
     </database>
-    <role id="3" parent="1" name="pg_database_owner">
+    <role id="3" parent="1" name="pg_checkpoint">
+      <ObjectId>4544</ObjectId>
+    </role>
+    <role id="4" parent="1" name="pg_create_subscription">
+      <ObjectId>6304</ObjectId>
+    </role>
+    <role id="5" parent="1" name="pg_database_owner">
       <ObjectId>6171</ObjectId>
     </role>
-    <role id="4" parent="1" name="pg_read_all_data">
-      <ObjectId>6181</ObjectId>
+    <role id="6" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
     </role>
-    <role id="5" parent="1" name="pg_write_all_data">
-      <ObjectId>6182</ObjectId>
+    <role id="7" parent="1" name="pg_maintain">
+      <ObjectId>6337</ObjectId>
     </role>
-    <role id="6" parent="1" name="pg_monitor">
+    <role id="8" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
       <RoleGrants>3374
 3375
 3377</RoleGrants>
     </role>
-    <role id="7" parent="1" name="pg_read_all_settings">
+    <role id="9" parent="1" name="pg_read_all_data">
+      <ObjectId>6181</ObjectId>
+    </role>
+    <role id="10" parent="1" name="pg_read_all_settings">
       <ObjectId>3374</ObjectId>
     </role>
-    <role id="8" parent="1" name="pg_read_all_stats">
+    <role id="11" parent="1" name="pg_read_all_stats">
       <ObjectId>3375</ObjectId>
     </role>
-    <role id="9" parent="1" name="pg_stat_scan_tables">
-      <ObjectId>3377</ObjectId>
-    </role>
-    <role id="10" parent="1" name="pg_read_server_files">
+    <role id="12" parent="1" name="pg_read_server_files">
       <ObjectId>4569</ObjectId>
-    </role>
-    <role id="11" parent="1" name="pg_write_server_files">
-      <ObjectId>4570</ObjectId>
-    </role>
-    <role id="12" parent="1" name="pg_execute_server_program">
-      <ObjectId>4571</ObjectId>
     </role>
     <role id="13" parent="1" name="pg_signal_backend">
       <ObjectId>4200</ObjectId>
     </role>
-    <role id="14" parent="1" name="pg_checkpoint">
-      <ObjectId>4544</ObjectId>
+    <role id="14" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
     </role>
-    <role id="15" parent="1" name="pg_maintain">
-      <ObjectId>6337</ObjectId>
-    </role>
-    <role id="16" parent="1" name="pg_use_reserved_connections">
+    <role id="15" parent="1" name="pg_use_reserved_connections">
       <ObjectId>4550</ObjectId>
     </role>
-    <role id="17" parent="1" name="pg_create_subscription">
-      <ObjectId>6304</ObjectId>
+    <role id="16" parent="1" name="pg_write_all_data">
+      <ObjectId>6182</ObjectId>
+    </role>
+    <role id="17" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
     </role>
     <role id="18" parent="1" name="postgres">
       <BypassRls>1</BypassRls>
@@ -4782,21 +4782,39 @@ false posixrules
 13572
 13573</MemberIds>
     </extension>
-    <language id="258" parent="2" name="c">
+    <extension id="258" parent="2" name="uuid-ossp">
+      <Comment>generate universally unique identifiers (UUIDs)</Comment>
+      <ObjectId>57558</ObjectId>
+      <StateNumber>1292</StateNumber>
+      <Version>1.1</Version>
+      <ExtSchemaId>2200</ExtSchemaId>
+      <ExtSchemaName>public</ExtSchemaName>
+      <MemberIds>57559
+57560
+57561
+57562
+57563
+57564
+57565
+57566
+57567
+57568</MemberIds>
+    </extension>
+    <language id="259" parent="2" name="c">
       <Comment>dynamically-loaded C functions</Comment>
       <ObjectId>13</ObjectId>
       <StateNumber>1</StateNumber>
       <ValidatorName>fmgr_c_validator</ValidatorName>
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
-    <language id="259" parent="2" name="internal">
+    <language id="260" parent="2" name="internal">
       <Comment>built-in functions</Comment>
       <ObjectId>12</ObjectId>
       <StateNumber>1</StateNumber>
       <ValidatorName>fmgr_internal_validator</ValidatorName>
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
-    <language id="260" parent="2" name="plpgsql">
+    <language id="261" parent="2" name="plpgsql">
       <Comment>PL/pgSQL procedural language</Comment>
       <HandlerName>plpgsql_call_handler</HandlerName>
       <HandlerSchema>pg_catalog</HandlerSchema>
@@ -4808,7 +4826,7 @@ false posixrules
       <ValidatorName>plpgsql_validator</ValidatorName>
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
-    <language id="261" parent="2" name="sql">
+    <language id="262" parent="2" name="sql">
       <Comment>SQL-language functions</Comment>
       <ObjectId>14</ObjectId>
       <StateNumber>1</StateNumber>
@@ -4816,98 +4834,309 @@ false posixrules
       <ValidatorName>fmgr_sql_validator</ValidatorName>
       <ValidatorSchema>pg_catalog</ValidatorSchema>
     </language>
-    <schema id="262" parent="2" name="information_schema">
+    <schema id="263" parent="2" name="information_schema">
       <ObjectId>13219</ObjectId>
       <StateNumber>538</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
-    <schema id="263" parent="2" name="pg_catalog">
+    <schema id="264" parent="2" name="pg_catalog">
       <Comment>system catalog schema</Comment>
       <ObjectId>11</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>postgres</OwnerName>
     </schema>
-    <schema id="264" parent="2" name="public">
+    <schema id="265" parent="2" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>761</IntrospectionStateNumber>
-      <LastIntrospectionLocalTimestamp>2025-02-04.11:21:34</LastIntrospectionLocalTimestamp>
+      <IntrospectionStateNumber>1622</IntrospectionStateNumber>
+      <LastIntrospectionLocalTimestamp>2025-02-17.12:54:06</LastIntrospectionLocalTimestamp>
       <ObjectId>2200</ObjectId>
       <StateNumber>532</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="265" parent="264" name="users_id_seq">
-      <Cycled>1</Cycled>
-      <ObjectId>16398</ObjectId>
-      <SequenceIdentity>1</SequenceIdentity>
-      <StartValue>1</StartValue>
-      <StateNumber>759</StateNumber>
-      <StoredType>integer|0s</StoredType>
+    <routine id="266" parent="265" name="uuid_generate_v1">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57564</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <LanguageName>c</LanguageName>
       <OwnerName>postgres</OwnerName>
-    </sequence>
-    <table id="266" parent="264" name="users">
-      <ObjectId>16388</ObjectId>
-      <StateNumber>754</StateNumber>
+    </routine>
+    <routine id="267" parent="265" name="uuid_generate_v1mc">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57565</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="268" parent="265" name="uuid_generate_v3">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57566</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="269" parent="265" name="uuid_generate_v4">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57567</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="270" parent="265" name="uuid_generate_v5">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57568</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="271" parent="265" name="uuid_nil">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57559</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="272" parent="265" name="uuid_ns_dns">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57560</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="273" parent="265" name="uuid_ns_oid">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57562</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="274" parent="265" name="uuid_ns_url">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57561</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <routine id="275" parent="265" name="uuid_ns_x500">
+      <ConcurrencyKind>safe</ConcurrencyKind>
+      <Cost>1.0</Cost>
+      <ObjectId>57563</ObjectId>
+      <Rows>0.0</Rows>
+      <StateNumber>1292</StateNumber>
+      <Strict>1</Strict>
+      <VolatilityKind>immutable</VolatilityKind>
+      <LanguageName>c</LanguageName>
+      <OwnerName>postgres</OwnerName>
+    </routine>
+    <table id="276" parent="265" name="user_roles">
+      <ObjectId>66065</ObjectId>
+      <StateNumber>1568</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>postgres</OwnerName>
     </table>
-    <column id="267" parent="266" name="id">
-      <IdentityKind>always</IdentityKind>
+    <table id="277" parent="265" name="users">
+      <ObjectId>66100</ObjectId>
+      <StateNumber>1618</StateNumber>
+      <AccessMethodId>2</AccessMethodId>
+      <OwnerName>postgres</OwnerName>
+    </table>
+    <argument id="278" parent="266">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="279" parent="267">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="280" parent="268">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="281" parent="268" name="namespace">
+      <Position>1</Position>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="282" parent="268" name="name">
+      <Position>2</Position>
+      <StoredType>text|0s</StoredType>
+    </argument>
+    <argument id="283" parent="269">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="284" parent="270">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="285" parent="270" name="namespace">
+      <Position>1</Position>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="286" parent="270" name="name">
+      <Position>2</Position>
+      <StoredType>text|0s</StoredType>
+    </argument>
+    <argument id="287" parent="271">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="288" parent="272">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="289" parent="273">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="290" parent="274">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <argument id="291" parent="275">
+      <ArgumentDirection>R</ArgumentDirection>
+      <StoredType>uuid|0s</StoredType>
+    </argument>
+    <column id="292" parent="276" name="role_id">
+      <DefaultExpression>uuid_generate_v4()</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
-      <StateNumber>759</StateNumber>
-      <StoredType>integer|0s</StoredType>
-      <SequenceId>16398</SequenceId>
-      <TypeId>23</TypeId>
+      <StateNumber>1567</StateNumber>
+      <StoredType>uuid|0s</StoredType>
+      <TypeId>2950</TypeId>
     </column>
-    <column id="268" parent="266" name="name">
-      <DefaultExpression>NULL::character varying</DefaultExpression>
+    <column id="293" parent="276" name="name">
+      <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>754</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
-      <TypeId>1043</TypeId>
+      <StateNumber>1567</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
     </column>
-    <column id="269" parent="266" name="surname">
-      <DefaultExpression>NULL::character varying</DefaultExpression>
-      <Position>3</Position>
-      <StateNumber>754</StateNumber>
-      <StoredType>varchar(50)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="270" parent="266" name="age">
-      <DefaultExpression>0</DefaultExpression>
-      <Position>4</Position>
-      <StateNumber>754</StateNumber>
-      <StoredType>integer|0s</StoredType>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="271" parent="266" name="gender">
-      <DefaultExpression>NULL::character varying</DefaultExpression>
-      <Position>5</Position>
-      <StateNumber>754</StateNumber>
-      <StoredType>varchar(10)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="272" parent="266" name="education">
-      <DefaultExpression>NULL::character varying</DefaultExpression>
-      <Position>6</Position>
-      <StateNumber>754</StateNumber>
-      <StoredType>varchar(200)|0s</StoredType>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="273" parent="266" name="users_pk">
-      <ColNames>id</ColNames>
-      <ObjectId>16396</ObjectId>
+    <index id="294" parent="276" name="uni_user_roles_role_id">
+      <ColNames>role_id</ColNames>
+      <ObjectId>66071</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>754</StateNumber>
+      <StateNumber>1567</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="274" parent="266" name="users_pk">
-      <ObjectId>16397</ObjectId>
+    <key id="295" parent="276" name="uni_user_roles_role_id">
+      <ObjectId>66072</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>754</StateNumber>
-      <UnderlyingIndexId>16396</UnderlyingIndexId>
+      <StateNumber>1567</StateNumber>
+      <UnderlyingIndexId>66071</UnderlyingIndexId>
+    </key>
+    <column id="296" parent="277" name="id">
+      <DefaultExpression>uuid_generate_v4()</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>uuid|0s</StoredType>
+      <TypeId>2950</TypeId>
+    </column>
+    <column id="297" parent="277" name="name">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="298" parent="277" name="surname">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="299" parent="277" name="age">
+      <DefaultExpression>&apos;-1&apos;::integer</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="300" parent="277" name="gender">
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="301" parent="277" name="education">
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>text|0s</StoredType>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="302" parent="277" name="status">
+      <DefaultExpression>0</DefaultExpression>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>bigint|0s</StoredType>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="303" parent="277" name="role_id">
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+      <StateNumber>1618</StateNumber>
+      <StoredType>uuid|0s</StoredType>
+      <TypeId>2950</TypeId>
+    </column>
+    <foreign-key id="304" parent="277" name="fk_users_role">
+      <ColNames>role_id</ColNames>
+      <ObjectId>66110</ObjectId>
+      <StateNumber>1618</StateNumber>
+      <RefKeyColPositions>1</RefKeyColPositions>
+      <RefTableId>66065</RefTableId>
+    </foreign-key>
+    <index id="305" parent="277" name="uni_users_id">
+      <ColNames>id</ColNames>
+      <ObjectId>66108</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1618</StateNumber>
+      <Unique>1</Unique>
+      <AccessMethodId>403</AccessMethodId>
+    </index>
+    <key id="306" parent="277" name="uni_users_id">
+      <ObjectId>66109</ObjectId>
+      <Primary>1</Primary>
+      <StateNumber>1618</StateNumber>
+      <UnderlyingIndexId>66108</UnderlyingIndexId>
     </key>
   </database-model>
 </dataSource>

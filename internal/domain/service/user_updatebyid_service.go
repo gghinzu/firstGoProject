@@ -32,6 +32,7 @@ func UpdateConvertToUser(dto *entity.UpdateUserDTO) *entity.User {
 		Age:       dto.Age,
 		Gender:    dto.Gender,
 		Education: dto.Education,
+		Role:      dto.Role,
 	}
 	return user
 }

@@ -25,7 +25,7 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 // GetAllUsers for displaying all the users
 func (r *UserRepository) GetAllUsers() (*[]entity.User, error) {
 	var userList *[]entity.User
-	err := r.db.Order("name").Find(&userList).Error
+	err := r.db.Preload("Role").Order("name").Find(&userList).Error
 	if err != nil {
 		return nil, err
 	}
@@ -54,8 +54,7 @@ func (r *UserRepository) DeleteUserByID(id uuid.UUID) error {
 
 // UpdateUserByID to update a specific user's info by the given id
 func (r *UserRepository) UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error {
-	//true false debug
-	err := r.db.Where("id = ?", id).Updates(&updatedUser).Error
+	err := r.db.Where("id = ?", id).Save(&updatedUser).Error
 	if err != nil {
 		return err
 	}

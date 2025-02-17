@@ -26,4 +26,6 @@ func (h *UserHandler) CreateUserHandler(c *gin.Context) {
 		c.JSON(500, gin.H{"message": err.Error()})
 		return
 	}
+
+	c.JSON(200, gin.H{"message": "user is created successfully"})
 }

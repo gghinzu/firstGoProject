@@ -13,4 +13,6 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "user not found"})
 		return
 	}
+
+	c.JSON(200, gin.H{"message": "user is deleted successfully"})
 }
