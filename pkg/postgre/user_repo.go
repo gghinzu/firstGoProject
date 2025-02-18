@@ -22,21 +22,11 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db}
 }
 
-// GetAllUsers for displaying all the users
-func (r *UserRepository) GetAllUsers() (*[]entity.User, error) {
-	var userList *[]entity.User
-	err := r.db.Preload("Role").Order("name").Find(&userList).Error
-	if err != nil {
-		return nil, err
-	}
-	return userList, nil
-}
-
 // GetUserByID to get a specific user's details
 func (r *UserRepository) GetUserByID(id uuid.UUID) (*entity.User, error) {
 	var user *entity.User
 	// record count control should be done
-	err := r.db.Where("id = ?", id).First(&user).Error
+	err := r.db.Preload("Role").Where("id = ?", id).First(&user).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, nil
 	}
@@ -82,7 +72,7 @@ func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus enum.User
 // SearchUser searches for a specific value in users' info and lists users
 func (r *UserRepository) SearchUser(info entity.SearchUserDTO) (*[]entity.User, error) {
 	var users *[]entity.User
-	query := r.db
+	query := r.db.Preload("Role")
 
 	if info.Name != nil {
 		query = query.Where("name ILIKE ?", info.Name)
