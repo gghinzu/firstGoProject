@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="user roles are added (as admin and user)&#10;user_roles and users tables are connected via roleid foreignkeys&#10;roles will be updated and ids will not be used in creation &amp; dto conversion&#10;creation and deletion messages are updated&#10;preload query is added to getallusers to load the inner table">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_create_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgre/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgre/user_repo.go" afterDir="false" />
-    </list>
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="bug fixes in repo layer" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +177,8 @@
     <MESSAGE value="pagination is implemented for search(list) users -- might be updated soon -- page and limit are added into searchdto as pointers" />
     <MESSAGE value="user roles are added (as admin and user)&#10;user_roles and users tables are connected via roleid foreignkeys&#10;roles will be updated and ids will not be used in creation &amp; dto conversion&#10;creation and deletion messages are updated" />
     <MESSAGE value="user roles are added (as admin and user)&#10;user_roles and users tables are connected via roleid foreignkeys&#10;roles will be updated and ids will not be used in creation &amp; dto conversion&#10;creation and deletion messages are updated&#10;preload query is added to getallusers to load the inner table" />
-    <option name="LAST_COMMIT_MESSAGE" value="user roles are added (as admin and user)&#10;user_roles and users tables are connected via roleid foreignkeys&#10;roles will be updated and ids will not be used in creation &amp; dto conversion&#10;creation and deletion messages are updated&#10;preload query is added to getallusers to load the inner table" />
+    <MESSAGE value="bug fixes in repo layer" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug fixes in repo layer" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
