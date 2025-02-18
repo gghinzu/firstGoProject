@@ -8,7 +8,6 @@ import (
 
 // UserRepositoryPort will be used as a bridge with other dependencies
 type UserRepositoryPort interface {
-	GetAllUsers() (*[]entity.User, error)
 	GetUserByID(id uuid.UUID) (*entity.User, error)
 	DeleteUserByID(id uuid.UUID) error
 	UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error
