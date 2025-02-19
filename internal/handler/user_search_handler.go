@@ -20,7 +20,7 @@ func (h *UserHandler) SearchHandler(c *gin.Context) {
 	}
 
 	if users == nil || len(*users) == 0 {
-		c.JSON(404, gin.H{"message": "no user found"})
+		c.JSON(200, gin.H{"message": "no user found"})
 		return
 	}
 

@@ -22,7 +22,6 @@ func CreateConvertToUser(dto *entity.CreateUserDTO) *entity.User {
 		Age:       dto.Age,
 		Gender:    dto.Gender,
 		Education: dto.Education,
-		RoleID:    dto.RoleId,
 	}
 	return user
 }

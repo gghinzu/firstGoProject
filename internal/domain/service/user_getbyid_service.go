@@ -8,6 +8,9 @@ import (
 // GetUserByID gets specified user with the given id using an instance of UserService
 // (implementation of the interface UserServicePort)
 func (s *UserService) GetUserByID(id string) (*entity.User, error) {
-	uid := uuid.MustParse(id)
+	uid, err := uuid.Parse(id)
+	if err != nil {
+		return nil, err
+	}
 	return s.repo.GetUserByID(uid)
 }

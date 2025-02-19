@@ -28,7 +28,7 @@ func (r *UserRepository) GetUserByID(id uuid.UUID) (*entity.User, error) {
 	// record count control should be done
 	err := r.db.Preload("Role").Where("id = ?", id).First(&user).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, nil
+		return nil, err
 	}
 	return user, nil
 }
@@ -53,7 +53,14 @@ func (r *UserRepository) UpdateUserByID(id uuid.UUID, updatedUser *entity.User) 
 
 // CreateUser to create a new user
 func (r *UserRepository) CreateUser(newUser *entity.User) error {
-	err := r.db.Create(&newUser).Error
+	var userRole *entity.UserRole
+
+	err := r.db.Table("user_roles").Where("name = ?", enum.User).First(&userRole).Error
+	if err != nil {
+		return err
+	}
+	newUser.RoleID = userRole.RoleId
+	err = r.db.Create(&newUser).Error
 	if err != nil {
 		return err
 	}

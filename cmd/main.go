@@ -2,6 +2,7 @@ package main
 
 import (
 	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/domain/repository/seed"
 	"firstGoProject/internal/domain/service"
 	"firstGoProject/internal/handler"
 	"firstGoProject/pkg/postgre"
@@ -14,6 +15,10 @@ func main() {
 
 	// there's no need for close connection, gorm does it automatically
 	db := postgre.Connection()
+	err := seed.Seed(db)
+	if err != nil {
+		return
+	}
 
 	// dependency injections
 	userRepository := postgre.NewUserRepository(db)
@@ -21,7 +26,7 @@ func main() {
 	userHandler := handler.NewUserHandler(userService)
 
 	// migration, code first, database generator according to entity
-	err := db.Migrator().AutoMigrate(&entity.User{})
+	err = db.Migrator().AutoMigrate(&entity.User{})
 	if err != nil {
 		return
 	}

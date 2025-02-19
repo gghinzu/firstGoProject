@@ -18,10 +18,10 @@ func (s *UserService) UpdateUserByID(id string, updatedUser *entity.UpdateUserDT
 	if converted == nil {
 		return errors.New("dto to entity conversion failed")
 	}
-	if user.Status != enum.Deleted {
+	if user.Status != enum.Deleted { //&& (user.Role.Name == enum.Admin || user.ID == converted.ID)
 		return s.repo.UpdateUserByID(user.ID, converted)
 	} else {
-		return errors.New("user cannot be updated because it is soft deleted")
+		return errors.New("user cannot be updated")
 	}
 }
 

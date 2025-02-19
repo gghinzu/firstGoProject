@@ -2,7 +2,6 @@ package entity
 
 import (
 	"firstGoProject/internal/domain/enum"
-	"github.com/google/uuid"
 )
 
 // for user creation, DTO
@@ -12,7 +11,6 @@ type CreateUserDTO struct {
 	Age       int             `json:"age"`
 	Gender    enum.UserGender `json:"gender"`
 	Education string          `json:"education"`
-	RoleId    uuid.UUID       `json:"role_id"`
 }
 
 // for updating user, DTO
