@@ -44,7 +44,7 @@ func (r *UserRepository) DeleteUserByID(id uuid.UUID) error {
 
 // UpdateUserByID to update a specific user's info by the given id
 func (r *UserRepository) UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error {
-	err := r.db.Where("id = ?", id).Save(&updatedUser).Error
+	err := r.db.Where("id = ?", id).Updates(&updatedUser).Error
 	if err != nil {
 		return err
 	}
@@ -109,6 +109,38 @@ func (r *UserRepository) SearchUser(info entity.SearchUserDTO) (*[]entity.User, 
 	}
 
 	return users, nil
+}
+
+func (r *UserRepository) SignUp(info *entity.User) error {
+	var userRole *entity.UserRole
+
+	err := r.db.Table("user_roles").Where("name = ?", enum.User).First(&userRole).Error
+	if err != nil {
+		return err
+	}
+	info.RoleID = userRole.RoleId
+	err = r.db.Create(&info).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
+	var user *entity.User
+	err := r.db.Where("email ILIKE ?", email).First(&user).Error
+	if err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+func (r *UserRepository) UpdateUserToken(userID uuid.UUID, token string) error {
+	err := r.db.Model(&entity.User{}).Where("id = ?", userID).Update("token", token).Error
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func newPaginate(limit int, page int) *paginate {

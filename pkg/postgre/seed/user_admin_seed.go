@@ -18,6 +18,8 @@ func Seed(db *gorm.DB) error {
 
 		return db.Create(&entity.User{
 			ID:        uuid.New(),
+			Email:     "admin@example.com",
+			Password:  "123456",
 			Name:      "seed",
 			Surname:   "seed",
 			Age:       0,

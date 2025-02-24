@@ -15,6 +15,8 @@ type UserServicePort interface {
 	CreateUser(newUser *entity.CreateUserDTO) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
 	SearchUser(info entity.SearchUserDTO) (*[]entity.User, error)
+	SignUp(newUser *entity.SignUpDTO) error
+	Login(info entity.LoginDTO) (*entity.TokenUserDTO, error)
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface

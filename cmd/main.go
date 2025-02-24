@@ -2,23 +2,20 @@ package main
 
 import (
 	"firstGoProject/internal/domain/entity"
-	"firstGoProject/internal/domain/repository/seed"
 	"firstGoProject/internal/domain/service"
 	"firstGoProject/internal/handler"
+	"firstGoProject/internal/middleware"
 	"firstGoProject/pkg/postgre"
+	"firstGoProject/pkg/postgre/seed"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	// using gin framework
-	router := gin.Default()
+	router := gin.New()
 
 	// there's no need for close connection, gorm does it automatically
 	db := postgre.Connection()
-	err := seed.Seed(db)
-	if err != nil {
-		return
-	}
 
 	// dependency injections
 	userRepository := postgre.NewUserRepository(db)
@@ -26,7 +23,12 @@ func main() {
 	userHandler := handler.NewUserHandler(userService)
 
 	// migration, code first, database generator according to entity
-	err = db.Migrator().AutoMigrate(&entity.User{})
+	err := db.Migrator().AutoMigrate(&entity.User{})
+	if err != nil {
+		return
+	}
+
+	err = seed.Seed(db)
 	if err != nil {
 		return
 	}
@@ -34,13 +36,19 @@ func main() {
 	// router grouping
 	users := router.Group("/user")
 	{
-		users.GET("/:id", userHandler.GetUserByIDHandler)
-		users.GET("", userHandler.SearchHandler)
-		users.PUT("/:id", userHandler.UpdateUserByIDHandler)
+		authorized := users.Group("/auth")
+		authorized.Use(middleware.AuthMiddleware())
+		{
+			authorized.GET("/:id", userHandler.GetUserByIDHandler)
+			authorized.GET("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
+			authorized.PUT("/:id", userHandler.UpdateUserByIDHandler)
+			authorized.POST("", userHandler.CreateUserHandler)
+			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
+			authorized.GET("", userHandler.SearchHandler)
+		}
 		//dto may be used for updating the statuses
-		users.PUT("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
-		users.POST("", userHandler.CreateUserHandler)
-		users.DELETE("/:id", userHandler.DeleteUserByIDHandler)
+		users.POST("/register", userHandler.SignUpHandler)
+		users.POST("/login", userHandler.LoginHandler)
 	}
 
 	// the specific port that we want to work with & error handling
