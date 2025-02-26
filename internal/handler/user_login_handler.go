@@ -1,20 +1,20 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *UserHandler) LoginHandler(c *gin.Context) {
-	var loginInfo entity.LoginDTO
+	var loginInfo dto.LoginDTO
 
 	if err := c.ShouldBindJSON(&loginInfo); err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	if loginInfo.Email == nil || loginInfo.Password == nil {
-		c.JSON(400, gin.H{"error": "email or password is nil"})
+	if loginInfo.Password == "" {
+		c.JSON(400, gin.H{"error": "password cannot be empty"})
 		return
 	}
 
@@ -25,8 +25,6 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"email": user.Email,
 		"token": user.Token,
-		/*		"refresh_token": user.RefreshToken,
-		 */})
+	})
 }

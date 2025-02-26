@@ -3,19 +3,13 @@ package seed
 import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
+	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
-	"firstGoProject/pkg/config"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"log"
 )
 
-func Seed(db *gorm.DB) error {
-	configuration, errC := config.LoadConfig()
-	if errC != nil {
-		log.Fatal("cannot load config:", errC)
-	}
-
+func Seed(db *gorm.DB, configuration *dto.ConfigDTO) error {
 	var count int64
 	if db.Table("users").Count(&count); count == 0 {
 		var adminRole *entity.UserRole

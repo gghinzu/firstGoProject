@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 )
 
@@ -12,7 +12,7 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	var updatedUser *entity.UpdateUserDTO
+	var updatedUser *dto.UpdateUserDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
 		c.JSON(500, gin.H{"error": "json cannot be bound"})

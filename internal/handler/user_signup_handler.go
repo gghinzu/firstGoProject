@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 )
 
 func (h *UserHandler) SignUpHandler(c *gin.Context) {
-	var info entity.SignUpDTO
+	var info dto.SignUpDTO
 
 	if err := c.ShouldBindJSON(&info); err != nil {
 		c.JSON(400, gin.H{"error": "Invalid JSON data"})

@@ -1,22 +1,12 @@
 package service
 
 import (
-	"errors"
-	"firstGoProject/internal/domain/entity"
-	"firstGoProject/pkg/postgre/token"
+	"firstGoProject/internal/dto"
+	"firstGoProject/pkg/token"
 )
 
-func (s *UserService) RefreshToken(email *string) (*entity.TokenUserDTO, error) {
-	if email == nil {
-		return nil, errors.New("email cannot be nil")
-	}
-
-	_, err := s.repo.GetUserByEmail(*email)
-	if err != nil {
-		return nil, errors.New("user not found")
-	}
-
-	tokenUser, errToken := token.CreateRefreshToken(email)
+func (s *UserService) RefreshToken() (*dto.TokenUserDTO, error) {
+	tokenUser, errToken := token.CreateRefreshToken()
 	if errToken != nil {
 		return nil, errToken
 	}

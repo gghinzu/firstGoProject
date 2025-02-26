@@ -4,6 +4,7 @@ import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/domain/repository"
+	"firstGoProject/internal/dto"
 	"firstGoProject/pkg/postgre"
 )
 
@@ -11,13 +12,13 @@ import (
 type UserServicePort interface {
 	GetUserByID(id string) (*entity.User, error)
 	DeleteUserByID(id string) error
-	UpdateUserByID(id string, updatedUser *entity.UpdateUserDTO) error
-	CreateUser(newUser *entity.CreateUserDTO) error
+	UpdateUserByID(id string, updatedUser *dto.UpdateUserDTO) error
+	CreateUser(newUser *dto.CreateUserDTO) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
-	SearchUser(info entity.SearchUserDTO) (*[]entity.User, error)
-	SignUp(newUser *entity.SignUpDTO) error
-	Login(info entity.LoginDTO) (*entity.TokenUserDTO, error)
-	RefreshToken(email *string) (*entity.TokenUserDTO, error)
+	SearchUser(info dto.SearchUserDTO) (*[]entity.User, error)
+	SignUp(newUser *dto.SignUpDTO) error
+	Login(info dto.LoginDTO) (*dto.TokenUserDTO, error)
+	RefreshToken() (*dto.TokenUserDTO, error)
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface

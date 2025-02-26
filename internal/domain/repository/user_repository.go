@@ -3,6 +3,7 @@ package repository
 import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
+	"firstGoProject/internal/dto"
 	"github.com/google/uuid"
 )
 
@@ -13,8 +14,7 @@ type UserRepositoryPort interface {
 	UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error
 	CreateUser(newUser *entity.User) error
 	UpdateUserStatusByID(id uuid.UUID, userStatus enum.UserStatus) error
-	SearchUser(info entity.SearchUserDTO) (*[]entity.User, error)
+	SearchUser(info dto.SearchUserDTO) (*[]entity.User, error)
 	SignUp(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)
-	//UpdateUserToken(userID uuid.UUID, token string) error
 }

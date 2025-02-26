@@ -2,6 +2,7 @@ package token
 
 import (
 	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"firstGoProject/pkg/config"
 	"github.com/golang-jwt/jwt/v4"
 	"log"
@@ -18,7 +19,7 @@ func init() {
 	secretKey = configuration.JWTSecret
 }
 
-func CreateAccessToken(user *entity.User) (*entity.TokenUserDTO, error) {
+func CreateAccessToken(user *entity.User) (*dto.TokenUserDTO, error) {
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"id":    user.ID.String(),
 		"email": user.Email,
@@ -32,9 +33,8 @@ func CreateAccessToken(user *entity.User) (*entity.TokenUserDTO, error) {
 		return nil, err
 	}
 
-	return &entity.TokenUserDTO{
-		Email: &user.Email,
-		Token: &accessTokenString,
+	return &dto.TokenUserDTO{
+		Token: accessTokenString,
 	}, nil
 }
 

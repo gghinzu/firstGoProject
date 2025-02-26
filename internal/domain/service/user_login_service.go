@@ -1,18 +1,18 @@
 package service
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
-	"firstGoProject/pkg/postgre/token"
+	"firstGoProject/pkg/token"
 )
 
-func (s *UserService) Login(user entity.LoginDTO) (*entity.TokenUserDTO, error) {
-	storedUser, err := s.repo.GetUserByEmail(*user.Email)
+func (s *UserService) Login(user dto.LoginDTO) (*dto.TokenUserDTO, error) {
+	storedUser, err := s.repo.GetUserByEmail(user.Email)
 	if err != nil {
 		return nil, err
 	}
 
-	errCompare := helper.ComparePassword(*user.Password, storedUser.Password)
+	errCompare := helper.ComparePassword(user.Password, storedUser.Password)
 	if errCompare != nil {
 		return nil, errCompare
 	}
@@ -21,12 +21,6 @@ func (s *UserService) Login(user entity.LoginDTO) (*entity.TokenUserDTO, error) 
 	if errToken != nil {
 		return nil, errToken
 	}
-
-	/*storedUser.Token = *tokenUser.Token
-	err = s.repo.UpdateUserToken(storedUser.ID, storedUser.Token)
-	if err != nil {
-		return nil, err
-	}*/
 
 	return tokenUser, nil
 }

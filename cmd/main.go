@@ -36,7 +36,7 @@ func main() {
 		return
 	}
 
-	err = seed.Seed(db)
+	err = seed.Seed(db, &configure)
 	if err != nil {
 		log.Fatalf("seeding failed: %v\n", err)
 		return

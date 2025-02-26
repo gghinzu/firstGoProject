@@ -3,10 +3,11 @@ package service
 import (
 	"errors"
 	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
 )
 
-func (s *UserService) SignUp(newUser *entity.SignUpDTO) error {
+func (s *UserService) SignUp(newUser *dto.SignUpDTO) error {
 	hash, err := helper.EncryptPassword(newUser.Password)
 	if err != nil {
 		return err
@@ -22,7 +23,7 @@ func (s *UserService) SignUp(newUser *entity.SignUpDTO) error {
 	return s.repo.SignUp(converted)
 }
 
-func SignUpConvertToUser(dto *entity.SignUpDTO) *entity.User {
+func SignUpConvertToUser(dto *dto.SignUpDTO) *entity.User {
 	user := &entity.User{
 		Email:     dto.Email,
 		Password:  dto.Password,

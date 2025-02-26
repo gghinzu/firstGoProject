@@ -4,6 +4,7 @@ import (
 	"errors"
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
+	"firstGoProject/internal/dto"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
@@ -77,7 +78,7 @@ func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus enum.User
 }
 
 // SearchUser searches for a specific value in users' info and lists users
-func (r *UserRepository) SearchUser(info entity.SearchUserDTO) (*[]entity.User, error) {
+func (r *UserRepository) SearchUser(info dto.SearchUserDTO) (*[]entity.User, error) {
 	var users *[]entity.User
 	query := r.db.Preload("Role")
 
@@ -134,14 +135,6 @@ func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
 	}
 	return user, nil
 }
-
-/*func (r *UserRepository) UpdateUserToken(userID uuid.UUID, token string) error {
-	err := r.db.Model(&entity.User{}).Where("id = ?", userID).Update("token", token).Error
-	if err != nil {
-		return err
-	}
-	return nil
-}*/
 
 func newPaginate(limit int, page int) *paginate {
 	return &paginate{limit: limit, page: page}

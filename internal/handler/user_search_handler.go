@@ -1,13 +1,13 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 )
 
 // SearchHandler gets url parameters and sends them to DTO
 func (h *UserHandler) SearchHandler(c *gin.Context) {
-	var info entity.SearchUserDTO
+	var info dto.SearchUserDTO
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})

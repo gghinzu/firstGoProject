@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,7 +13,7 @@ func (h *UserHandler) CreateUserHandler(c *gin.Context) {
 		return
 	}
 
-	var userModel *entity.CreateUserDTO
+	var userModel *dto.CreateUserDTO
 
 	//to bind a request body into a type
 	if err := c.ShouldBind(&userModel); err != nil {
