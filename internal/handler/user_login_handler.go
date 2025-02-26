@@ -15,6 +15,7 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 
 	if loginInfo.Email == nil || loginInfo.Password == nil {
 		c.JSON(400, gin.H{"error": "email or password is nil"})
+		return
 	}
 
 	user, errToken := h.s.Login(loginInfo)
@@ -26,5 +27,6 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"email": user.Email,
 		"token": user.Token,
-	})
+		/*		"refresh_token": user.RefreshToken,
+		 */})
 }

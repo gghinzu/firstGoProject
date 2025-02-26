@@ -51,6 +51,11 @@ type LoginDTO struct {
 }
 
 type TokenUserDTO struct {
+	Email        *string `json:"email"`
+	Token        *string `json:"token"`
+	RefreshToken *string `json:"refresh_token"`
+}
+
+type RefreshTokenDTO struct {
 	Email *string `json:"email"`
-	Token *string `json:"token"`
 }

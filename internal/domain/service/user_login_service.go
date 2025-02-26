@@ -17,16 +17,16 @@ func (s *UserService) Login(user entity.LoginDTO) (*entity.TokenUserDTO, error) 
 		return nil, errCompare
 	}
 
-	tokenUser, errToken := token.CreateToken(storedUser)
+	tokenUser, errToken := token.CreateAccessToken(storedUser)
 	if errToken != nil {
 		return nil, errToken
 	}
 
-	storedUser.Token = *tokenUser.Token
+	/*storedUser.Token = *tokenUser.Token
 	err = s.repo.UpdateUserToken(storedUser.ID, storedUser.Token)
 	if err != nil {
 		return nil, err
-	}
+	}*/
 
 	return tokenUser, nil
 }

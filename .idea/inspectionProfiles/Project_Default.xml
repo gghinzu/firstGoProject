@@ -6,6 +6,9 @@
         <function importPath="firstGoProject/internal/domain/service" name="ConvertToUser" />
         <function importPath="github.com/golang-jwt/jwt" name="Parse" />
       </functions>
+      <methods>
+        <method importPath="firstGoProject/internal/domain/service" receiver="UserServicePort" name="RefreshTokenService" />
+      </methods>
     </inspection_tool>
   </profile>
 </component>

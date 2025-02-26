@@ -17,5 +17,6 @@ type User struct {
 	Status    enum.UserStatus `json:"status" gorm:"not null;default:0"`
 	RoleID    uuid.UUID       `json:"role_id" gorm:"type:uuid;not null"`
 	Role      UserRole        `json:"role" gorm:"not null;foreignKey:RoleID;references:RoleId"`
-	Token     string          `json:"token"`
+	/*	AccessToken  string          `json:"access_token"`
+		RefreshToken string          `json:"refresh_token"`*/
 }

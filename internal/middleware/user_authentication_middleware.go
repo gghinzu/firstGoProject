@@ -3,7 +3,6 @@ package middleware
 import (
 	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strings"
 )
 
@@ -11,7 +10,7 @@ func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.GetHeader("Authorization")
 		if tokenString == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": "Missing token"})
+			c.JSON(401, gin.H{"error": "missing token"})
 			c.Abort()
 			return
 		}
@@ -20,7 +19,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		tokenErr := helper.VerifyToken(tokenString)
 		if tokenErr != nil {
-			c.JSON(http.StatusUnauthorized, gin.H{"error": tokenErr.Error()})
+			c.JSON(401, gin.H{"error": tokenErr.Error()})
 			c.Abort()
 			return
 		}

@@ -135,13 +135,13 @@ func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
 	return user, nil
 }
 
-func (r *UserRepository) UpdateUserToken(userID uuid.UUID, token string) error {
+/*func (r *UserRepository) UpdateUserToken(userID uuid.UUID, token string) error {
 	err := r.db.Model(&entity.User{}).Where("id = ?", userID).Update("token", token).Error
 	if err != nil {
 		return err
 	}
 	return nil
-}
+}*/
 
 func newPaginate(limit int, page int) *paginate {
 	return &paginate{limit: limit, page: page}

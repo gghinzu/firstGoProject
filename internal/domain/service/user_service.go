@@ -17,6 +17,7 @@ type UserServicePort interface {
 	SearchUser(info entity.SearchUserDTO) (*[]entity.User, error)
 	SignUp(newUser *entity.SignUpDTO) error
 	Login(info entity.LoginDTO) (*entity.TokenUserDTO, error)
+	RefreshToken(email *string) (*entity.TokenUserDTO, error)
 }
 
 // UserService serves as a receiver for implementing UserRepositoryPort interface

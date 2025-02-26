@@ -16,5 +16,5 @@ type UserRepositoryPort interface {
 	SearchUser(info entity.SearchUserDTO) (*[]entity.User, error)
 	SignUp(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)
-	UpdateUserToken(userID uuid.UUID, token string) error
+	//UpdateUserToken(userID uuid.UUID, token string) error
 }
