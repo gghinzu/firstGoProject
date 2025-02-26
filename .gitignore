@@ -1,0 +1,25 @@
+```
+ .env
+ .env.development
+ .env.production
+ .env.test
+
+ *.exe
+ *.out
+ /bin/
+ /dist/
+
+ *.test
+
+ *.log
+
+ .idea/
+ *.iml
+ *.swp
+ *.swo
+ *~
+
+ vendor/
+
+ *.tmp
+ *.bak
