@@ -5,15 +5,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// SearchHandler gets url parameters and sends them to DTO
-func (h *UserHandler) SearchHandler(c *gin.Context) {
-	var info dto.SearchUserDTO
+func (h *UserHandler) FilterHandler(c *gin.Context) {
+	var info dto.FilterDTO
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
 	}
 
-	users, errS := h.s.SearchUser(info)
+	users, errS := h.s.FilterUser(info)
 	if errS != nil {
 		c.JSON(500, gin.H{"message": errS.Error()})
 		return

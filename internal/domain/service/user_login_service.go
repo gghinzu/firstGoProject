@@ -3,7 +3,7 @@ package service
 import (
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
-	"firstGoProject/pkg/token"
+	"firstGoProject/pkg/jwt"
 )
 
 func (s *UserService) Login(user dto.LoginDTO) (*dto.TokenUserDTO, error) {
@@ -17,7 +17,7 @@ func (s *UserService) Login(user dto.LoginDTO) (*dto.TokenUserDTO, error) {
 		return nil, errCompare
 	}
 
-	tokenUser, errToken := token.CreateAccessToken(storedUser)
+	tokenUser, errToken := jwt.CreateAccessToken(storedUser)
 	if errToken != nil {
 		return nil, errToken
 	}

@@ -2,11 +2,11 @@ package service
 
 import (
 	"firstGoProject/internal/dto"
-	"firstGoProject/pkg/token"
+	"firstGoProject/pkg/jwt"
 )
 
 func (s *UserService) RefreshToken() (*dto.TokenUserDTO, error) {
-	tokenUser, errToken := token.CreateRefreshToken()
+	tokenUser, errToken := jwt.CreateRefreshToken()
 	if errToken != nil {
 		return nil, errToken
 	}

@@ -3,35 +3,36 @@ package seed
 import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
-	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"time"
 )
 
-func Seed(db *gorm.DB, configuration *dto.ConfigDTO) error {
+func AdminSeed(db *gorm.DB) error {
 	var count int64
-	if db.Table("users").Count(&count); count == 0 {
+	if db.Model(&entity.User{}).Count(&count); count == 0 {
 		var adminRole *entity.UserRole
-		err := db.Table("user_roles").Where("name = ?", enum.Admin).First(&adminRole).Error
+		err := db.Model(&entity.UserRole{}).Where("name = ?", enum.Admin).First(&adminRole).Error
 		if err != nil {
 			return err
 		}
 
-		hashedPassword, errP := helper.EncryptPassword(configuration.SeedPassword)
+		hashedPassword, errP := helper.EncryptPassword("123456")
 		if errP != nil {
 			return errP
 		}
 
+		age := time.Now().Year() - 2002
 		return db.Create(&entity.User{
 			ID:        uuid.New(),
-			Email:     configuration.SeedMail,
+			Email:     "admin@example.com",
 			Password:  string(hashedPassword),
-			Name:      configuration.SeedName,
-			Surname:   configuration.SeedSurname,
-			Age:       0,
-			Gender:    "",
-			Education: "",
+			Name:      "seed",
+			Surname:   "seed",
+			Age:       age,
+			Gender:    enum.Other,
+			Education: "N/A",
 			Status:    0,
 			RoleID:    adminRole.RoleId,
 		}).Error

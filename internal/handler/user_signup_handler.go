@@ -6,14 +6,14 @@ import (
 )
 
 func (h *UserHandler) SignUpHandler(c *gin.Context) {
-	var info dto.SignUpDTO
+	var info *dto.SignUpDTO
 
 	if err := c.ShouldBindJSON(&info); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid JSON data"})
+		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 
-	err := h.s.SignUp(&info)
+	err := h.s.SignUp(info)
 	if err != nil {
 		c.JSON(500, gin.H{"message": err.Error()})
 		return

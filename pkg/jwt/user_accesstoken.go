@@ -1,4 +1,4 @@
-package token
+package jwt
 
 import (
 	"firstGoProject/internal/domain/entity"
@@ -16,13 +16,13 @@ func init() {
 	if errC != nil {
 		log.Fatal("cannot load config:", errC)
 	}
-	secretKey = configuration.JWTSecret
+	secretKey = configuration.JWTAccessSecret
 }
 
-func CreateAccessToken(user *entity.User) (*dto.TokenUserDTO, error) {
+func CreateAccessToken(userGiven *entity.User) (*dto.TokenUserDTO, error) {
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id":    user.ID.String(),
-		"email": user.Email,
+		"id":    userGiven.ID.String(),
+		"email": userGiven.Email,
 		"exp":   time.Now().Add(time.Minute * 15).Unix(),
 	})
 

@@ -6,8 +6,8 @@ import (
 	"firstGoProject/internal/handler"
 	"firstGoProject/internal/middleware"
 	"firstGoProject/pkg/config"
-	"firstGoProject/pkg/postgre"
-	"firstGoProject/pkg/postgre/seed"
+	"firstGoProject/pkg/postgres"
+	"firstGoProject/pkg/postgres/seed"
 	"github.com/gin-gonic/gin"
 	"log"
 )
@@ -18,27 +18,29 @@ func main() {
 		log.Fatal("cannot load config:", errC)
 	}
 
-	// using gin framework
 	router := gin.New()
 
-	// there's no need for close connection, gorm does it automatically
-	db := postgre.Connection()
+	db := postgres.Connection()
 
 	// dependency injections
-	userRepository := postgre.NewUserRepository(db)
+	userRepository := postgres.NewUserRepository(db)
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
 
-	// migration, code first, database generator according to entity
 	err := db.Migrator().AutoMigrate(&entity.User{}, &entity.UserRole{})
 	if err != nil {
 		log.Fatalf("auto migration failed: %s", err.Error())
 		return
 	}
 
-	err = seed.Seed(db, &configure)
-	if err != nil {
-		log.Fatalf("seeding failed: %v\n", err)
+	errRoleSeed := seed.RoleSeed(db)
+	if errRoleSeed != nil {
+		log.Fatalf("role seeding failed: %v\n", errRoleSeed)
+	}
+
+	errUserSeed := seed.AdminSeed(db)
+	if errUserSeed != nil {
+		log.Fatalf("user seeding failed: %v\n", errUserSeed)
 		return
 	}
 
@@ -53,15 +55,13 @@ func main() {
 			authorized.PUT("/:id", userHandler.UpdateUserByIDHandler)
 			authorized.POST("", userHandler.CreateUserHandler)
 			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
-			authorized.GET("", userHandler.SearchHandler)
+			authorized.GET("", userHandler.FilterHandler)
 		}
-		//dto may be used for updating the statuses
 		users.POST("/register", userHandler.SignUpHandler)
 		users.POST("/login", userHandler.LoginHandler)
 		users.POST("/refresh-token", userHandler.RefreshTokenHandler)
 	}
 
-	// the specific port that we want to work with & error handling
 	err = router.Run(configure.ClientOrigin)
 	if err != nil {
 		return

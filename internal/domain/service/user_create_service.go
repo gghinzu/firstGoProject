@@ -2,27 +2,32 @@ package service
 
 import (
 	"errors"
-	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/dto"
 )
 
-// CreateUser gets its own DTO, converts it to entity and sends the data to the repository
-// uses the instance of UserService (it connects the service with the repo)
 func (s *UserService) CreateUser(newUser *dto.CreateUserDTO) error {
-	converted := CreateConvertToUser(newUser)
+	converted := newUser.CreateConvertToUser(newUser)
 	if converted == nil {
 		return errors.New("dto to entity conversion failed")
 	}
-	return s.repo.CreateUser(converted)
-}
 
-func CreateConvertToUser(dto *dto.CreateUserDTO) *entity.User {
-	user := &entity.User{
-		Name:      dto.Name,
-		Surname:   dto.Surname,
-		Age:       dto.Age,
-		Gender:    dto.Gender,
-		Education: dto.Education,
+	roleName := newUser.Role
+
+	validRoles := map[string]bool{
+		"user":  true,
+		"admin": true,
 	}
-	return user
+
+	if !validRoles[roleName] {
+		return errors.New("role name is invalid")
+	}
+
+	userRole, err := s.repo.GetUserRoleByRoleName(roleName)
+	if err != nil {
+		return err
+	}
+
+	converted.RoleID = userRole.RoleId
+
+	return s.repo.CreateUser(converted)
 }

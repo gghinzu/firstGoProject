@@ -5,7 +5,6 @@ import (
 	"strings"
 )
 
-// GetUserByIDHandler uses the s layer's methods using their instances
 func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 	id := strings.TrimPrefix(c.Param("id"), "/")
 

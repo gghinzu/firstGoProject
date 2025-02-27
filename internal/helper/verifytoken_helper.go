@@ -1,7 +1,7 @@
 package helper
 
 import (
-	a "firstGoProject/pkg/token"
+	a "firstGoProject/pkg/jwt"
 	"fmt"
 	"github.com/golang-jwt/jwt/v4"
 )

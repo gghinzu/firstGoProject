@@ -18,13 +18,13 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 		return
 	}
 
-	user, errToken := h.s.Login(loginInfo)
+	userLogin, errToken := h.s.Login(loginInfo)
 	if errToken != nil {
 		c.JSON(401, gin.H{"error": errToken.Error()})
 		return
 	}
 
 	c.JSON(200, gin.H{
-		"token": user.Token,
+		"jwt": userLogin.Token,
 	})
 }
