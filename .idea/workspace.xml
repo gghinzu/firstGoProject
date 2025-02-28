@@ -4,43 +4,26 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="config struct is relocated&#10;loadconfig is supposed to be in the main but couldn't be handled (might be updated soon)&#10;refreshtoken is updated --&gt; clients no longer provide email, they provide a valid token and get their refresh token&#10;all the dtos are relocated into a new directory">
-      <change afterPath="$PROJECT_DIR$/internal/domain/service/user_filter_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="profiles are added --&gt; after logging in, user can see, update and delete their own profiles &#10;updateprofiledto is added&#10;middleware, token generators and verificators are updated due to the changes made&#10;in main, a new group called profile is added to minimize process">
+      <change afterPath="$PROJECT_DIR$/internal/domain/service/user_deleteprofile_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/domain/service/user_getprofile_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/handler/user_getprofile_handler.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/entity/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_search_service.go" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_dto.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_create_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_create_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_token.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_token.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_login_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_search_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_filter_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_signup_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_signup_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/user_comparepassword_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/comparepassword_helper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/user_encryptpassword_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/encryptpassword_helper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/user_verifytoken_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/verifytoken_helper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgre/postgres_connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/postgres_connection.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgre/seed/user_admin_seed.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgre/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/user_repo.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/token/user_accesstoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_accesstoken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/token/user_refreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_refreshtoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/verifytoken_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/verifytoken_helper.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/user_authentication_middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_authentication_middleware.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,7 +222,9 @@
     <MESSAGE value="signupdto, logindto, and tokendto are added&#10;email, password, token fields are added to base entity&#10;register and login processes are handled by servers, handlers and repo&#10;authentication middleware is created and authentication-required processes and methods are seperated and handled by it&#10;grouping is handled in the main, requests that need authentication are grouped together&#10;for storing the password in the database, encrytion and decryption processes are handled by helpers&#10;user_jwt is created to create tokens in every login for users --&gt; used custom claims&#10;seed's location is changed&#10;updatetoken function is created in repository layer (don't know if it is necessary or not, might be deleted later)&#10;errors and bugs are tried to be fixed" />
     <MESSAGE value="viper is downloaded and configuration is done &#10;.env file is added&#10;token attribute is deleted from database because we don't need it now&#10;refresh-token is added different than access token -&gt; user can now enter their email and get a new refresh token &#10;admin seed's password is updated (hashed)&#10;refreshtokendto is added&#10;refreshtoken handler and service are added" />
     <MESSAGE value="config struct is relocated&#10;loadconfig is supposed to be in the main but couldn't be handled (might be updated soon)&#10;refreshtoken is updated --&gt; clients no longer provide email, they provide a valid token and get their refresh token&#10;all the dtos are relocated into a new directory" />
-    <option name="LAST_COMMIT_MESSAGE" value="config struct is relocated&#10;loadconfig is supposed to be in the main but couldn't be handled (might be updated soon)&#10;refreshtoken is updated --&gt; clients no longer provide email, they provide a valid token and get their refresh token&#10;all the dtos are relocated into a new directory" />
+    <MESSAGE value="files, their formats and locations are updated -&gt; repos and services are updated based on business logic&#10;all the dtos are seperated now and their helper functions are with the related dtos&#10;searchuser's name is changed as filteruser because it's a filtering process&#10;roleseed is implemented for userrole creation in the migration&#10;default role (user) is decided and coded&#10;init function is added to createtoken files to prevent unnecessary memory usage in every function call&#10;access and refresh token files are seperated now --&gt; their keys are seperated as well --&gt; and they are not being stored in the database because we don't need it&#10;.Table() usage is omitted and .Model() is used rather than that&#10;age is getting from the user as birthdate but stored as int -&gt; might be changed later -&gt; also format is not appropriate for now&#10;postgres related things are removed from .env file because we don't need them&#10;pagination is removed --&gt; will be implemented soon" />
+    <MESSAGE value="profiles are added --&gt; after logging in, user can see, update and delete their own profiles &#10;updateprofiledto is added&#10;middleware, token generators and verificators are updated due to the changes made&#10;in main, a new group called profile is added to minimize process" />
+    <option name="LAST_COMMIT_MESSAGE" value="profiles are added --&gt; after logging in, user can see, update and delete their own profiles &#10;updateprofiledto is added&#10;middleware, token generators and verificators are updated due to the changes made&#10;in main, a new group called profile is added to minimize process" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

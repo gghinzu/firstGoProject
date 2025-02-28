@@ -25,6 +25,6 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{
-		"jwt": userLogin.Token,
+		"token": userLogin.Token,
 	})
 }

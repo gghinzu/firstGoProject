@@ -17,13 +17,14 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		tokenString = strings.TrimPrefix(tokenString, "Bearer ")
 
-		tokenErr := helper.VerifyToken(tokenString)
+		userID, tokenErr := helper.VerifyToken(tokenString)
 		if tokenErr != nil {
 			c.JSON(401, gin.H{"error": tokenErr.Error()})
 			c.Abort()
 			return
 		}
 
+		c.Set("userID", userID)
 		c.Next()
 	}
 }

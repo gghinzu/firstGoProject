@@ -13,8 +13,8 @@ func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 		return
 	}
 
-	verify := helper.VerifyToken(token.Token)
-	if verify != nil {
+	_, err := helper.VerifyToken(token.Token)
+	if err != nil {
 		c.JSON(400, gin.H{"error": "token is invalid"})
 		return
 	}
@@ -31,5 +31,4 @@ func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 	}
 
 	c.JSON(200, gin.H{"refresh_token": refresh.RefreshToken})
-
 }

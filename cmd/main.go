@@ -56,10 +56,16 @@ func main() {
 			authorized.POST("", userHandler.CreateUserHandler)
 			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 			authorized.GET("", userHandler.FilterHandler)
+			authorized.POST("/refresh-token", userHandler.RefreshTokenHandler)
+			profile := authorized.Group("/:id/profile")
+			{
+				profile.GET("", userHandler.GetProfile)
+				profile.PUT("", userHandler.UpdateProfile)
+				profile.DELETE("", userHandler.DeleteProfile)
+			}
 		}
 		users.POST("/register", userHandler.SignUpHandler)
 		users.POST("/login", userHandler.LoginHandler)
-		users.POST("/refresh-token", userHandler.RefreshTokenHandler)
 	}
 
 	err = router.Run(configure.ClientOrigin)

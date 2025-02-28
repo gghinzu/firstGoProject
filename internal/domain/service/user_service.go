@@ -18,6 +18,9 @@ type UserServicePort interface {
 	SignUp(newUser *dto.SignUpDTO) error
 	Login(info dto.LoginDTO) (*dto.TokenUserDTO, error)
 	RefreshToken() (*dto.TokenUserDTO, error)
+	GetProfile(id string) (*entity.User, error)
+	UpdateProfile(id string, userDTO *dto.UpdateProfileDTO) (*entity.User, error)
+	DeleteProfile(id string) error
 }
 
 type UserService struct {

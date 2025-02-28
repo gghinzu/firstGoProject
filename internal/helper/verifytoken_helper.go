@@ -1,23 +1,30 @@
 package helper
 
 import (
+	"errors"
 	a "firstGoProject/pkg/jwt"
-	"fmt"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
 )
 
-func VerifyToken(tokenString string) error {
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+type Claims struct {
+	UserID uuid.UUID `json:"user_id"`
+	jwt.StandardClaims
+}
+
+func VerifyToken(tokenString string) (uuid.UUID, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return []byte(a.GetSecretKey()), nil
 	})
 
 	if err != nil {
-		return err
+		return uuid.Nil, err
 	}
 
-	if !token.Valid {
-		return fmt.Errorf("invalid token")
+	claims, ok := token.Claims.(*Claims)
+	if !ok || !token.Valid {
+		return uuid.Nil, errors.New("invalid token")
 	}
 
-	return nil
+	return claims.UserID, nil
 }
