@@ -10,7 +10,7 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 
 	err := h.s.DeleteUserByID(id)
 	if err != nil {
-		c.JSON(404, gin.H{"error": err.Error()})
+		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
 

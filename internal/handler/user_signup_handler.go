@@ -19,5 +19,5 @@ func (h *UserHandler) SignUpHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(201, gin.H{"message": "User signed up successfully"})
+	c.JSON(200, gin.H{"message": "user signed up successfully"})
 }

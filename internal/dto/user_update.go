@@ -12,7 +12,6 @@ type UpdateUserDTO struct {
 	Age       time.Time       `json:"age"`
 	Gender    enum.UserGender `json:"gender"`
 	Education string          `json:"education"`
-	Role      entity.UserRole `json:"role"`
 }
 
 func (UpdateUserDTO) UpdateConvertToUser(dto *UpdateUserDTO) *entity.User {
@@ -24,7 +23,6 @@ func (UpdateUserDTO) UpdateConvertToUser(dto *UpdateUserDTO) *entity.User {
 		Age:       age,
 		Gender:    dto.Gender,
 		Education: dto.Education,
-		Role:      dto.Role,
 	}
 	return userUpdate
 }

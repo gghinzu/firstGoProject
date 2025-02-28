@@ -19,6 +19,6 @@ func (s *UserService) UpdateUserByID(id string, updatedUser *dto.UpdateUserDTO) 
 	if userUpdate.Status != enum.Deleted { //&& (user.Role.Name == enum.Admin || user.ID == converted.ID)
 		return s.repo.UpdateUserByID(userUpdate.ID, converted)
 	} else {
-		return errors.New("user cannot be updated")
+		return errors.New("user is deactivated and cannot be updated")
 	}
 }

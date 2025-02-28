@@ -32,6 +32,7 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 		userStat = enum.Deleted
 	default:
 		c.JSON(400, gin.H{"error": "invalid status"})
+		return
 	}
 
 	err := h.s.UpdateUserStatusByID(id, userStat)

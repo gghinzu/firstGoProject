@@ -10,6 +10,7 @@ func (h *UserHandler) FilterHandler(c *gin.Context) {
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
 		c.JSON(400, gin.H{"error": err.Error()})
+		return
 	}
 
 	users, errS := h.s.FilterUser(info)
