@@ -51,7 +51,7 @@ func main() {
 		authorized.Use(middleware.AuthMiddleware())
 		{
 			authorized.GET("/:id", userHandler.GetUserByIDHandler)
-			authorized.GET("/:id/:status", userHandler.UpdateUserStatusByIDHandler)
+			authorized.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
 			authorized.PUT("/:id", userHandler.UpdateUserByIDHandler)
 			authorized.POST("", userHandler.CreateUserHandler)
 			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
