@@ -3,7 +3,7 @@ package postgres
 import (
 	"errors"
 	"firstGoProject/internal/domain/entity"
-	user2 "firstGoProject/internal/domain/enum"
+	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
@@ -50,7 +50,7 @@ func (r *UserRepository) CreateUser(newUser *entity.User) error {
 	return nil
 }
 
-func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus user2.UserStatus) error {
+func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus enum.UserStatus) error {
 	err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", userStatus).Error
 	if err != nil {
 		return err
@@ -60,7 +60,7 @@ func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus user2.Use
 
 func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) {
 	var users *[]entity.User
-	query := r.db.Preload("Role")
+	query := r.paginate(int(info.Limit), int(info.Page)).Preload("Role")
 
 	if info.Name != nil {
 		query = query.Where("name ILIKE ?", info.Name)
@@ -113,4 +113,9 @@ func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
 		return nil, err
 	}
 	return newUser, nil
+}
+
+func (r *UserRepository) paginate(limit int, offset int) *gorm.DB {
+	var users *[]entity.User
+	return r.db.Limit(limit).Offset((offset - 1) * limit).Find(&users)
 }
