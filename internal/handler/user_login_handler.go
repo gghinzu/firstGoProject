@@ -3,28 +3,30 @@ package handler
 import (
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func (h *UserHandler) LoginHandler(c *gin.Context) {
 	var loginInfo dto.LoginDTO
 
 	if err := c.ShouldBindJSON(&loginInfo); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if loginInfo.Password == "" {
-		c.JSON(400, gin.H{"error": "password cannot be empty"})
+	if loginInfo.Password == "" || loginInfo.Email == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "email or password cannot be empty"})
 		return
 	}
 
-	userLogin, errToken := h.s.Login(loginInfo)
-	if errToken != nil {
-		c.JSON(401, gin.H{"error": errToken.Error()})
+	userLogin, err := h.s.Login(loginInfo)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, gin.H{
-		"token": userLogin.Token,
+	c.JSON(http.StatusOK, gin.H{
+		"access_token":  userLogin.Token,
+		"refresh_token": userLogin.RefreshToken,
 	})
 }

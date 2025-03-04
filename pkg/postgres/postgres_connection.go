@@ -14,11 +14,11 @@ func Connection() *gorm.DB {
 		panic(err)
 	}
 
-	gormDB, errA := gorm.Open(postgres.New(postgres.Config{
+	gormDB, err := gorm.Open(postgres.New(postgres.Config{
 		Conn: sqlDB,
 	}), &gorm.Config{})
-	if errA != nil {
-		panic(errA)
+	if err != nil {
+		panic(err)
 	}
 
 	return gormDB

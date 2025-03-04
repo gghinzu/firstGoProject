@@ -14,17 +14,17 @@ func (s *UserService) SignUp(newUser *dto.SignUpDTO) error {
 
 	newUser.Password = string(hash)
 
-	converted := newUser.SignUpConvertToUser(newUser)
-	if converted == nil {
+	convertedUser := newUser.SignUpConvertToUser(newUser)
+	if convertedUser == nil {
 		return errors.New("failed to convert DTO to entity")
 	}
 
 	//create as user by default
-	userRole, errU := s.repo.GetUserRoleByRoleName("user")
-	if errU != nil {
-		return errU
+	userRole, err := s.repo.GetUserRoleByRoleName("user")
+	if err != nil {
+		return err
 	}
-	converted.RoleID = userRole.RoleId
+	convertedUser.RoleID = userRole.RoleId
 
-	return s.repo.SignUp(converted)
+	return s.repo.SignUp(convertedUser)
 }

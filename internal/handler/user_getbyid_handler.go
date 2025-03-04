@@ -2,21 +2,22 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strings"
 )
 
 func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 	id := strings.TrimPrefix(c.Param("id"), "/")
 
-	user, errUser := h.s.GetUserByID(id)
+	user, err := h.s.GetUserByID(id)
 	if user == nil {
-		c.JSON(404, gin.H{"error": "no user found"})
+		c.JSON(http.StatusNotFound, gin.H{"error": "no user found"})
 		return
 	}
-	if errUser != nil {
-		c.JSON(500, gin.H{"error": errUser.Error()})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, user)
+	c.JSON(http.StatusOK, user)
 }

@@ -4,31 +4,29 @@ import (
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
-	var token dto.RefreshTokenDTO
-	if err := c.ShouldBindJSON(&token); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+	var refreshToken *dto.RefreshTokenDTO
+	if err := c.ShouldBindJSON(&refreshToken); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	_, err := helper.VerifyToken(token.Token)
+	claims, err := helper.VerifyToken(refreshToken.RefreshToken, "refresh")
 	if err != nil {
-		c.JSON(400, gin.H{"error": "token is invalid"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	if token.Token == "" {
-		c.JSON(400, gin.H{"error": "token must be provided"})
+	id := claims.UserID
+	tokenUser, err := h.s.RefreshToken(id)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
-	refresh, errToken := h.s.RefreshToken()
-	if errToken != nil {
-		c.JSON(401, gin.H{"error": errToken.Error()})
-		return
-	}
+	c.JSON(http.StatusOK, tokenUser)
 
-	c.JSON(200, gin.H{"refresh_token": refresh.RefreshToken})
 }

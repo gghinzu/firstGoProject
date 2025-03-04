@@ -11,10 +11,11 @@ func (s *UserService) UpdateProfile(id string, updatedUser *dto.UpdateProfileDTO
 	if err != nil {
 		return nil, err
 	}
-	converted := updatedUser.UpdateProfileConvertToUser(updatedUser)
-	errRepo := s.repo.UpdateUserByID(uid, converted)
-	if errRepo != nil {
-		return nil, errRepo
+
+	convertedUser := updatedUser.UpdateProfileConvertToUser(updatedUser)
+	err = s.repo.UpdateUserByID(uid, convertedUser)
+	if err != nil {
+		return nil, err
 	}
-	return converted, nil
+	return convertedUser, nil
 }

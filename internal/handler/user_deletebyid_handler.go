@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strings"
 )
 
@@ -10,9 +11,9 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 
 	err := h.s.DeleteUserByID(id)
 	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "user is deleted successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "user is deleted successfully"})
 }

@@ -4,27 +4,34 @@ import (
 	"errors"
 	a "firstGoProject/pkg/jwt"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/google/uuid"
 )
 
-type Claims struct {
-	UserID uuid.UUID `json:"user_id"`
-	jwt.StandardClaims
+type UserCustomClaims struct {
+	UserID  string `json:"user_id"`
+	Name    string `json:"name"`
+	Surname string `json:"surname"`
+	Email   string `json:"email"`
+	Type    string `json:"type"`
+	jwt.RegisteredClaims
 }
 
-func VerifyToken(tokenString string) (uuid.UUID, error) {
-	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+func VerifyToken(tokenString, expectedType string) (UserCustomClaims, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &UserCustomClaims{}, func(*jwt.Token) (interface{}, error) {
 		return []byte(a.GetSecretKey()), nil
 	})
 
 	if err != nil {
-		return uuid.Nil, err
+		return UserCustomClaims{}, err
 	}
 
-	claims, ok := token.Claims.(*Claims)
+	customClaims, ok := token.Claims.(*UserCustomClaims)
 	if !ok || !token.Valid {
-		return uuid.Nil, errors.New("invalid token")
+		return UserCustomClaims{}, errors.New("invalid token")
 	}
 
-	return claims.UserID, nil
+	if customClaims.Type != expectedType {
+		return UserCustomClaims{}, errors.New("invalid type")
+	}
+
+	return *customClaims, nil
 }

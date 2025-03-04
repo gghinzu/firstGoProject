@@ -13,9 +13,9 @@ import (
 )
 
 func main() {
-	configure, errC := config.LoadConfig()
-	if errC != nil {
-		log.Fatal("cannot load config:", errC)
+	configure, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal("cannot load config:", err)
 	}
 
 	router := gin.New()
@@ -27,20 +27,20 @@ func main() {
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
 
-	err := db.Migrator().AutoMigrate(&entity.User{}, &entity.UserRole{})
+	err = db.Migrator().AutoMigrate(&entity.User{}, &entity.UserRole{})
 	if err != nil {
 		log.Fatalf("auto migration failed: %s", err.Error())
 		return
 	}
 
-	errRoleSeed := seed.RoleSeed(db)
-	if errRoleSeed != nil {
-		log.Fatalf("role seeding failed: %v\n", errRoleSeed)
+	err = seed.RoleSeed(db)
+	if err != nil {
+		log.Fatalf("role seeding failed: %v\n", err)
 	}
 
-	errUserSeed := seed.AdminSeed(db)
-	if errUserSeed != nil {
-		log.Fatalf("user seeding failed: %v\n", errUserSeed)
+	err = seed.AdminSeed(db)
+	if err != nil {
+		log.Fatalf("user seeding failed: %v\n", err)
 		return
 	}
 
@@ -56,7 +56,6 @@ func main() {
 			authorized.POST("", userHandler.CreateUserHandler)
 			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 			authorized.GET("", userHandler.FilterHandler)
-			authorized.POST("/refresh-token", userHandler.RefreshTokenHandler)
 			profile := authorized.Group("/:id/profile")
 			{
 				profile.GET("", userHandler.GetProfile)
@@ -64,6 +63,7 @@ func main() {
 				profile.DELETE("", userHandler.DeleteProfile)
 			}
 		}
+		users.POST("/refresh-token", userHandler.RefreshTokenHandler)
 		users.POST("/register", userHandler.SignUpHandler)
 		users.POST("/login", userHandler.LoginHandler)
 	}

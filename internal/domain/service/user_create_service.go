@@ -6,8 +6,8 @@ import (
 )
 
 func (s *UserService) CreateUser(newUser *dto.CreateUserDTO) error {
-	converted := newUser.CreateConvertToUser(newUser)
-	if converted == nil {
+	convertedUser := newUser.CreateConvertToUser(newUser)
+	if convertedUser == nil {
 		return errors.New("dto to entity conversion failed")
 	}
 
@@ -27,7 +27,7 @@ func (s *UserService) CreateUser(newUser *dto.CreateUserDTO) error {
 		return err
 	}
 
-	converted.RoleID = userRole.RoleId
+	convertedUser.RoleID = userRole.RoleId
 
-	return s.repo.CreateUser(converted)
+	return s.repo.CreateUser(convertedUser)
 }

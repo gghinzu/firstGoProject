@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="error messages and returns are corrected">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="pagination is added for filtering">
+      <change afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/dto/user_token_response.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -31,15 +32,15 @@
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/calculateage_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/calculateage_helper.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_create.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_create.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_filter.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_login.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_signup.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_signup.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_status.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_status.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_token.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_token.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_update.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_update.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_updateprofile.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_create.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_create_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_filter.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_login.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_login_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_signup.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_signup_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_status.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_status_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_token.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_update.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_update_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_updateprofile.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_create_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_create_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" afterDir="false" />
@@ -248,7 +249,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="tried to apply hexagonal architecture to the directory structure&#10;handlers, local repos, external repos and services are seperated now&#10;interfaces and structures are implemented&#10;updated main&#10;tidied up mod file" />
     <MESSAGE value="CRUD (delete) operation is added&#10;project structure has been changed&#10;user_service and user_handler files are generified and their operations are seperated" />
     <MESSAGE value="CRUD (update) operation is added and all the related files are updated according to this change" />
     <MESSAGE value="CRUD (update) operation is designed with DTO" />
@@ -273,7 +273,8 @@
     <MESSAGE value="profiles are added --&gt; after logging in, user can see, update and delete their own profiles &#10;updateprofiledto is added&#10;middleware, token generators and verificators are updated due to the changes made&#10;jwt.StandardClaims is deprecated but it's working&#10;in main, a new group called profile is added to minimize process&#10;refreshtoken is moved into authorized group in main, doesn't need to take dto, it may get the token from auth part --&gt; might be updated" />
     <MESSAGE value="updatestatusbyid is no longer a get method, it's post --&gt; it uses updatestatusdto and gets the status from body, not url" />
     <MESSAGE value="error messages and returns are corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="error messages and returns are corrected" />
+    <MESSAGE value="pagination is added for filtering" />
+    <option name="LAST_COMMIT_MESSAGE" value="pagination is added for filtering" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

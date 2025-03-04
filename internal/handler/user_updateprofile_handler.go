@@ -3,13 +3,14 @@ package handler
 import (
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strings"
 )
 
 func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	var updateData *dto.UpdateProfileDTO
 	if err := c.ShouldBindJSON(&updateData); err != nil {
-		c.JSON(400, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -17,9 +18,9 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 
 	_, err := h.s.UpdateProfile(id, updateData)
 	if err != nil {
-		c.JSON(500, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "profile is updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": "profile is updated successfully"})
 }

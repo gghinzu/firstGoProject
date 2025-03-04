@@ -12,18 +12,18 @@ import (
 var secretKey string
 
 func init() {
-	configuration, errC := config.LoadConfig()
-	if errC != nil {
-		log.Fatal("cannot load config:", errC)
+	configuration, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal("cannot load config:", err)
 	}
 	secretKey = configuration.JWTAccessSecret
 }
 
 func CreateAccessToken(userGiven *entity.User) (*dto.TokenUserDTO, error) {
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id":    userGiven.ID.String(),
-		"email": userGiven.Email,
-		"exp":   time.Now().Add(time.Minute * 15).Unix(),
+		"id":   userGiven.ID.String(),
+		"type": "access",
+		"exp":  time.Now().Add(time.Minute * 15).Unix(),
 	})
 
 	secretKey := []byte(GetSecretKey())
@@ -34,7 +34,11 @@ func CreateAccessToken(userGiven *entity.User) (*dto.TokenUserDTO, error) {
 	}
 
 	return &dto.TokenUserDTO{
-		Token: accessTokenString,
+		UserID:  userGiven.ID,
+		Name:    userGiven.Name,
+		Surname: userGiven.Surname,
+		Email:   userGiven.Email,
+		Token:   accessTokenString,
 	}, nil
 }
 

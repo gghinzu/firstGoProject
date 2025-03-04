@@ -1,34 +1,34 @@
 package jwt
 
 import (
-	"firstGoProject/internal/dto"
 	"firstGoProject/pkg/config"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/google/uuid"
 	"log"
 	"time"
 )
 
 func init() {
-	configuration, errC := config.LoadConfig()
-	if errC != nil {
-		log.Fatal("cannot load config:", errC)
+	configuration, err := config.LoadConfig()
+	if err != nil {
+		log.Fatal("cannot load config:", err)
 	}
 	secretKey = configuration.JWTRefreshSecret
 }
 
-func CreateRefreshToken() (*dto.TokenUserDTO, error) {
+func CreateRefreshToken(userID uuid.UUID) (string, error) {
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp": time.Now().Add(time.Hour * 24 * 180).Unix(),
+		"user_id": userID.String(),
+		"type":    "refresh",
+		"exp":     time.Now().Add(time.Hour * 24 * 180).Unix(),
 	})
 
 	secretKey := []byte(GetSecretKey())
 
 	refreshTokenString, err := refreshToken.SignedString(secretKey)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 
-	return &dto.TokenUserDTO{
-		RefreshToken: refreshTokenString,
-	}, nil
+	return refreshTokenString, nil
 }
