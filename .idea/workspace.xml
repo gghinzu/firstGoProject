@@ -4,47 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="slight changes in refreshtoken response">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="email and password validation are added for update, register and login processes">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/entity/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_gender.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_gender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_filter_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_login_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_login_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_signup_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_signup_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_status_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_status_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_update_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_update_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_create_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_create_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_filter_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_filter_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_login_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_signup_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_signup_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/comparepassword_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/comparepassword_helper.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/middleware/user_authentication_middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_authentication_middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_refreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_refreshtoken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgres/postgres_connection.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/postgres_connection.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,7 +222,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="searching for name option is added, but it's case-sensitive&#10;updating status option is improved (activate and passivate are not seperated now)" />
     <MESSAGE value="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users" />
     <MESSAGE value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
     <MESSAGE value="gender is turned into an enum&#10;searchdto is added&#10;search part is updated (handler, service and repo layers use searchdto to make the process easier and flexible)&#10;softdelete is updated (it uses 'status' instead of 'deleted' attribute of user entity)&#10;error handling is updated in the repository part to see the errors clearly (if any)&#10;new userstatus is added to enums (not initialized)&#10;general bug fixes &amp; tidying up" />
@@ -282,7 +246,8 @@
     <MESSAGE value="role authorization is added --&gt; only admins can request specific requests --&gt; rolemiddleware is added&#10;'claims' is updated&#10;getuserwithrole repo and service are added --&gt; we can get the user with their roles --&gt; so that we are ok with our architecture --&gt; we can access user roles&#10;a todo is left --&gt; order may be added to filtering" />
     <MESSAGE value="getprofile handler bug fix" />
     <MESSAGE value="slight changes in refreshtoken response" />
-    <option name="LAST_COMMIT_MESSAGE" value="slight changes in refreshtoken response" />
+    <MESSAGE value="email and password validation are added for update, register and login processes" />
+    <option name="LAST_COMMIT_MESSAGE" value="email and password validation are added for update, register and login processes" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

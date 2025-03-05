@@ -26,5 +26,11 @@ func (s *UserService) SignUp(newUser *dto.SignUpDTO) error {
 	}
 	convertedUser.RoleID = userRole.RoleId
 
+	user, _ := s.repo.GetUserByEmail(convertedUser.Email)
+
+	if user != nil {
+		return errors.New("email is taken")
+	}
+
 	return s.repo.SignUp(convertedUser)
 }
