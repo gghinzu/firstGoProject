@@ -27,6 +27,6 @@ func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, tokenUser)
+	c.JSON(http.StatusOK, gin.H{"access-token:": tokenUser.RefreshToken})
 
 }
