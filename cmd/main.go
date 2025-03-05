@@ -59,12 +59,12 @@ func main() {
 			adminAuth := authorized.Group("")
 			adminAuth.Use(middleware.RoleMiddleware())
 			{
+				adminAuth.GET("", userHandler.FilterHandler)
 				adminAuth.GET("/:id", userHandler.GetUserByIDHandler)
-				adminAuth.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
 				adminAuth.PUT("/:id", userHandler.UpdateUserByIDHandler)
 				adminAuth.POST("", userHandler.CreateUserHandler)
+				adminAuth.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
 				adminAuth.DELETE("/:id", userHandler.DeleteUserByIDHandler)
-				adminAuth.GET("", userHandler.FilterHandler)
 			}
 		}
 		users.POST("/refresh-token", userHandler.RefreshTokenHandler)

@@ -3,10 +3,11 @@ package handler
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strings"
 )
 
 func (h *UserHandler) GetProfile(c *gin.Context) {
-	id := c.GetString("id")
+	id := strings.TrimPrefix(c.Param("id"), "/")
 
 	user, err := h.s.GetProfile(id)
 	if user == nil {
