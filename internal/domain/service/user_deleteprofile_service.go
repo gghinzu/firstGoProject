@@ -6,7 +6,6 @@ import (
 
 func (s *UserService) DeleteProfile(id string) error {
 	uid, err := uuid.Parse(id)
-	//TODO: uuid
 	if err != nil {
 		return err
 	}

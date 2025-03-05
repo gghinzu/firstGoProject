@@ -17,12 +17,17 @@ func (s *UserService) Login(user dto.LoginDTO) (*dto.TokenUserDTO, error) {
 		return nil, err
 	}
 
-	tokenUser, err := jwt.CreateAccessToken(storedUser)
+	userWithRole, role, err := s.GetUserWithRole(storedUser.ID.String())
 	if err != nil {
 		return nil, err
 	}
 
-	refreshToken, err := jwt.CreateRefreshToken(storedUser.ID)
+	tokenUser, err := jwt.CreateAccessToken(userWithRole, role)
+	if err != nil {
+		return nil, err
+	}
+
+	refreshToken, err := jwt.CreateRefreshToken(userWithRole, role)
 	if err != nil {
 		return nil, err
 	}

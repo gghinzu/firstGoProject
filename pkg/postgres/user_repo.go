@@ -115,6 +115,15 @@ func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
 	return newUser, nil
 }
 
+func (r *UserRepository) GetUserWithRole(user *entity.User) (enum.UserRole, error) {
+	var userRole entity.UserRole
+	err := r.db.Where("role_id = ?", user.RoleID).First(&userRole).Error
+	if err != nil {
+		return "", err
+	}
+	return userRole.Name, nil
+}
+
 func (r *UserRepository) paginate(limit int, offset int) *gorm.DB {
 	var users *[]entity.User
 	return r.db.Limit(limit).Offset((offset - 1) * limit).Find(&users)

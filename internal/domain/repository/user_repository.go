@@ -17,4 +17,5 @@ type UserRepositoryPort interface {
 	SignUp(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)
 	GetUserRoleByRoleName(roleName string) (*entity.UserRole, error)
+	GetUserWithRole(user *entity.User) (enum.UserRole, error)
 }

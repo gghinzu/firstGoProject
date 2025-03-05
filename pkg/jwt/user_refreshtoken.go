@@ -1,9 +1,10 @@
 package jwt
 
 import (
+	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/domain/enum"
 	"firstGoProject/pkg/config"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/google/uuid"
 	"log"
 	"time"
 )
@@ -16,9 +17,10 @@ func init() {
 	secretKey = configuration.JWTRefreshSecret
 }
 
-func CreateRefreshToken(userID uuid.UUID) (string, error) {
+func CreateRefreshToken(user *entity.User, role enum.UserRole) (string, error) {
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": userID.String(),
+		"user_id": user.ID.String(),
+		"role":    string(role),
 		"type":    "refresh",
 		"exp":     time.Now().Add(time.Hour * 24 * 180).Unix(),
 	})

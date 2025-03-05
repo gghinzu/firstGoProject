@@ -6,19 +6,22 @@ import (
 )
 
 func (s *UserService) RefreshToken(userID string) (*dto.TokenUserDTO, error) {
-	user, err := s.GetUserByID(userID)
-	if err != nil {
-		return nil, err
-	}
-	tokenUser, err := jwt.CreateAccessToken(user)
+	userWithRole, role, err := s.GetUserWithRole(userID)
 	if err != nil {
 		return nil, err
 	}
 
-	refreshToken, err := jwt.CreateRefreshToken(user.ID)
+	tokenUser, err := jwt.CreateAccessToken(userWithRole, role)
 	if err != nil {
 		return nil, err
 	}
+
+	refreshToken, err := jwt.CreateRefreshToken(userWithRole, role)
+	if err != nil {
+		return nil, err
+	}
+
 	tokenUser.RefreshToken = refreshToken
+
 	return tokenUser, nil
 }

@@ -50,17 +50,21 @@ func main() {
 		authorized := users.Group("")
 		authorized.Use(middleware.AuthMiddleware())
 		{
-			authorized.GET("/:id", userHandler.GetUserByIDHandler)
-			authorized.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
-			authorized.PUT("/:id", userHandler.UpdateUserByIDHandler)
-			authorized.POST("", userHandler.CreateUserHandler)
-			authorized.DELETE("/:id", userHandler.DeleteUserByIDHandler)
-			authorized.GET("", userHandler.FilterHandler)
 			profile := authorized.Group("/:id/profile")
 			{
 				profile.GET("", userHandler.GetProfile)
 				profile.PUT("", userHandler.UpdateProfile)
 				profile.DELETE("", userHandler.DeleteProfile)
+			}
+			adminAuth := authorized.Group("")
+			adminAuth.Use(middleware.RoleMiddleware())
+			{
+				adminAuth.GET("/:id", userHandler.GetUserByIDHandler)
+				adminAuth.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
+				adminAuth.PUT("/:id", userHandler.UpdateUserByIDHandler)
+				adminAuth.POST("", userHandler.CreateUserHandler)
+				adminAuth.DELETE("/:id", userHandler.DeleteUserByIDHandler)
+				adminAuth.GET("", userHandler.FilterHandler)
 			}
 		}
 		users.POST("/refresh-token", userHandler.RefreshTokenHandler)

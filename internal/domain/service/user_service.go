@@ -21,6 +21,7 @@ type UserServicePort interface {
 	GetProfile(id string) (*entity.User, error)
 	UpdateProfile(id string, userDTO *dto.UpdateProfileDTO) (*entity.User, error)
 	DeleteProfile(id string) error
+	GetUserWithRole(userID string) (*entity.User, enum.UserRole, error)
 }
 
 type UserService struct {

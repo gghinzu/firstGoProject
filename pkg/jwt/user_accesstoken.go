@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
 	"firstGoProject/pkg/config"
 	"github.com/golang-jwt/jwt/v4"
@@ -19,9 +20,10 @@ func init() {
 	secretKey = configuration.JWTAccessSecret
 }
 
-func CreateAccessToken(userGiven *entity.User) (*dto.TokenUserDTO, error) {
+func CreateAccessToken(user *entity.User, role enum.UserRole) (*dto.TokenUserDTO, error) {
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id":   userGiven.ID.String(),
+		"id":   user.ID.String(),
+		"role": string(role),
 		"type": "access",
 		"exp":  time.Now().Add(time.Minute * 15).Unix(),
 	})
@@ -34,10 +36,10 @@ func CreateAccessToken(userGiven *entity.User) (*dto.TokenUserDTO, error) {
 	}
 
 	return &dto.TokenUserDTO{
-		UserID:  userGiven.ID,
-		Name:    userGiven.Name,
-		Surname: userGiven.Surname,
-		Email:   userGiven.Email,
+		UserID:  user.ID,
+		Name:    user.Name,
+		Surname: user.Surname,
+		Email:   user.Email,
 		Token:   accessTokenString,
 	}, nil
 }
