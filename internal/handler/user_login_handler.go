@@ -3,11 +3,14 @@ package handler
 import (
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 	"net/http"
 )
 
 func (h *UserHandler) LoginHandler(c *gin.Context) {
 	var loginInfo dto.LoginDTO
+
+	validate := validator.New()
 
 	if err := c.ShouldBindJSON(&loginInfo); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -16,6 +19,12 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 
 	if loginInfo.Password == "" || loginInfo.Email == "" {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "email or password cannot be empty"})
+		return
+	}
+
+	err := validate.Struct(&loginInfo)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid email or password"})
 		return
 	}
 

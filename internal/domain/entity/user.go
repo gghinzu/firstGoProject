@@ -7,8 +7,8 @@ import (
 
 type User struct {
 	ID        uuid.UUID       `json:"id" gorm:"type:uuid;primaryKey;unique;default:uuid_generate_v4()"`
-	Email     string          `json:"email" gorm:"type:varchar(255);unique;not null"`
-	Password  string          `json:"password" gorm:"type:varchar(255);not null"`
+	Email     string          `json:"email" gorm:"type:varchar(255);unique;not null" validate:"required,email"`
+	Password  string          `json:"password" gorm:"type:varchar(255);not null" validate:"required,min=6"`
 	Name      string          `json:"name" gorm:"type:varchar(255);not null"`
 	Surname   string          `json:"surname" gorm:"type:varchar(255);not null"`
 	Age       int             `json:"birth_date" gorm:"type:bigint;not null"`

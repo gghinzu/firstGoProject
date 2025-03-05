@@ -18,7 +18,7 @@ func AdminSeed(db *gorm.DB) error {
 			return err
 		}
 
-		hashedPassword, err := helper.EncryptPassword("123456")
+		hashedPassword, err := helper.EncryptPassword("123456789")
 		if err != nil {
 			return err
 		}

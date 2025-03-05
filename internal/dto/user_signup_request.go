@@ -7,8 +7,8 @@ import (
 )
 
 type SignUpDTO struct {
-	Email     string          `validate:"required" json:"email" gorm:"unique;not null"`
-	Password  string          `validate:"required" json:"password" gorm:"not null"`
+	Email     string          `json:"email" gorm:"unique;not null" validate:"required,email"`
+	Password  string          `json:"password" gorm:"not null" validate:"required,min=6"`
 	Name      string          `json:"name"`
 	Surname   string          `json:"surname"`
 	Age       time.Time       `json:"age"`

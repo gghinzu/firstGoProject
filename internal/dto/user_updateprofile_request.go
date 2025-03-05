@@ -7,8 +7,8 @@ import (
 )
 
 type UpdateProfileDTO struct {
-	Email     string          `json:"email"`
-	Password  string          `json:"password"`
+	Email     string          `json:"email" validate:"required,email"`
+	Password  string          `json:"password" validate:"required,min=6"`
 	Name      string          `json:"name"`
 	Surname   string          `json:"surname"`
 	Age       time.Time       `json:"age"`
