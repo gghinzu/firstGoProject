@@ -5,7 +5,6 @@ import (
 )
 
 type FilterDTO struct {
-	//TODO: order
 	Name      *string          `json:"name" form:"name"`
 	Surname   *string          `json:"surname" form:"surname"`
 	Age       *int             `json:"age" form:"age"`
