@@ -14,4 +14,5 @@ type FilterDTO struct {
 	Status    *enum.UserStatus `json:"status" form:"status"`
 	Page      int32            `json:"page" form:"page"`
 	Limit     int32            `json:"limit" form:"limit"`
+	Order     *string          `json:"order" form:"order"`
 }

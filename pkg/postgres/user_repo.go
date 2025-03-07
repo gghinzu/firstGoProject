@@ -80,6 +80,9 @@ func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) 
 	if info.Status != nil {
 		query = query.Where("status = ?", info.Status)
 	}
+	if info.Order != nil {
+		query = query.Order(*info.Order)
+	}
 
 	err := query.Find(&users).Error
 	if err != nil {

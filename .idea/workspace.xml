@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="email and password validation are added for update, register and login processes">
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="duplicate key (in sign up) and incorrect password/email (in log in) are handled with errors.New">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_filter_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/user_repo.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +222,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="error messages are rearranged and fixed&#10;soft deletion is added (may be fixed in further phases)&#10;updating processes are blocked for soft deleted users" />
     <MESSAGE value="search option is better now (it's not waiting for parameters in main, it gets the params from postman side &amp; it is case-insensitive now)" />
     <MESSAGE value="gender is turned into an enum&#10;searchdto is added&#10;search part is updated (handler, service and repo layers use searchdto to make the process easier and flexible)&#10;softdelete is updated (it uses 'status' instead of 'deleted' attribute of user entity)&#10;error handling is updated in the repository part to see the errors clearly (if any)&#10;new userstatus is added to enums (not initialized)&#10;general bug fixes &amp; tidying up" />
     <MESSAGE value="pointer to json binding is handled with gin.ShouldBindQuery and search dto is updated according to it (now, we can check null pointers instead of empty strings)&#10;dto files is seperated from base entity now" />
@@ -247,7 +246,8 @@
     <MESSAGE value="getprofile handler bug fix" />
     <MESSAGE value="slight changes in refreshtoken response" />
     <MESSAGE value="email and password validation are added for update, register and login processes" />
-    <option name="LAST_COMMIT_MESSAGE" value="email and password validation are added for update, register and login processes" />
+    <MESSAGE value="duplicate key (in sign up) and incorrect password/email (in log in) are handled with errors.New" />
+    <option name="LAST_COMMIT_MESSAGE" value="duplicate key (in sign up) and incorrect password/email (in log in) are handled with errors.New" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
