@@ -11,7 +11,7 @@ type User struct {
 	Password  string          `json:"password" gorm:"type:varchar(255);not null" validate:"required,min=6"`
 	Name      string          `json:"name" gorm:"type:varchar(255);not null"`
 	Surname   string          `json:"surname" gorm:"type:varchar(255);not null"`
-	Age       int             `json:"birth_date" gorm:"type:bigint;not null"`
+	Age       int             `json:"age" gorm:"type:bigint;not null"`
 	Gender    enum.UserGender `json:"gender" gorm:"type:varchar(12)"`
 	Education string          `json:"education" gorm:"type:varchar(255)"`
 	Status    enum.UserStatus `json:"status" gorm:"not null;default:0"`
