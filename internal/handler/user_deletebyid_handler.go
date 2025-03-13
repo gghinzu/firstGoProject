@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"firstGoProject/internal/domain/error"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -15,5 +16,5 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "user is deleted successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": error.Success})
 }

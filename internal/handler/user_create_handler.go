@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"firstGoProject/internal/domain/error"
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -25,5 +26,5 @@ func (h *UserHandler) CreateUserHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "user is created successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": error.Success})
 }

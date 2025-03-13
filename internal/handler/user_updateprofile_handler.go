@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"firstGoProject/internal/domain/error"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
@@ -22,5 +23,5 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "profile is updated successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": error.Success})
 }

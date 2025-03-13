@@ -18,6 +18,8 @@ func main() {
 
 	router := gin.New()
 	db := postgres.Connection()
+	postgres.Migrate(db)
+	postgres.Seed(db)
 
 	// dependency injections
 	userRepository := postgres.NewUserRepository(db)

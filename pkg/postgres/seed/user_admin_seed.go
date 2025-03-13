@@ -24,6 +24,7 @@ func AdminSeed(db *gorm.DB) error {
 		}
 
 		age := time.Now().Year() - 2002
+
 		return db.Create(&entity.User{
 			ID:        uuid.New().String(),
 			Email:     "admin@example.com",

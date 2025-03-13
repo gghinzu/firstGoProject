@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"firstGoProject/internal/domain/error"
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -34,5 +35,5 @@ func (h *UserHandler) VerifyEmailHandler(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Email verified successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": error.Success})
 }
