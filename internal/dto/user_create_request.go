@@ -3,11 +3,10 @@ package dto
 import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
-	"github.com/google/uuid"
 	"time"
 )
 
-type CreateUserDTO struct {
+type CreateDTO struct {
 	Name      string          `json:"name"`
 	Surname   string          `json:"surname"`
 	Age       time.Time       `json:"age"`
@@ -16,7 +15,7 @@ type CreateUserDTO struct {
 	Role      string          `json:"role"`
 }
 
-func (CreateUserDTO) CreateConvertToUser(dto *CreateUserDTO) *entity.User {
+func (CreateDTO) CreateConvertToUser(dto *CreateDTO) *entity.User {
 	age := CalculateAge(dto.Age)
 	userCreate := &entity.User{
 		Name:      dto.Name,
@@ -24,7 +23,7 @@ func (CreateUserDTO) CreateConvertToUser(dto *CreateUserDTO) *entity.User {
 		Age:       age,
 		Gender:    dto.Gender,
 		Education: dto.Education,
-		RoleID:    uuid.UUID{},
+		RoleID:    dto.Role,
 	}
 
 	return userCreate

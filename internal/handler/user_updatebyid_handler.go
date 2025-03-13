@@ -1,11 +1,16 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/dto"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"net/http"
 )
+
+func init() {
+	validate = validator.New()
+}
 
 func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 	id := c.Param("id")
@@ -14,9 +19,7 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 		return
 	}
 
-	var updatedUser dto.UpdateUserDTO
-
-	validate := validator.New()
+	var updatedUser dto.UpdateDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "json cannot be bound"})
@@ -25,7 +28,9 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 
 	err := validate.Struct(&updatedUser)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "email must be valid and password must be at least 6 characters"})
+		var errs validator.ValidationErrors
+		errors.As(err, &errs)
+		c.JSON(http.StatusUnprocessableEntity, gin.H{"error": errs.Error()})
 		return
 	}
 

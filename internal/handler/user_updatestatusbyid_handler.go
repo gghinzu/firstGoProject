@@ -15,7 +15,7 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 		return
 	}
 
-	var status *dto.UserStatusDTO
+	var status *dto.StatusDTO
 	if err := c.ShouldBindJSON(&status); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "json cannot be bound"})
 		return

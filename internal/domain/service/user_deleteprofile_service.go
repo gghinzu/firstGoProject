@@ -1,15 +1,7 @@
 package service
 
-import (
-	"github.com/google/uuid"
-)
-
 func (s *UserService) DeleteProfile(id string) error {
-	uid, err := uuid.Parse(id)
-	if err != nil {
-		return err
-	}
-	err = s.repo.DeleteUserByID(uid)
+	err := s.repo.DeleteUserByID(id)
 	if err != nil {
 		return err
 	}

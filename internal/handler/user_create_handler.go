@@ -12,7 +12,7 @@ func (h *UserHandler) CreateUserHandler(c *gin.Context) {
 		return
 	}
 
-	var userModel *dto.CreateUserDTO
+	var userModel *dto.CreateDTO
 
 	if err := c.ShouldBind(&userModel); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "json cannot be bound"})

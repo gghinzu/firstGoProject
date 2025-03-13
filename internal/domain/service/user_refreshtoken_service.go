@@ -5,7 +5,7 @@ import (
 	"firstGoProject/pkg/jwt"
 )
 
-func (s *UserService) RefreshToken(userID string) (*dto.TokenUserDTO, error) {
+func (s *UserService) RefreshToken(userID string) (*dto.TokenDTO, error) {
 	userWithRole, role, err := s.GetUserWithRole(userID)
 	if err != nil {
 		return nil, err

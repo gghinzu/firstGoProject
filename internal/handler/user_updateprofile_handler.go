@@ -2,9 +2,9 @@ package handler
 
 import (
 	"firstGoProject/internal/dto"
+	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 func (h *UserHandler) UpdateProfile(c *gin.Context) {
@@ -14,9 +14,9 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 		return
 	}
 
-	id := strings.TrimPrefix(c.Param("id"), "/")
+	claims := c.MustGet("claims").(helper.UserCustomClaims)
 
-	_, err := h.s.UpdateProfile(id, updateData)
+	_, err := h.s.UpdateProfile(claims.ID, updateData)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return

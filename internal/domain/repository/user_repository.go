@@ -4,15 +4,14 @@ import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
-	"github.com/google/uuid"
 )
 
 type UserRepositoryPort interface {
-	GetUserByID(id uuid.UUID) (*entity.User, error)
-	DeleteUserByID(id uuid.UUID) error
-	UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error
+	GetUserByID(id string) (*entity.User, error)
+	DeleteUserByID(id string) error
+	UpdateUserByID(id string, updatedUser *entity.User) error
 	CreateUser(newUser *entity.User) error
-	UpdateUserStatusByID(id uuid.UUID, userStatus enum.UserStatus) error
+	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
 	FilterUser(info dto.FilterDTO) (*[]entity.User, error)
 	SignUp(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)

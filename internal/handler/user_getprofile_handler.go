@@ -1,15 +1,15 @@
 package handler
 
 import (
+	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 func (h *UserHandler) GetProfile(c *gin.Context) {
-	id := strings.TrimPrefix(c.Param("id"), "/")
+	claims := c.MustGet("claims").(helper.UserCustomClaims)
 
-	user, err := h.s.GetProfile(id)
+	user, err := h.s.GetProfile(claims.ID)
 	if user == nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "no user found"})
 		return

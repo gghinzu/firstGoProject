@@ -5,7 +5,7 @@ import (
 	"firstGoProject/internal/dto"
 )
 
-func (s *UserService) CreateUser(newUser *dto.CreateUserDTO) error {
+func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 	convertedUser := newUser.CreateConvertToUser(newUser)
 	if convertedUser == nil {
 		return errors.New("dto to entity conversion failed")

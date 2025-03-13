@@ -2,6 +2,6 @@ package dto
 
 import "firstGoProject/internal/domain/enum"
 
-type UserStatusDTO struct {
+type StatusDTO struct {
 	Status enum.UserStatus `json:"status"`
 }

@@ -1,25 +1,38 @@
 package postgres
 
 import (
-	"database/sql"
+	"firstGoProject/internal/domain/entity"
+	"firstGoProject/pkg/postgres/seed"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"log"
 )
 
 func Connection() *gorm.DB {
 	dsn := "host=localhost user=postgres password=mysecretpassword dbname=postgres port=5432 sslmode=disable"
 
-	sqlDB, err := sql.Open("pgx", dsn)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}
 
-	gormDB, err := gorm.Open(postgres.New(postgres.Config{
-		Conn: sqlDB,
-	}), &gorm.Config{})
+	err = db.Migrator().AutoMigrate(&entity.User{}, &entity.UserRole{})
 	if err != nil {
-		panic(err)
+		log.Fatalf("auto migration failed: %s", err.Error())
+		return nil
 	}
 
-	return gormDB
+	err = seed.RoleSeed(db)
+	if err != nil {
+		log.Fatalf("role seeding failed: %v\n", err)
+		return nil
+	}
+
+	err = seed.AdminSeed(db)
+	if err != nil {
+		log.Fatalf("user seeding failed: %v\n", err)
+		return nil
+	}
+
+	return db
 }

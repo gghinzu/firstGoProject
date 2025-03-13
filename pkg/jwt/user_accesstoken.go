@@ -20,9 +20,9 @@ func init() {
 	secretKey = configuration.JWTAccessSecret
 }
 
-func CreateAccessToken(user *entity.User, role enum.UserRole) (*dto.TokenUserDTO, error) {
+func CreateAccessToken(user *entity.User, role enum.UserRole) (*dto.TokenDTO, error) {
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"id":   user.ID.String(),
+		"id":   user.ID,
 		"role": string(role),
 		"type": "access",
 		"exp":  time.Now().Add(time.Minute * 15).Unix(),
@@ -35,7 +35,7 @@ func CreateAccessToken(user *entity.User, role enum.UserRole) (*dto.TokenUserDTO
 		return nil, err
 	}
 
-	return &dto.TokenUserDTO{
+	return &dto.TokenDTO{
 		UserID:  user.ID,
 		Name:    user.Name,
 		Surname: user.Surname,

@@ -20,8 +20,7 @@ func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 		return
 	}
 
-	id := claims.UserID
-	tokenUser, err := h.s.RefreshToken(id)
+	tokenUser, err := h.s.RefreshToken(claims.ID)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return

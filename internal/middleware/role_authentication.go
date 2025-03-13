@@ -7,14 +7,13 @@ import (
 	"net/http"
 )
 
-func RoleMiddleware() gin.HandlerFunc {
+func RoleAuthentication() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		claims := c.MustGet("claims").(helper.UserCustomClaims)
 		role := claims.Role
 
 		if role != enum.Admin {
-			c.JSON(http.StatusForbidden, gin.H{"error": "access is forbidden"})
-			c.Abort()
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "access is forbidden"})
 			return
 		}
 		c.Next()

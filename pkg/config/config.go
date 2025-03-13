@@ -10,6 +10,8 @@ func LoadConfig() (config dto.ConfigDTO, err error) {
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
 
+	//TODO: it ignores .env's
+	//bind env
 	viper.AutomaticEnv()
 
 	err = viper.ReadInConfig()

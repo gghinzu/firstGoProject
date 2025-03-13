@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type UpdateUserDTO struct {
+type UpdateDTO struct {
 	Name      string          `json:"name"`
 	Surname   string          `json:"surname"`
 	Age       time.Time       `json:"age"`
@@ -14,7 +14,7 @@ type UpdateUserDTO struct {
 	Education string          `json:"education"`
 }
 
-func (UpdateUserDTO) UpdateConvertToUser(dto *UpdateUserDTO) *entity.User {
+func (UpdateDTO) UpdateConvertToUser(dto *UpdateDTO) *entity.User {
 	age := CalculateAge(dto.Age)
 
 	userUpdate := &entity.User{

@@ -5,7 +5,7 @@ import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
-	"github.com/google/uuid"
+	"fmt"
 	"gorm.io/gorm"
 )
 
@@ -17,7 +17,7 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db}
 }
 
-func (r *UserRepository) GetUserByID(id uuid.UUID) (*entity.User, error) {
+func (r *UserRepository) GetUserByID(id string) (*entity.User, error) {
 	var getUser *entity.User
 	err := r.db.Preload("Role").Where("id = ?", id).First(&getUser).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -26,7 +26,7 @@ func (r *UserRepository) GetUserByID(id uuid.UUID) (*entity.User, error) {
 	return getUser, nil
 }
 
-func (r *UserRepository) DeleteUserByID(id uuid.UUID) error {
+func (r *UserRepository) DeleteUserByID(id string) error {
 	err := r.db.Delete(&entity.User{}, id).Error
 	if err != nil {
 		return err
@@ -34,10 +34,17 @@ func (r *UserRepository) DeleteUserByID(id uuid.UUID) error {
 	return nil
 }
 
-func (r *UserRepository) UpdateUserByID(id uuid.UUID, updatedUser *entity.User) error {
-	err := r.db.Where("id = ?", id).Updates(&updatedUser).Error
-	if err != nil {
-		return err
+func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) error {
+	if updatedUser == nil {
+		return errors.New("updatedUser cannot be nil")
+	}
+
+	result := r.db.Where("id = ?", id).Select("*").Updates(*updatedUser)
+	if result.Error != nil {
+		return fmt.Errorf("failed to update user with id %s: %w", id, result.Error)
+	}
+	if result.RowsAffected == 0 {
+		return errors.New("no user found with the given id")
 	}
 	return nil
 }
@@ -50,7 +57,7 @@ func (r *UserRepository) CreateUser(newUser *entity.User) error {
 	return nil
 }
 
-func (r *UserRepository) UpdateUserStatusByID(id uuid.UUID, userStatus enum.UserStatus) error {
+func (r *UserRepository) UpdateUserStatusByID(id string, userStatus enum.UserStatus) error {
 	err := r.db.Model(&entity.User{}).Where("id = ?", id).Update("status", userStatus).Error
 	if err != nil {
 		return err

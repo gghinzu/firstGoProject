@@ -1,15 +1,15 @@
 package handler
 
 import (
+	"firstGoProject/internal/helper"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 func (h *UserHandler) DeleteProfile(c *gin.Context) {
-	id := strings.TrimPrefix(c.Param("id"), "/")
+	claims := c.MustGet("claims").(helper.UserCustomClaims)
 
-	err := h.s.DeleteProfile(id)
+	err := h.s.DeleteProfile(claims.ID)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

@@ -9,8 +9,8 @@ import (
 
 func RoleSeed(db *gorm.DB) error {
 	roles := []entity.UserRole{
-		{RoleId: uuid.New(), Name: enum.User},
-		{RoleId: uuid.New(), Name: enum.Admin},
+		{RoleId: uuid.New().String(), Name: enum.User},
+		{RoleId: uuid.New().String(), Name: enum.Admin},
 	}
 
 	for _, role := range roles {
