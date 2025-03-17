@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"errors"
 	"firstGoProject/internal/dto"
+	"firstGoProject/internal/error"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"net/http"
@@ -18,15 +18,13 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	var loginInfo dto.LoginDTO
 
 	if err := c.ShouldBindJSON(&loginInfo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
 		return
 	}
 
 	err := validate.Struct(&loginInfo)
 	if err != nil {
-		var errs validator.ValidationErrors
-		errors.As(err, &errs)
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"error": errs.Error()})
+		c.JSON(http.StatusUnprocessableEntity, gin.H{"error": error.InvalidInput})
 		return
 	}
 
@@ -34,7 +32,7 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 
 	userLogin, err = h.s.Login(loginInfo)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": error.NotAuthenticated})
 		return
 	}
 

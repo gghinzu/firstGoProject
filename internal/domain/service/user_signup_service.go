@@ -5,6 +5,7 @@ import (
 	"errors"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
+	error2 "firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
 	"firstGoProject/pkg/config"
 	"fmt"
@@ -51,7 +52,7 @@ func (s *UserService) SignUp(newUser *dto.SignUpDTO) error {
 
 	convertedUser := newUser.SignUpConvertToUser(newUser)
 	if convertedUser == nil {
-		return errors.New("failed to convert DTO to entity")
+		return errors.New(error2.ConversionError)
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName("user")

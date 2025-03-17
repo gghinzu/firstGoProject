@@ -2,6 +2,7 @@ package helper
 
 import (
 	"errors"
+	error2 "firstGoProject/internal/error"
 	a "firstGoProject/pkg/jwt"
 	"github.com/golang-jwt/jwt/v4"
 )
@@ -27,11 +28,11 @@ func VerifyToken(tokenString, expectedType string) (UserCustomClaims, error) {
 
 	customClaims, ok := token.Claims.(*UserCustomClaims)
 	if !ok || !token.Valid {
-		return UserCustomClaims{}, errors.New("invalid token")
+		return UserCustomClaims{}, errors.New(error2.NotAuthorized)
 	}
 
 	if customClaims.Type != expectedType {
-		return UserCustomClaims{}, errors.New("invalid type")
+		return UserCustomClaims{}, errors.New(error2.InvalidInput)
 	}
 
 	return *customClaims, nil

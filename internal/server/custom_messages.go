@@ -1,3 +1,3 @@
-package error
+package server
 
 const Success = "success"

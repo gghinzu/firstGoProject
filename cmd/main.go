@@ -21,7 +21,6 @@ func main() {
 	postgres.Migrate(db)
 	postgres.Seed(db)
 
-	// dependency injections
 	userRepository := postgres.NewUserRepository(db)
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)

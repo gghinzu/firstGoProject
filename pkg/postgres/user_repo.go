@@ -5,6 +5,7 @@ import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
+	error2 "firstGoProject/internal/error"
 	"fmt"
 	"gorm.io/gorm"
 )
@@ -36,15 +37,17 @@ func (r *UserRepository) DeleteUserByID(id string) error {
 
 func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) error {
 	if updatedUser == nil {
-		return errors.New("updatedUser cannot be nil")
+		return fmt.Errorf(error2.InvalidInput)
 	}
 
 	result := r.db.Where("id = ?", id).Select("*").Updates(*updatedUser)
+
 	if result.Error != nil {
 		return fmt.Errorf("failed to update user with id %s: %w", id, result.Error)
 	}
+
 	if result.RowsAffected == 0 {
-		return errors.New("no user found with the given id")
+		return errors.New(error2.NotFound)
 	}
 	return nil
 }

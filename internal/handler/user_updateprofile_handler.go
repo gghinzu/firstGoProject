@@ -1,9 +1,10 @@
 package handler
 
 import (
-	"firstGoProject/internal/domain/error"
 	"firstGoProject/internal/dto"
+	"firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
+	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -11,7 +12,7 @@ import (
 func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	var updateData *dto.UpdateProfileDTO
 	if err := c.ShouldBindJSON(&updateData); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
 		return
 	}
 
@@ -19,9 +20,9 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 
 	_, err := h.s.UpdateProfile(claims.ID, updateData)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": error.InternalServerError})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": error.Success})
+	c.JSON(http.StatusOK, gin.H{"message": server.Success})
 }

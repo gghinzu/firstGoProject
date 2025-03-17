@@ -2,24 +2,26 @@ package service
 
 import (
 	"errors"
+	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
+	error2 "firstGoProject/internal/error"
 )
 
 func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 	convertedUser := newUser.CreateConvertToUser(newUser)
 	if convertedUser == nil {
-		return errors.New("dto to entity conversion failed")
+		return errors.New(error2.ConversionError)
 	}
 
 	roleName := newUser.Role
 
 	validRoles := map[string]bool{
-		"user":  true,
-		"admin": true,
+		string(enum.User):  true,
+		string(enum.Admin): true,
 	}
 
 	if !validRoles[roleName] {
-		return errors.New("role name is invalid")
+		return errors.New(error2.InvalidInput)
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName(roleName)
