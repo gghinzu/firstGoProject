@@ -13,9 +13,9 @@ func (h *UserHandler) DeleteProfile(c *gin.Context) {
 
 	err := h.s.DeleteProfile(claims.ID)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
+		c.JSON(http.StatusBadRequest, error.DeleteError.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": server.Success})
+	c.JSON(http.StatusOK, server.Success)
 }

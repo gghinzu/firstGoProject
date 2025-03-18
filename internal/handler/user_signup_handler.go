@@ -1,11 +1,13 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"gorm.io/gorm"
 	"net/http"
 )
 
@@ -17,20 +19,24 @@ func (h *UserHandler) SignUpHandler(c *gin.Context) {
 	var info dto.SignUpDTO
 
 	if err := c.ShouldBindJSON(&info); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
+		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
 		return
 	}
 
 	if err := validate.Struct(&info); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"error": error.InvalidInput})
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
 		return
 	}
 
 	err := h.s.SignUp(&info)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": error.InternalServerError})
+		if errors.Is(err, gorm.ErrDuplicatedKey) {
+			c.JSON(http.StatusNotFound, error.AlreadyExists.Error())
+			return
+		}
+		c.JSON(http.StatusInternalServerError, error.InternalServerError.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": server.Success})
+	c.JSON(http.StatusOK, server.Success)
 }

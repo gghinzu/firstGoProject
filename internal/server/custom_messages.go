@@ -1,3 +1,6 @@
 package server
 
-const Success = "success"
+const (
+	Success  = "success"
+	NotFound = "not found"
+)

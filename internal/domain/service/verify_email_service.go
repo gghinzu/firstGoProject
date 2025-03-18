@@ -3,7 +3,6 @@ package service
 import (
 	"errors"
 	"firstGoProject/internal/domain/enum"
-	error2 "firstGoProject/internal/error"
 )
 
 func (s *UserService) VerifyEmail(email, code string) error {
@@ -12,8 +11,8 @@ func (s *UserService) VerifyEmail(email, code string) error {
 		return err
 	}
 
-	if user.VerificationCode != &code {
-		return errors.New(error2.InvalidInput)
+	if *user.VerificationCode != code {
+		return errors.New("invalid verification code")
 	}
 
 	user.Status = enum.Active

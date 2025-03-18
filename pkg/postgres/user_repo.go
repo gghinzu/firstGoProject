@@ -5,7 +5,6 @@ import (
 	"firstGoProject/internal/domain/entity"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
-	error2 "firstGoProject/internal/error"
 	"fmt"
 	"gorm.io/gorm"
 )
@@ -37,17 +36,11 @@ func (r *UserRepository) DeleteUserByID(id string) error {
 
 func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) error {
 	if updatedUser == nil {
-		return fmt.Errorf(error2.InvalidInput)
+		return fmt.Errorf("updated user cannot be nil")
 	}
-
-	result := r.db.Where("id = ?", id).Select("*").Updates(*updatedUser)
-
-	if result.Error != nil {
-		return fmt.Errorf("failed to update user with id %s: %w", id, result.Error)
-	}
-
-	if result.RowsAffected == 0 {
-		return errors.New(error2.NotFound)
+	err := r.db.Where("id = ?", id).Updates(*updatedUser).Error
+	if err != nil {
+		return err
 	}
 	return nil
 }
@@ -71,7 +64,6 @@ func (r *UserRepository) UpdateUserStatusByID(id string, userStatus enum.UserSta
 func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) {
 	var users *[]entity.User
 	query := r.paginate(int(info.Limit), int(info.Page)).Preload("Role")
-
 	if info.Name != nil {
 		query = query.Where("name ILIKE ?", info.Name)
 	}
@@ -93,12 +85,10 @@ func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) 
 	if info.Order != nil {
 		query = query.Order(*info.Order)
 	}
-
 	err := query.Find(&users).Error
 	if err != nil {
 		return nil, err
 	}
-
 	return users, nil
 }
 

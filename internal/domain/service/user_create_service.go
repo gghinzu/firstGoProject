@@ -10,7 +10,7 @@ import (
 func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 	convertedUser := newUser.CreateConvertToUser(newUser)
 	if convertedUser == nil {
-		return errors.New(error2.ConversionError)
+		return error2.ConversionError
 	}
 
 	roleName := newUser.Role
@@ -21,7 +21,7 @@ func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 	}
 
 	if !validRoles[roleName] {
-		return errors.New(error2.InvalidInput)
+		return errors.New("invalid role")
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName(roleName)

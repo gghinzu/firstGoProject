@@ -1,9 +1,11 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"net/http"
 	"strings"
 )
@@ -13,9 +15,13 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 
 	err := h.s.DeleteUserByID(id)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": error.InternalServerError})
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			return
+		}
+		c.JSON(http.StatusInternalServerError, error.DeleteError.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": server.Success})
+	c.JSON(http.StatusOK, server.Success)
 }

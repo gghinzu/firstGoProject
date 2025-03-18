@@ -17,20 +17,20 @@ func (h *UserHandler) VerifyEmailHandler(c *gin.Context) {
 	var input dto.VerifyEmailDTO
 
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
+		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
 		return
 	}
 
 	if err := validate.Struct(&input); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{"error": error.InvalidInput})
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
 		return
 	}
 
 	err := h.s.VerifyEmail(input.Email, input.Code)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
+		c.JSON(http.StatusBadRequest, error.VerifyError.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": server.Success})
+	c.JSON(http.StatusOK, server.Success)
 }

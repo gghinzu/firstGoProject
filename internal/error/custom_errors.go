@@ -1,11 +1,20 @@
 package error
 
-const NotFound = "not found"
-const NotAuthorized = "unauthorized"
-const InvalidInput = "not verified"
-const InternalServerError = "internal server error"
-const BadRequest = "bad request"
-const EmptyBody = "body is empty"
-const NotAuthenticated = "not authenticated"
-const Forbidden = "forbidden"
-const ConversionError = "conversion failed"
+import "errors"
+
+var (
+	AlreadyExists       = errors.New("already exists")
+	NotFound            = errors.New("not found")
+	Unauthorized        = errors.New("unauthorized")
+	InternalServerError = errors.New("internal server error")
+	BadRequest          = errors.New("bad request")
+	EmptyRequestBody    = errors.New("empty request body")
+	Unauthenticated     = errors.New("unauthenticated")
+	ConversionError     = errors.New("conversion error")
+	JsonParseError      = errors.New("json parse error")
+	CreateError         = errors.New("creation error")
+	DeleteError         = errors.New("deletion error")
+	UpdateError         = errors.New("update error")
+	VerifyError         = errors.New("verification error")
+	InvalidInput        = errors.New("invalid input")
+)

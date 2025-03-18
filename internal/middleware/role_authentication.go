@@ -14,7 +14,7 @@ func RoleAuthentication() gin.HandlerFunc {
 		role := claims.Role
 
 		if role != string(enum.Admin) {
-			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": error.Forbidden})
+			c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthorized.Error())
 			return
 		}
 		c.Next()

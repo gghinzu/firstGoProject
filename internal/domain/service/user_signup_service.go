@@ -52,7 +52,7 @@ func (s *UserService) SignUp(newUser *dto.SignUpDTO) error {
 
 	convertedUser := newUser.SignUpConvertToUser(newUser)
 	if convertedUser == nil {
-		return errors.New(error2.ConversionError)
+		return error2.ConversionError
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName("user")

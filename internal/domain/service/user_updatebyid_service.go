@@ -18,7 +18,7 @@ func (s *UserService) UpdateUserByID(id string, updatedUser *dto.UpdateDTO) erro
 	convertedUser := updatedUser.UpdateConvertToUser(updatedUser)
 
 	if convertedUser == nil {
-		return errors.New(error2.ConversionError)
+		return error2.ConversionError
 	}
 
 	if userUpdate.Status != enum.Deleted {

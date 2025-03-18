@@ -28,11 +28,11 @@ func VerifyToken(tokenString, expectedType string) (UserCustomClaims, error) {
 
 	customClaims, ok := token.Claims.(*UserCustomClaims)
 	if !ok || !token.Valid {
-		return UserCustomClaims{}, errors.New(error2.NotAuthorized)
+		return UserCustomClaims{}, error2.Unauthorized
 	}
 
 	if customClaims.Type != expectedType {
-		return UserCustomClaims{}, errors.New(error2.InvalidInput)
+		return UserCustomClaims{}, errors.New("invalid token type")
 	}
 
 	return *customClaims, nil

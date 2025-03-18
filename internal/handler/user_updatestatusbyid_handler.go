@@ -1,11 +1,13 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 	"net/http"
 )
 
@@ -13,13 +15,13 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	id := c.Param("id")
 
 	if c.Request.Body == nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.EmptyBody})
+		c.JSON(http.StatusBadRequest, error.EmptyRequestBody.Error())
 		return
 	}
 
 	var status *dto.StatusDTO
 	if err := c.ShouldBindJSON(&status); err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "json cannot be bound"})
+		c.JSON(http.StatusInternalServerError, error.JsonParseError.Error())
 		return
 	}
 
@@ -34,15 +36,19 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	case 2:
 		userStat = enum.Deleted
 	default:
-		c.JSON(http.StatusBadRequest, gin.H{"error": error.BadRequest})
+		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
 		return
 	}
 
 	err := h.s.UpdateUserStatusByID(id, userStat)
 	if err != nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": error.NotFound})
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			return
+		}
+		c.JSON(http.StatusNotFound, error.UpdateError.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": server.Success})
+	c.JSON(http.StatusOK, server.Success)
 }
