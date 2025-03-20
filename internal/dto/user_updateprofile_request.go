@@ -32,5 +32,6 @@ func (UpdateProfileDTO) UpdateProfileConvertToUser(dto *UpdateProfileDTO) *entit
 		Education: dto.Education,
 		Role:      dto.Role,
 	}
+
 	return userUpdate
 }

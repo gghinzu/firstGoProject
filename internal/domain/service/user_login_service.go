@@ -8,6 +8,7 @@ import (
 
 func (s *UserService) Login(user dto.LoginDTO) (*dto.TokenDTO, error) {
 	storedUser, err := s.repo.GetUserByEmail(user.Email)
+
 	if err != nil {
 		return nil, err
 	}

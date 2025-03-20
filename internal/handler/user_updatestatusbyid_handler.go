@@ -20,12 +20,14 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	}
 
 	var status *dto.StatusDTO
+
 	if err := c.ShouldBindJSON(&status); err != nil {
 		c.JSON(http.StatusInternalServerError, error.JsonParseError.Error())
 		return
 	}
 
 	var userStat enum.UserStatus
+
 	userStatus := status.Status
 
 	switch userStatus {

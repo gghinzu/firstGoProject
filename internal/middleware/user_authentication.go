@@ -11,6 +11,7 @@ import (
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.GetHeader("Authorization")
+
 		if tokenString == "" {
 			c.JSON(http.StatusUnauthorized, error.Unauthorized.Error())
 			return

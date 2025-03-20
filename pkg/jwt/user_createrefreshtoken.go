@@ -11,9 +11,11 @@ import (
 
 func init() {
 	configuration, err := config.LoadConfig()
+
 	if err != nil {
 		log.Fatal("cannot load config:", err)
 	}
+
 	secretKey = configuration.JWTRefreshSecret
 }
 

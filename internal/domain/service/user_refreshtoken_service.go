@@ -7,6 +7,7 @@ import (
 
 func (s *UserService) RefreshToken(userID string) (*dto.TokenDTO, error) {
 	userWithRole, role, err := s.GetUserWithRole(userID)
+
 	if err != nil {
 		return nil, err
 	}

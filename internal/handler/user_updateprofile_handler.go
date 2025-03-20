@@ -15,6 +15,7 @@ import (
 
 func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	var updateData dto.UpdateProfileDTO
+
 	if err := c.ShouldBindJSON(&updateData); err != nil {
 		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
 		return

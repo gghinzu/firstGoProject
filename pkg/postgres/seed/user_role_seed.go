@@ -15,6 +15,7 @@ func RoleSeed(db *gorm.DB) error {
 
 	for _, role := range roles {
 		var count int64
+
 		db.Model(&entity.UserRole{}).Where("name = ?", role.Name).Count(&count)
 		if count == 0 {
 			if err := db.Create(&role).Error; err != nil {
@@ -22,5 +23,6 @@ func RoleSeed(db *gorm.DB) error {
 			}
 		}
 	}
+
 	return nil
 }

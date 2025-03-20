@@ -10,6 +10,7 @@ import (
 
 func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 	var refreshToken *dto.RefreshTokenDTO
+
 	if err := c.ShouldBindJSON(&refreshToken); err != nil {
 		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
 		return
@@ -28,5 +29,4 @@ func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, tokenUser.RefreshToken)
-
 }

@@ -11,8 +11,10 @@ import (
 
 func AdminSeed(db *gorm.DB) error {
 	var count int64
+
 	if db.Model(&entity.User{}).Count(&count); count == 0 {
 		var adminRole *entity.UserRole
+
 		err := db.Model(&entity.UserRole{}).Where("name = ?", enum.Admin).First(&adminRole).Error
 		if err != nil {
 			return err
@@ -38,5 +40,6 @@ func AdminSeed(db *gorm.DB) error {
 			RoleID:    adminRole.RoleId,
 		}).Error
 	}
+
 	return nil
 }

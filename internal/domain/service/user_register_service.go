@@ -9,16 +9,17 @@ import (
 	"firstGoProject/internal/helper"
 	"firstGoProject/pkg/config"
 	"fmt"
-	"log"
 	"math/big"
 	"net/smtp"
 )
 
 func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	hash, err := helper.EncryptPassword(newUser.Password)
+
 	if err != nil {
-		return fmt.Errorf("failed to encrypt password: %v", err)
+		return err
 	}
+
 	newUser.Password = string(hash)
 
 	user := newUser.RegisterConvertToUser(newUser)
@@ -30,6 +31,7 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	if err != nil {
 		return err
 	}
+
 	user.RoleID = userRole.RoleId
 
 	existingUser, _ := s.repo.GetUserByEmail(user.Email)
@@ -56,13 +58,15 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 
 func GenerateVerificationCode() string {
 	num, _ := rand.Int(rand.Reader, big.NewInt(1000000))
+
 	return fmt.Sprintf("%06d", num)
 }
 
 func SendVerificationEmail(email, code string) error {
 	configure, err := config.LoadConfig()
+
 	if err != nil {
-		log.Fatal("cannot load config:", err)
+		return err
 	}
 
 	smtpHost := configure.SMTPHost
@@ -76,9 +80,10 @@ func SendVerificationEmail(email, code string) error {
 
 	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, senderEmail, to, msg)
 	if err != nil {
-		return fmt.Errorf("failed to send email: %v", err)
+		return err
 	}
 
 	fmt.Printf("Verification email sent to %s with code: %s\n", email, code)
+
 	return nil
 }

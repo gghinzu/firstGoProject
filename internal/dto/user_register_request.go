@@ -28,5 +28,6 @@ func (RegisterDTO) RegisterConvertToUser(dto *RegisterDTO) *entity.User {
 		Gender:    dto.Gender,
 		Education: dto.Education,
 	}
+
 	return userSign
 }

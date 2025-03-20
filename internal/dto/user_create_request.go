@@ -17,6 +17,7 @@ type CreateDTO struct {
 
 func (CreateDTO) CreateConvertToUser(dto *CreateDTO) *entity.User {
 	age := CalculateAge(dto.Age)
+
 	userCreate := &entity.User{
 		Name:      dto.Name,
 		Surname:   dto.Surname,

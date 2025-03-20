@@ -10,6 +10,7 @@ import (
 
 func (h *UserHandler) FilterHandler(c *gin.Context) {
 	var info dto.FilterDTO
+
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, error.BadRequest.Error())

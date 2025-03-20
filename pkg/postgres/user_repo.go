@@ -40,7 +40,7 @@ func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) err
 	if err != nil {
 		return err
 	}
-	//default value handling
+	// default value handling
 	if updatedUser.Status == 0 {
 		err = r.UpdateUserStatusByID(id, 0)
 		if err != nil {

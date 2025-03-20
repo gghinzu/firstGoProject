@@ -17,6 +17,7 @@ func init() {
 
 func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 	id := c.Param("id")
+
 	if c.Request.Body == nil {
 		c.JSON(http.StatusBadRequest, error.EmptyRequestBody.Error())
 		return
