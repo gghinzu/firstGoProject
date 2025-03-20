@@ -19,6 +19,7 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 			c.JSON(http.StatusNotFound, error.NotFound.Error())
 			return
 		}
+
 		c.JSON(http.StatusInternalServerError, error.DeleteError.Error())
 		return
 	}

@@ -18,7 +18,7 @@ func LoadConfig() (config dto.ConfigDTO, err error) {
 	if err != nil {
 		log.Printf("no .env file found: %v", err)
 	} else {
-		log.Println("Successfully loaded .env file")
+		log.Println("successfully loaded .env file")
 	}
 
 	err = viper.Unmarshal(&config)

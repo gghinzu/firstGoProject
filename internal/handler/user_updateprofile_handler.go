@@ -39,6 +39,7 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 			c.JSON(http.StatusNotFound, error.NotFound.Error())
 			return
 		}
+
 		c.JSON(http.StatusInternalServerError, error.UpdateError.Error())
 		return
 	}

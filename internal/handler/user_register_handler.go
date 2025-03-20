@@ -34,6 +34,7 @@ func (h *UserHandler) RegisterHandler(c *gin.Context) {
 			c.JSON(http.StatusNotFound, error.AlreadyExists.Error())
 			return
 		}
+
 		c.JSON(http.StatusInternalServerError, error.InternalServerError.Error())
 		return
 	}

@@ -48,6 +48,7 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 			c.JSON(http.StatusNotFound, error.NotFound.Error())
 			return
 		}
+
 		c.JSON(http.StatusNotFound, error.UpdateError.Error())
 		return
 	}
