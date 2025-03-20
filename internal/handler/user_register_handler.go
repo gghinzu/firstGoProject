@@ -15,8 +15,8 @@ func init() {
 	validate = validator.New()
 }
 
-func (h *UserHandler) SignUpHandler(c *gin.Context) {
-	var info dto.SignUpDTO
+func (h *UserHandler) RegisterHandler(c *gin.Context) {
+	var info dto.RegisterDTO
 
 	if err := c.ShouldBindJSON(&info); err != nil {
 		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
@@ -28,7 +28,7 @@ func (h *UserHandler) SignUpHandler(c *gin.Context) {
 		return
 	}
 
-	err := h.s.SignUp(&info)
+	err := h.s.Register(&info)
 	if err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			c.JSON(http.StatusNotFound, error.AlreadyExists.Error())

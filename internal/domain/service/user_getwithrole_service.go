@@ -10,7 +10,7 @@ func (s *UserService) GetUserWithRole(id string) (*entity.User, enum.UserRole, e
 	if err != nil {
 		return nil, "", err
 	}
-	role, err := s.repo.GetUserWithRole(user)
+	role, err := s.repo.GetRoleByUserInfo(user)
 	if err != nil {
 		return nil, "", err
 	}

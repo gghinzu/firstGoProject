@@ -15,7 +15,7 @@ type UserServicePort interface {
 	CreateUser(newUser *dto.CreateDTO) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
 	FilterUser(info dto.FilterDTO) (*[]entity.User, error)
-	SignUp(newUser *dto.SignUpDTO) error
+	Register(newUser *dto.RegisterDTO) error
 	Login(info dto.LoginDTO) (*dto.TokenDTO, error)
 	RefreshToken(userID string) (*dto.TokenDTO, error)
 	GetProfile(id string) (*entity.User, error)

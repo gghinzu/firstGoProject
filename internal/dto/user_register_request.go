@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type SignUpDTO struct {
+type RegisterDTO struct {
 	Email     string          `json:"email" gorm:"unique;not null" validate:"required,email"`
 	Password  string          `json:"password" gorm:"not null" validate:"required,min=6"`
 	Name      string          `json:"name"`
@@ -16,7 +16,7 @@ type SignUpDTO struct {
 	Education string          `json:"education"`
 }
 
-func (SignUpDTO) SignUpConvertToUser(dto *SignUpDTO) *entity.User {
+func (RegisterDTO) RegisterConvertToUser(dto *RegisterDTO) *entity.User {
 	age := CalculateAge(dto.Age)
 
 	userSign := &entity.User{

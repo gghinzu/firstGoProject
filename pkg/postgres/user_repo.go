@@ -38,7 +38,7 @@ func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) err
 	if updatedUser == nil {
 		return fmt.Errorf("updated user cannot be nil")
 	}
-	err := r.db.Where("id = ?", id).Updates(*updatedUser).Error
+	err := r.db.Model(&entity.User{}).Where("id = ?", id).Omit("id", "email", "password").Updates(*updatedUser).Error
 	if err != nil {
 		return err
 	}
@@ -92,7 +92,7 @@ func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) 
 	return users, nil
 }
 
-func (r *UserRepository) SignUp(info *entity.User) error {
+func (r *UserRepository) Register(info *entity.User) error {
 	err := r.db.Create(&info).Error
 	if err != nil {
 		return err
@@ -118,7 +118,7 @@ func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
 	return newUser, nil
 }
 
-func (r *UserRepository) GetUserWithRole(user *entity.User) (enum.UserRole, error) {
+func (r *UserRepository) GetRoleByUserInfo(user *entity.User) (enum.UserRole, error) {
 	var userRole entity.UserRole
 	err := r.db.Where("role_id = ?", user.RoleID).First(&userRole).Error
 	if err != nil {

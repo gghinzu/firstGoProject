@@ -49,7 +49,7 @@ func main() {
 			}
 		}
 		users.POST("/refresh-token", userHandler.RefreshTokenHandler)
-		users.POST("/register", userHandler.SignUpHandler)
+		users.POST("/register", userHandler.RegisterHandler)
 		users.POST("/login", userHandler.LoginHandler)
 		users.POST("/verify", userHandler.VerifyEmailHandler)
 	}

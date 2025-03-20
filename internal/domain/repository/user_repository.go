@@ -13,8 +13,8 @@ type UserRepositoryPort interface {
 	CreateUser(newUser *entity.User) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
 	FilterUser(info dto.FilterDTO) (*[]entity.User, error)
-	SignUp(user *entity.User) error
+	Register(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)
 	GetUserRoleByRoleName(roleName string) (*entity.UserRole, error)
-	GetUserWithRole(user *entity.User) (enum.UserRole, error)
+	GetRoleByUserInfo(user *entity.User) (enum.UserRole, error)
 }
