@@ -13,6 +13,7 @@ type UpdateProfileDTO struct {
 	Surname   string          `json:"surname"`
 	Age       time.Time       `json:"age"`
 	Gender    enum.UserGender `json:"gender"`
+	Status    enum.UserStatus `json:"status"`
 	Education string          `json:"education"`
 	Role      entity.UserRole `json:"role"`
 }
@@ -27,6 +28,7 @@ func (UpdateProfileDTO) UpdateProfileConvertToUser(dto *UpdateProfileDTO) *entit
 		Surname:   dto.Surname,
 		Age:       age,
 		Gender:    dto.Gender,
+		Status:    dto.Status,
 		Education: dto.Education,
 		Role:      dto.Role,
 	}

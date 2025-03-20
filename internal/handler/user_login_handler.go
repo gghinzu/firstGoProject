@@ -1,10 +1,12 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"gorm.io/gorm"
 	"net/http"
 )
 
@@ -32,6 +34,11 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 
 	userLogin, err = h.s.Login(loginInfo)
 	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+			return
+		}
+
 		c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthenticated.Error())
 		return
 	}

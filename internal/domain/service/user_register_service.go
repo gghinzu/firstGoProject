@@ -21,8 +21,8 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	}
 	newUser.Password = string(hash)
 
-	convertedUser := newUser.RegisterConvertToUser(newUser)
-	if convertedUser == nil {
+	user := newUser.RegisterConvertToUser(newUser)
+	if user == nil {
 		return error2.ConversionError
 	}
 
@@ -30,23 +30,23 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	if err != nil {
 		return err
 	}
-	convertedUser.RoleID = userRole.RoleId
+	user.RoleID = userRole.RoleId
 
-	existingUser, _ := s.repo.GetUserByEmail(convertedUser.Email)
+	existingUser, _ := s.repo.GetUserByEmail(user.Email)
 	if existingUser != nil {
 		return errors.New("email is taken")
 	}
 
 	verificationCode := GenerateVerificationCode()
-	convertedUser.VerificationCode = &verificationCode
-	convertedUser.Status = enum.Passive
+	user.VerificationCode = &verificationCode
+	user.Status = enum.Passive
 
-	err = s.repo.Register(convertedUser)
+	err = s.repo.Register(user)
 	if err != nil {
 		return err
 	}
 
-	err = SendVerificationEmail(convertedUser.Email, verificationCode)
+	err = SendVerificationEmail(user.Email, verificationCode)
 	if err != nil {
 		return err
 	}

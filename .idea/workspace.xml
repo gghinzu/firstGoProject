@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="custom errors are updated&#10;c.json messages are updated&#10;gin.h is no longer used&#10;changes may be done soon">
+    <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="updatebyid (in repo) is updated to handle default values in go&#10;signup --&gt; register (renamed)&#10;loadconfig is updated to handle all the .env's --&gt; not only local ones --&gt; no todo left here&#10;helper, token, email and dto files are renamed&#10;fixes">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
@@ -23,27 +23,23 @@
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getprofile_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getwithrole_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getwithrole_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_signup_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_register_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_register_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_register_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/domain/service/verify_email_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_verifyemail_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/calculateage_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/helper_calculateage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_verifyemail_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_verifyemail_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/helper_calculateage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/helper_calculateage.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_config.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_create_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_create_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_filter_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_login_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_login_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_signup_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_register_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_register_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_register_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_status_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_status_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_token_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_token_response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/dto/user_update_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_update_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/dto/user_verifyemail_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_verifyemail_response.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/error/custom_errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/error/custom_errors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_create_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_create_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" afterDir="false" />
@@ -53,20 +49,19 @@
       <change beforePath="$PROJECT_DIR$/internal/handler/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_login_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/user_signup_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_register_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_register_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_register_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/handler/verify_email_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_verifyemail_handler.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/comparepassword_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_comparepassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/encryptpassword_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_encryptpassword.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/helper/verifytoken_helper.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_verifytoken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/middleware/role_authentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_roleauthentication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/helper_comparepassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_comparepassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/helper_encryptpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_encryptpassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/helper_verifytoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_verifytoken.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/middleware/user_authentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_authentication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/user_roleauthentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_roleauthentication.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/server/custom_messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/custom_messages.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/loadconfig.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_accesstoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createaccesstoken.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_refreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createrefreshtoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/config/loadconfig.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/loadconfig.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_createaccesstoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createaccesstoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_createrefreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createrefreshtoken.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/postgres/postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/postgres.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/postgres/seed/user_role_seed.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_role_seed.go" afterDir="false" />
@@ -301,7 +296,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="bug fixes in repo layer" />
     <MESSAGE value="roleid is no longer used in the creation process, users are saved as a 'user' by default&#10;if there's no record in users database, a seed user (as an admin) is created automatically by default&#10;error messages and json codes are updated&#10;uuid parsing from url is improved&#10;createuserdto is updated according to the changes in repo and service layer of creation -- roleid is automatically set by the role name of the user" />
     <MESSAGE value="signupdto, logindto, and tokendto are added&#10;email, password, token fields are added to base entity&#10;register and login processes are handled by servers, handlers and repo&#10;authentication middleware is created and authentication-required processes and methods are seperated and handled by it&#10;grouping is handled in the main, requests that need authentication are grouped together&#10;for storing the password in the database, encrytion and decryption processes are handled by helpers&#10;user_jwt is created to create tokens in every login for users --&gt; used custom claims&#10;seed's location is changed&#10;updatetoken function is created in repository layer (don't know if it is necessary or not, might be deleted later)&#10;errors and bugs are tried to be fixed" />
     <MESSAGE value="viper is downloaded and configuration is done &#10;.env file is added&#10;token attribute is deleted from database because we don't need it now&#10;refresh-token is added different than access token -&gt; user can now enter their email and get a new refresh token &#10;admin seed's password is updated (hashed)&#10;refreshtokendto is added&#10;refreshtoken handler and service are added" />
@@ -326,7 +320,8 @@
     <MESSAGE value="custom errors and messages are implemented&#10;enum fixes" />
     <MESSAGE value="fixes" />
     <MESSAGE value="custom errors are updated&#10;c.json messages are updated&#10;gin.h is no longer used&#10;changes may be done soon" />
-    <option name="LAST_COMMIT_MESSAGE" value="custom errors are updated&#10;c.json messages are updated&#10;gin.h is no longer used&#10;changes may be done soon" />
+    <MESSAGE value="updatebyid (in repo) is updated to handle default values in go&#10;signup --&gt; register (renamed)&#10;loadconfig is updated to handle all the .env's --&gt; not only local ones --&gt; no todo left here&#10;helper, token, email and dto files are renamed&#10;fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="updatebyid (in repo) is updated to handle default values in go&#10;signup --&gt; register (renamed)&#10;loadconfig is updated to handle all the .env's --&gt; not only local ones --&gt; no todo left here&#10;helper, token, email and dto files are renamed&#10;fixes" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

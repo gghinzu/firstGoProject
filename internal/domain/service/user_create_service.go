@@ -8,8 +8,8 @@ import (
 )
 
 func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
-	convertedUser := newUser.CreateConvertToUser(newUser)
-	if convertedUser == nil {
+	user := newUser.CreateConvertToUser(newUser)
+	if user == nil {
 		return error2.ConversionError
 	}
 
@@ -29,7 +29,7 @@ func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 		return err
 	}
 
-	convertedUser.RoleID = userRole.RoleId
+	user.RoleID = userRole.RoleId
 
-	return s.repo.CreateUser(convertedUser)
+	return s.repo.CreateUser(user)
 }

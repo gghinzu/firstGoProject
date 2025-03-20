@@ -15,6 +15,6 @@ type User struct {
 	Education        string          `json:"education" gorm:"type:varchar(255);not null"`
 	Status           enum.UserStatus `json:"status" gorm:"not null"`
 	RoleID           string          `json:"role_id" gorm:"type:uuid;not null"`
-	Role             UserRole        `json:"role" gorm:"not null;foreignKey:RoleID;references:RoleId"`
+	Role             UserRole        `json:"role" gorm:"foreignKey:RoleID;references:RoleId;not null"`
 	VerificationCode *string         `json:"verification_code" gorm:"type:varchar(255)"`
 }

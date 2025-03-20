@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
@@ -25,6 +26,11 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	}
 
 	claims := c.MustGet("claims").(helper.UserCustomClaims)
+
+	if claims.Role != string(enum.Admin) && updateData.Role.Name == enum.Admin {
+		c.JSON(http.StatusUnprocessableEntity, error.Unauthorized.Error())
+		return
+	}
 
 	_, err := h.s.UpdateProfile(claims.ID, &updateData)
 	if err != nil {

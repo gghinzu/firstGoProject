@@ -15,14 +15,14 @@ func (s *UserService) UpdateUserByID(id string, updatedUser *dto.UpdateDTO) erro
 		return fmt.Errorf("%v", err)
 	}
 
-	convertedUser := updatedUser.UpdateConvertToUser(updatedUser)
+	user := updatedUser.UpdateConvertToUser(updatedUser)
 
-	if convertedUser == nil {
+	if user == nil {
 		return error2.ConversionError
 	}
 
 	if userUpdate.Status != enum.Deleted {
-		return s.repo.UpdateUserByID(userUpdate.ID, convertedUser)
+		return s.repo.UpdateUserByID(userUpdate.ID, user)
 	} else {
 		return errors.New("user is deactivated and cannot be updated")
 	}
