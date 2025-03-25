@@ -13,7 +13,7 @@ func (h *UserHandler) DeleteProfile(c *gin.Context) {
 
 	err := h.s.DeleteProfile(claims.ID)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, error.DeleteError.Error())
+		c.JSON(http.StatusBadRequest, error.DeleteError)
 		return
 	}
 

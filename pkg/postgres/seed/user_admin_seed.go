@@ -34,9 +34,9 @@ func AdminSeed(db *gorm.DB) error {
 			Name:      "seed",
 			Surname:   "seed",
 			Age:       age,
-			Gender:    enum.Other,
-			Education: "N/A",
-			Status:    0,
+			Gender:    enum.NotSpecified,
+			Education: enum.None,
+			Status:    1,
 			RoleID:    adminRole.RoleId,
 		}).Error
 	}

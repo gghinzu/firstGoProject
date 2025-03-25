@@ -25,37 +25,42 @@ func main() {
 	userService := service.NewUserService(userRepository)
 	userHandler := handler.NewUserHandler(userService)
 
-	// router grouping
-	users := router.Group("/user")
-	{
-		authorized := users.Group("")
-		authorized.Use(middleware.AuthMiddleware())
-		{
-			profile := authorized.Group("/profile")
-			{
-				profile.GET("", userHandler.GetProfile)
-				profile.PUT("", userHandler.UpdateProfile)
-				profile.DELETE("", userHandler.DeleteProfile)
-			}
-			adminAuth := authorized.Group("")
-			adminAuth.Use(middleware.RoleAuthentication())
-			{
-				adminAuth.GET("", userHandler.FilterHandler)
-				adminAuth.GET("/:id", userHandler.GetUserByIDHandler)
-				adminAuth.PUT("/:id", userHandler.UpdateUserByIDHandler)
-				adminAuth.POST("", userHandler.CreateUserHandler)
-				adminAuth.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
-				adminAuth.DELETE("/:id", userHandler.DeleteUserByIDHandler)
-			}
-		}
-		users.POST("/refresh-token", userHandler.RefreshTokenHandler)
-		users.POST("/register", userHandler.RegisterHandler)
-		users.POST("/login", userHandler.LoginHandler)
-		users.POST("/verify", userHandler.VerifyEmailHandler)
-	}
+	SetupRouter(router, userHandler)
 
 	err = router.Run(configure.ClientOrigin)
 	if err != nil {
 		return
+	}
+}
+
+func SetupRouter(router *gin.Engine, userHandler *handler.UserHandler) {
+	auth := router.Group("/auth")
+	{
+		auth.POST("/refresh-token", userHandler.RefreshTokenHandler)
+		auth.POST("/login", userHandler.LoginHandler)
+	}
+
+	profile := router.Group("/profile")
+	profile.Use(middleware.AuthMiddleware())
+	{
+		profile.GET("", userHandler.GetProfile)
+		profile.PUT("", userHandler.UpdateProfile)
+		profile.DELETE("", userHandler.DeleteProfile)
+	}
+
+	user := router.Group("/user")
+	{
+		user.POST("/register", userHandler.RegisterHandler)
+		user.POST("/verify", userHandler.VerifyEmailHandler)
+	}
+
+	user.Use(middleware.AuthMiddleware(), middleware.RoleAuthorization())
+	{
+		user.GET("", userHandler.FilterHandler)
+		user.GET("/:id", userHandler.GetUserByIDHandler)
+		user.PUT("/:id", userHandler.UpdateUserByIDHandler)
+		user.POST("", userHandler.CreateUserHandler)
+		user.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
+		user.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 	}
 }

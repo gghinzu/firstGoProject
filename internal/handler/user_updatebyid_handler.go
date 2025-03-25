@@ -19,31 +19,31 @@ func (h *UserHandler) UpdateUserByIDHandler(c *gin.Context) {
 	id := c.Param("id")
 
 	if c.Request.Body == nil {
-		c.JSON(http.StatusBadRequest, error.EmptyRequestBody.Error())
+		c.JSON(http.StatusBadRequest, error.EmptyRequestBody)
 		return
 	}
 
 	var updatedUser dto.UpdateDTO
 
 	if err := c.ShouldBindJSON(&updatedUser); err != nil {
-		c.JSON(http.StatusInternalServerError, error.JsonParseError.Error())
+		c.JSON(http.StatusInternalServerError, error.JsonParseError)
 		return
 	}
 
 	err := validate.Struct(&updatedUser)
 	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 		return
 	}
 
 	err = h.s.UpdateUserByID(id, &updatedUser)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			c.JSON(http.StatusNotFound, error.NotFound)
 			return
 		}
 
-		c.JSON(http.StatusInternalServerError, error.UpdateError.Error())
+		c.JSON(http.StatusInternalServerError, error.UpdateError)
 		return
 	}
 

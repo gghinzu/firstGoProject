@@ -7,12 +7,13 @@ import (
 )
 
 type UserRepositoryPort interface {
-	GetUserByID(id string) (*entity.User, error)
+	GetUserByID(id string) (*dto.UserResponseDTO, error)
+	GetUserByIDRaw(id string) (*entity.User, error)
 	DeleteUserByID(id string) error
 	UpdateUserByID(id string, updatedUser *entity.User) error
 	CreateUser(newUser *entity.User) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
-	FilterUser(info dto.FilterDTO) (*[]entity.User, error)
+	FilterUser(info dto.FilterDTO) (*[]dto.UserResponseDTO, error)
 	Register(user *entity.User) error
 	GetUserByEmail(email string) (*entity.User, error)
 	GetUserRoleByRoleName(roleName string) (*entity.UserRole, error)

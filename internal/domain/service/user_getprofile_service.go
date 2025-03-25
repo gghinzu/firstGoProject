@@ -1,9 +1,9 @@
 package service
 
 import (
-	"firstGoProject/internal/domain/entity"
+	"firstGoProject/internal/dto"
 )
 
-func (s *UserService) GetProfile(id string) (*entity.User, error) {
+func (s *UserService) GetProfile(id string) (*dto.UserResponseDTO, error) {
 	return s.repo.GetUserByID(id)
 }

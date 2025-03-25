@@ -6,14 +6,12 @@ import (
 )
 
 func (s *UserService) GetUserWithRole(id string) (*entity.User, enum.UserRole, error) {
-	user, err := s.repo.GetUserByID(id)
-
+	user, err := s.repo.GetUserByIDRaw(id)
 	if err != nil {
 		return nil, "", err
 	}
 
 	role, err := s.repo.GetRoleByUserInfo(user)
-
 	if err != nil {
 		return nil, "", err
 	}

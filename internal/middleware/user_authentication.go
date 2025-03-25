@@ -13,7 +13,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		tokenString := c.GetHeader("Authorization")
 
 		if tokenString == "" {
-			c.JSON(http.StatusUnauthorized, error.Unauthorized.Error())
+			c.JSON(http.StatusUnauthorized, error.Unauthorized)
 			return
 		}
 
@@ -21,7 +21,7 @@ func AuthMiddleware() gin.HandlerFunc {
 
 		claims, err := helper.VerifyToken(tokenString, "access")
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthorized.Error())
+			c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthorized)
 			return
 		}
 

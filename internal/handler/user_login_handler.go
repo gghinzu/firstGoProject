@@ -20,13 +20,13 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	var loginInfo dto.LoginDTO
 
 	if err := c.ShouldBindJSON(&loginInfo); err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
 	err := validate.Struct(&loginInfo)
 	if err != nil {
-		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 		return
 	}
 
@@ -35,11 +35,11 @@ func (h *UserHandler) LoginHandler(c *gin.Context) {
 	userLogin, err = h.s.Login(loginInfo)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+			c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 			return
 		}
 
-		c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthenticated.Error())
+		c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthenticated)
 		return
 	}
 

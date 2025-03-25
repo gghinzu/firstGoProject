@@ -19,23 +19,23 @@ func (h *UserHandler) RegisterHandler(c *gin.Context) {
 	var info dto.RegisterDTO
 
 	if err := c.ShouldBindJSON(&info); err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
 	if err := validate.Struct(&info); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 		return
 	}
 
 	err := h.s.Register(&info)
 	if err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
-			c.JSON(http.StatusNotFound, error.AlreadyExists.Error())
+			c.JSON(http.StatusNotFound, error.AlreadyExists)
 			return
 		}
 
-		c.JSON(http.StatusInternalServerError, error.InternalServerError.Error())
+		c.JSON(http.StatusInternalServerError, error.InternalServerError)
 		return
 	}
 

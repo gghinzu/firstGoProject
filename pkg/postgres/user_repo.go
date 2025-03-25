@@ -16,13 +16,39 @@ func NewUserRepository(db *gorm.DB) *UserRepository {
 	return &UserRepository{db}
 }
 
-func (r *UserRepository) GetUserByID(id string) (*entity.User, error) {
-	var getUser *entity.User
-	err := r.db.Preload("Role").Where("id = ?", id).First(&getUser).Error
+func (r *UserRepository) GetUserByID(id string) (*dto.UserResponseDTO, error) {
+	var user entity.User
+	err := r.db.Preload("Role").Where("id = ?", id).First(&user).Error
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, err
 	}
-	return getUser, nil
+	if err != nil {
+		return nil, err
+	}
+	userDTO := &dto.UserResponseDTO{
+		ID:        user.ID,
+		Email:     user.Email,
+		Name:      user.Name,
+		Surname:   user.Surname,
+		Age:       user.Age,
+		Gender:    user.Gender,
+		Education: user.Education,
+		Status:    user.Status,
+		Role:      string(user.Role.Name),
+	}
+	return userDTO, nil
+}
+
+func (r *UserRepository) GetUserByIDRaw(id string) (*entity.User, error) {
+	var user entity.User
+	err := r.db.Preload("Role").Where("id = ?", id).First(&user).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, err
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
 }
 
 func (r *UserRepository) DeleteUserByID(id string) error {
@@ -34,18 +60,21 @@ func (r *UserRepository) DeleteUserByID(id string) error {
 }
 
 func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) error {
-	err := r.db.Model(&entity.User{}).Where("id = ?", id).
-		Omit("id", "role_id", "verification_code").
-		Updates(updatedUser).Error
+	updateData := map[string]interface{}{
+		"email":                    updatedUser.Email,
+		"password":                 updatedUser.Password,
+		"name":                     updatedUser.Name,
+		"surname":                  updatedUser.Surname,
+		"age":                      updatedUser.Age,
+		"gender":                   updatedUser.Gender,
+		"education":                updatedUser.Education,
+		"status":                   updatedUser.Status,
+		"verification_code":        updatedUser.VerificationCode,
+		"verification_code_expiry": updatedUser.VerificationCodeExpiry,
+	}
+	err := r.db.Model(&entity.User{}).Where("id = ?", id).Updates(updateData).Error
 	if err != nil {
 		return err
-	}
-	// default value handling
-	if updatedUser.Status == 0 {
-		err = r.UpdateUserStatusByID(id, 0)
-		if err != nil {
-			return err
-		}
 	}
 	return nil
 }
@@ -66,9 +95,10 @@ func (r *UserRepository) UpdateUserStatusByID(id string, userStatus enum.UserSta
 	return nil
 }
 
-func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) {
-	var users *[]entity.User
-	query := r.paginate(int(info.Limit), int(info.Page)).Preload("Role")
+func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]dto.UserResponseDTO, error) {
+	var users []entity.User
+	query := r.paginate(int(info.Limit), int(info.Page)).Preload("Role").
+		Select("id", "email", "name", "surname", "age", "gender", "education", "status", "role_id")
 	if info.Name != nil {
 		query = query.Where("name ILIKE ?", info.Name)
 	}
@@ -94,7 +124,21 @@ func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]entity.User, error) 
 	if err != nil {
 		return nil, err
 	}
-	return users, nil
+	userDTOs := make([]dto.UserResponseDTO, len(users))
+	for i, user := range users {
+		userDTOs[i] = dto.UserResponseDTO{
+			ID:        user.ID,
+			Email:     user.Email,
+			Name:      user.Name,
+			Surname:   user.Surname,
+			Age:       user.Age,
+			Gender:    user.Gender,
+			Education: user.Education,
+			Status:    user.Status,
+			Role:      string(user.Role.Name),
+		}
+	}
+	return &userDTOs, nil
 }
 
 func (r *UserRepository) Register(info *entity.User) error {
@@ -115,17 +159,17 @@ func (r *UserRepository) GetUserRoleByRoleName(roleName string) (*entity.UserRol
 }
 
 func (r *UserRepository) GetUserByEmail(email string) (*entity.User, error) {
-	var newUser *entity.User
-	err := r.db.Where("email ILIKE ?", email).First(&newUser).Error
+	var user *entity.User
+	err := r.db.Preload("Role").Where("lower(email) = lower(?)", email).First(&user).Error
 	if err != nil {
 		return nil, err
 	}
-	return newUser, nil
+	return user, nil
 }
 
 func (r *UserRepository) GetRoleByUserInfo(user *entity.User) (enum.UserRole, error) {
 	var userRole entity.UserRole
-	err := r.db.Where("role_id = ?", user.RoleID).First(&userRole).Error
+	err := r.db.Model(&entity.UserRole{}).Where("role_id = ?", user.RoleID).First(&userRole).Error
 	if err != nil {
 		return "", err
 	}
@@ -133,6 +177,5 @@ func (r *UserRepository) GetRoleByUserInfo(user *entity.User) (enum.UserRole, er
 }
 
 func (r *UserRepository) paginate(limit int, offset int) *gorm.DB {
-	var users *[]entity.User
-	return r.db.Limit(limit).Offset((offset - 1) * limit).Find(&users)
+	return r.db.Limit(limit).Offset((offset - 1) * limit)
 }

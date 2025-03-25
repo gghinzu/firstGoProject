@@ -13,13 +13,13 @@ func (h *UserHandler) FilterHandler(c *gin.Context) {
 
 	err := c.ShouldBindQuery(&info)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
 	users, err := h.s.FilterUser(info)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, error.InternalServerError.Error())
+		c.JSON(http.StatusInternalServerError, error.InternalServerError)
 		return
 	}
 

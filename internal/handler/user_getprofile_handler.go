@@ -21,10 +21,10 @@ func (h *UserHandler) GetProfile(c *gin.Context) {
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			c.JSON(http.StatusNotFound, error.NotFound)
 			return
 		}
-		c.JSON(http.StatusInternalServerError, error.InternalServerError.Error())
+		c.JSON(http.StatusInternalServerError, error.InternalServerError)
 		return
 	}
 

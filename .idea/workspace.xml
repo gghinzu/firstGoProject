@@ -6,14 +6,71 @@
   <component name="ChangeListManager">
     <list default="true" id="9f37234e-4515-4d4c-90d0-42f2bffa279d" name="Changes" comment="fixes">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/ceb1f2cf-ee7e-4d56-b3a1-b9ff020e1250/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/entity/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/entity/user_role.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/entity/user_role.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_gender.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_gender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_role.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_role.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/enum/user_status.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/enum/user_status.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/repository/user_repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_create_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_deletebyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_deleteprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_deleteprofile_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_filter_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_filter_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getbyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getprofile_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_getwithrole_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_getwithrole_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_login_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_refreshtoken_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_register_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_register_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatebyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updateprofile_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_updatestatusbyid_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/domain/service/user_verifyemail_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/domain/service/user_verifyemail_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/helper_calculateage.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/helper_calculateage.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_config.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_create_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_create_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_filter_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_filter_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_login_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_login_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_refreshtoken_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_register_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_register_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_status_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_status_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_token_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_token_response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_update_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_update_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_updateprofile_request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/user_verifyemail_response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/dto/user_verifyemail_response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/error/custom_errors.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/error/custom_errors.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_create_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_create_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deletebyid_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_deleteprofile_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_filter_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_filter_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getbyid_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_getprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_getprofile_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_login_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_login_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_refreshtoken_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_register_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_register_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatebyid_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updateprofile_handler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_updatestatusbyid_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/user_verifyemail_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/user_verifyemail_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/helper_comparepassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_comparepassword.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/helper/helper_encryptpassword.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_encryptpassword.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/helper/helper_verifytoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/helper/helper_verifytoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/user_authentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_authentication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/middleware/user_roleauthentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/middleware/user_roleauthorization.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/server/custom_messages.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/server/custom_messages.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pkg/config/loadconfig.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/config/loadconfig.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_createaccesstoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createaccesstoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/jwt/user_createrefreshtoken.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/jwt/user_createrefreshtoken.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/postgres.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/postgres.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_admin_seed.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/seed/user_role_seed.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/seed/user_role_seed.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/postgres/user_repo.go" beforeDir="false" afterPath="$PROJECT_DIR$/pkg/postgres/user_repo.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,6 +351,88 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/handler/user_login_handler.go</url>
+          <line>34</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/handler/user_login_handler.go</url>
+          <line>35</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/handler/user_login_handler.go</url>
+          <line>41</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/handler/user_login_handler.go</url>
+          <line>42</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>9</line>
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>10</line>
+          <option name="timeStamp" value="64" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>14</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>15</line>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>20</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>19</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>24</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>25</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>29</line>
+          <option name="timeStamp" value="71" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>30</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>34</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/internal/domain/service/user_login_service.go</url>
+          <line>36</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="DlvErrorBreakpoint" />
       </default-breakpoints>

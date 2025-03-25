@@ -11,11 +11,11 @@ import (
 	"fmt"
 	"math/big"
 	"net/smtp"
+	"time"
 )
 
 func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	hash, err := helper.EncryptPassword(newUser.Password)
-
 	if err != nil {
 		return err
 	}
@@ -24,7 +24,7 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 
 	user := newUser.RegisterConvertToUser(newUser)
 	if user == nil {
-		return error2.ConversionError
+		return error2.ConversionError.Message
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName("user")
@@ -40,7 +40,9 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 	}
 
 	verificationCode := GenerateVerificationCode()
+	expiry := time.Now().Add(15 * time.Minute)
 	user.VerificationCode = &verificationCode
+	user.VerificationCodeExpiry = &expiry
 	user.Status = enum.Passive
 
 	err = s.repo.Register(user)
@@ -58,13 +60,11 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 
 func GenerateVerificationCode() string {
 	num, _ := rand.Int(rand.Reader, big.NewInt(1000000))
-
 	return fmt.Sprintf("%06d", num)
 }
 
 func SendVerificationEmail(email, code string) error {
 	configure, err := config.LoadConfig()
-
 	if err != nil {
 		return err
 	}
@@ -76,14 +76,13 @@ func SendVerificationEmail(email, code string) error {
 
 	auth := smtp.PlainAuth("", senderEmail, senderPassword, smtpHost)
 	to := []string{email}
-	msg := []byte(fmt.Sprintf("Subject: Verification Code\r\n\r\nHi,\n\nYour verification code: %s\n\nThanks!", code))
+	msg := []byte(fmt.Sprintf("Subject: Verification Code\r\n\r\nHi,\n\nYour Verification Code For 15 Minutes: %s\n\n\n\nThanks!", code))
 
 	err = smtp.SendMail(smtpHost+":"+smtpPort, auth, senderEmail, to, msg)
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("Verification email sent to %s with code: %s\n", email, code)
-
+	fmt.Printf("Reciever: %s\nCode: %s", email, code)
 	return nil
 }

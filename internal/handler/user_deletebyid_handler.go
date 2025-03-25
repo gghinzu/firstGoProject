@@ -16,11 +16,11 @@ func (h *UserHandler) DeleteUserByIDHandler(c *gin.Context) {
 	err := h.s.DeleteUserByID(id)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			c.JSON(http.StatusNotFound, error.NotFound)
 			return
 		}
 
-		c.JSON(http.StatusInternalServerError, error.DeleteError.Error())
+		c.JSON(http.StatusInternalServerError, error.DeleteError)
 		return
 	}
 

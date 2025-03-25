@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/server"
@@ -17,20 +18,28 @@ func (h *UserHandler) VerifyEmailHandler(c *gin.Context) {
 	var input dto.VerifyEmailDTO
 
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
 	if err := validate.Struct(&input); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput.Error())
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 		return
 	}
 
 	err := h.s.VerifyEmail(input.Email, input.Code)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, error.VerifyError.Error())
+		switch {
+		case errors.Is(err, error.VerificationCodeNotFound.Message):
+			c.JSON(http.StatusBadRequest, error.VerificationCodeNotFound)
+		case errors.Is(err, error.InvalidVerificationCode.Message):
+			c.JSON(http.StatusBadRequest, error.InvalidVerificationCode)
+		case errors.Is(err, error.ExpiredVerificationCode.Message):
+			c.JSON(http.StatusBadRequest, error.ExpiredVerificationCode)
+		default:
+			c.JSON(http.StatusBadRequest, error.VerifyError)
+		}
 		return
 	}
-
 	c.JSON(http.StatusOK, server.Success)
 }

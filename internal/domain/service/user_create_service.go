@@ -11,7 +11,7 @@ func (s *UserService) CreateUser(newUser *dto.CreateDTO) error {
 	user := newUser.CreateConvertToUser(newUser)
 
 	if user == nil {
-		return error2.ConversionError
+		return error2.ConversionError.Message
 	}
 
 	roleName := newUser.Role

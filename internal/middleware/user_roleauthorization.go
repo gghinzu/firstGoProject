@@ -8,14 +8,14 @@ import (
 	"net/http"
 )
 
-func RoleAuthentication() gin.HandlerFunc {
+func RoleAuthorization() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		claims := c.MustGet("claims").(helper.UserCustomClaims)
 
 		role := claims.Role
 
 		if role != string(enum.Admin) {
-			c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthorized.Error())
+			c.AbortWithStatusJSON(http.StatusForbidden, error.Unauthorized)
 			return
 		}
 

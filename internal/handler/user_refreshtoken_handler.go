@@ -9,24 +9,26 @@ import (
 )
 
 func (h *UserHandler) RefreshTokenHandler(c *gin.Context) {
-	var refreshToken *dto.RefreshTokenDTO
+	var refreshTokenDTO *dto.RefreshTokenDTO
 
-	if err := c.ShouldBindJSON(&refreshToken); err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+	if err := c.ShouldBindJSON(&refreshTokenDTO); err != nil {
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
-	claims, err := helper.VerifyToken(refreshToken.RefreshToken, "refresh")
+	claims, err := helper.VerifyToken(refreshTokenDTO.RefreshToken, "refresh")
 	if err != nil {
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.Unauthenticated)
 		return
 	}
 
 	tokenUser, err := h.s.RefreshToken(claims.ID)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, error.Unauthorized.Error())
+		c.JSON(http.StatusUnauthorized, error.Unauthorized)
 		return
 	}
 
-	c.JSON(http.StatusOK, tokenUser.RefreshToken)
+	c.JSON(http.StatusOK, gin.H{
+		"access_token": tokenUser.Token,
+	})
 }

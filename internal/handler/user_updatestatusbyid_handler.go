@@ -15,14 +15,14 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	id := c.Param("id")
 
 	if c.Request.Body == nil {
-		c.JSON(http.StatusBadRequest, error.EmptyRequestBody.Error())
+		c.JSON(http.StatusBadRequest, error.EmptyRequestBody)
 		return
 	}
 
 	var status *dto.StatusDTO
 
 	if err := c.ShouldBindJSON(&status); err != nil {
-		c.JSON(http.StatusInternalServerError, error.JsonParseError.Error())
+		c.JSON(http.StatusInternalServerError, error.JsonParseError)
 		return
 	}
 
@@ -31,25 +31,25 @@ func (h *UserHandler) UpdateUserStatusByIDHandler(c *gin.Context) {
 	userStatus := status.Status
 
 	switch userStatus {
-	case 0:
-		userStat = enum.Active
 	case 1:
-		userStat = enum.Passive
+		userStat = enum.Active
 	case 2:
+		userStat = enum.Passive
+	case 3:
 		userStat = enum.Deleted
 	default:
-		c.JSON(http.StatusBadRequest, error.BadRequest.Error())
+		c.JSON(http.StatusBadRequest, error.BadRequest)
 		return
 	}
 
 	err := h.s.UpdateUserStatusByID(id, userStat)
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			c.JSON(http.StatusNotFound, error.NotFound.Error())
+			c.JSON(http.StatusNotFound, error.NotFound)
 			return
 		}
 
-		c.JSON(http.StatusNotFound, error.UpdateError.Error())
+		c.JSON(http.StatusNotFound, error.UpdateError)
 		return
 	}
 

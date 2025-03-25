@@ -21,10 +21,10 @@ func init() {
 
 func CreateRefreshToken(user *entity.User, role enum.UserRole) (string, error) {
 	refreshToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"user_id": user.ID,
-		"role":    string(role),
-		"type":    "refresh",
-		"exp":     time.Now().Add(time.Hour * 24 * 180).Unix(),
+		"id":   user.ID,
+		"role": string(role),
+		"type": "refresh",
+		"exp":  time.Now().Add(time.Hour * 24 * 180).Unix(),
 	})
 
 	secretKey := []byte(GetSecretKey())

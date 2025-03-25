@@ -22,7 +22,7 @@ func Connection() *gorm.DB {
 func Migrate(db *gorm.DB) {
 	err := db.Migrator().AutoMigrate(&entity.User{}, &entity.UserRole{})
 	if err != nil {
-		log.Fatalf("auto migration failed: %s", err.Error())
+		log.Fatalf("auto migration failed: %s", err)
 	}
 }
 
