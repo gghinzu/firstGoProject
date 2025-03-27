@@ -4,7 +4,6 @@ import (
 	"errors"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
-	error2 "firstGoProject/internal/error"
 	"fmt"
 )
 
@@ -16,7 +15,7 @@ func (s *UserService) UpdateUserByID(id string, updatedUser *dto.UpdateDTO) erro
 
 	user := updatedUser.UpdateConvertToUser(updatedUser)
 	if user == nil {
-		return error2.ConversionError.Message
+		return errors.New("")
 	}
 
 	if userUpdate.Status != enum.Deleted {

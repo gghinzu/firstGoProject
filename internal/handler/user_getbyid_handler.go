@@ -3,7 +3,6 @@ package handler
 import (
 	"errors"
 	"firstGoProject/internal/error"
-	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"net/http"
@@ -15,7 +14,7 @@ func (h *UserHandler) GetUserByIDHandler(c *gin.Context) {
 
 	user, err := h.s.GetUserByID(id)
 	if user == nil {
-		c.JSON(http.StatusNotFound, server.NotFound)
+		c.JSON(http.StatusNotFound, error.NotFound)
 		return
 	}
 

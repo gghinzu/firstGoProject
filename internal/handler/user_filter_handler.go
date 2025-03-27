@@ -3,7 +3,6 @@ package handler
 import (
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
-	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -24,7 +23,7 @@ func (h *UserHandler) FilterHandler(c *gin.Context) {
 	}
 
 	if users == nil || len(*users) == 0 {
-		c.JSON(http.StatusNotFound, server.NotFound)
+		c.JSON(http.StatusNotFound, error.NotFound)
 		return
 	}
 

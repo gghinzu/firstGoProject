@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"errors"
 	"firstGoProject/internal/dto"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/server"
@@ -30,11 +29,11 @@ func (h *UserHandler) VerifyEmailHandler(c *gin.Context) {
 	err := h.s.VerifyEmail(input.Email, input.Code)
 	if err != nil {
 		switch {
-		case errors.Is(err, error.VerificationCodeNotFound.Message):
+		case err.Error() == error.VerificationCodeNotFound.Error.Code:
 			c.JSON(http.StatusBadRequest, error.VerificationCodeNotFound)
-		case errors.Is(err, error.InvalidVerificationCode.Message):
+		case err.Error() == error.InvalidVerificationCode.Error.Code:
 			c.JSON(http.StatusBadRequest, error.InvalidVerificationCode)
-		case errors.Is(err, error.ExpiredVerificationCode.Message):
+		case err.Error() == error.ExpiredVerificationCode.Error.Code:
 			c.JSON(http.StatusBadRequest, error.ExpiredVerificationCode)
 		default:
 			c.JSON(http.StatusBadRequest, error.VerifyError)

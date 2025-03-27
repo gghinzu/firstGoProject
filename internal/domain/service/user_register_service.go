@@ -5,7 +5,6 @@ import (
 	"errors"
 	"firstGoProject/internal/domain/enum"
 	"firstGoProject/internal/dto"
-	error2 "firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
 	"firstGoProject/pkg/config"
 	"fmt"
@@ -24,7 +23,7 @@ func (s *UserService) Register(newUser *dto.RegisterDTO) error {
 
 	user := newUser.RegisterConvertToUser(newUser)
 	if user == nil {
-		return error2.ConversionError.Message
+		return errors.New("")
 	}
 
 	userRole, err := s.repo.GetUserRoleByRoleName("user")

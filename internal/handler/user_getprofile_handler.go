@@ -4,7 +4,6 @@ import (
 	"errors"
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
-	"firstGoProject/internal/server"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"net/http"
@@ -15,7 +14,7 @@ func (h *UserHandler) GetProfile(c *gin.Context) {
 
 	user, err := h.s.GetProfile(claims.ID)
 	if user == nil {
-		c.JSON(http.StatusNotFound, server.NotFound)
+		c.JSON(http.StatusNotFound, error.NotFound)
 		return
 	}
 
