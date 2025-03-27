@@ -45,7 +45,6 @@ func SetupRouter(router *gin.Engine, userHandler *handler.UserHandler) {
 	{
 		profile.GET("", userHandler.GetProfile)
 		profile.PUT("", userHandler.UpdateProfile)
-		profile.DELETE("", userHandler.DeleteProfile)
 	}
 
 	user := router.Group("/user")

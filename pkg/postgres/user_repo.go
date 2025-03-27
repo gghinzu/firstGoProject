@@ -67,7 +67,7 @@ func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) err
 		"surname":                  updatedUser.Surname,
 		"age":                      updatedUser.Age,
 		"gender":                   updatedUser.Gender,
-		"education":                updatedUser.Education.String(),
+		"education":                updatedUser.Education,
 		"status":                   updatedUser.Status,
 		"verification_code":        updatedUser.VerificationCode,
 		"verification_code_expiry": updatedUser.VerificationCodeExpiry,

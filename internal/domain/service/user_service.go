@@ -19,7 +19,6 @@ type UserServicePort interface {
 	RefreshToken(id string) (*dto.TokenDTO, error)
 	GetProfile(id string) (*dto.UserResponseDTO, error)
 	UpdateProfile(id string, userDTO *dto.UpdateProfileDTO) (*entity.User, error)
-	DeleteProfile(id string) error
 	GetUserWithRole(id string) (*entity.User, enum.UserRole, error)
 	VerifyEmail(email, code string) error
 }
