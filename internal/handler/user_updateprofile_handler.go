@@ -7,6 +7,7 @@ import (
 	"firstGoProject/internal/error"
 	"firstGoProject/internal/helper"
 	"firstGoProject/internal/server"
+	"firstGoProject/internal/validation"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"net/http"
@@ -22,14 +23,53 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 	}
 
 	if reflect.DeepEqual(updateData, dto.UpdateProfileDTO{}) {
-		c.JSON(http.StatusBadRequest, error.BadRequest)
+		c.JSON(http.StatusBadRequest, error.EmptyRequestBody)
+		return
+	}
+
+	if !validation.ValidateEmail(updateData.Email) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidatePassword(updateData.Password) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateName(updateData.Name) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateSurname(updateData.Surname) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateAge(updateData.Age) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateGender(updateData.Gender) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateStatus(updateData.Status) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateEducation(updateData.Education) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
+		return
+	}
+	if !validation.ValidateRole(updateData.Role.Name) {
+		c.JSON(http.StatusUnprocessableEntity, error.InvalidInput)
 		return
 	}
 
 	claims := c.MustGet("claims").(helper.UserCustomClaims)
 
-	if claims.Role != string(enum.Admin) && updateData.Role.Name == enum.Admin {
-		c.JSON(http.StatusUnprocessableEntity, error.Unauthorized)
+	roleInt := claims.Role
+
+	if roleInt != string(enum.Admin) && updateData.Role.Name == enum.Admin {
+		c.JSON(http.StatusUnauthorized, error.Unauthorized)
 		return
 	}
 
@@ -39,7 +79,6 @@ func (h *UserHandler) UpdateProfile(c *gin.Context) {
 			c.JSON(http.StatusNotFound, error.NotFound)
 			return
 		}
-
 		c.JSON(http.StatusInternalServerError, error.UpdateError)
 		return
 	}

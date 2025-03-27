@@ -6,15 +6,14 @@ import (
 	"time"
 )
 
-// TODO: regex
 type RegisterDTO struct {
-	Email     string             `json:"email" gorm:"unique;not null" validate:"required,email"`
-	Password  string             `json:"password" gorm:"not null" validate:"required,min=6,max=255"`
-	Name      string             `json:"name" validate:"required,excludesall=0123456789,min=2,max=255"`
-	Surname   string             `json:"surname" validate:"required,excludesall=0123456789,min=2,max=255"`
-	Age       time.Time          `json:"age" validate:"required"`
-	Gender    enum.UserGender    `json:"gender" validate:"required,oneof=male female 'not specified'"`
-	Education enum.UserEducation `json:"education" validate:"required,oneof=None 'Primary School' 'Middle School' 'High School' 'Bachelor''s Degree' 'Master''s Degree' Doctorate"`
+	Email     string             `json:"email" gorm:"unique;not null"`
+	Password  string             `json:"password" gorm:"not null"`
+	Name      string             `json:"name"`
+	Surname   string             `json:"surname"`
+	Age       time.Time          `json:"age"`
+	Gender    enum.UserGender    `json:"gender"`
+	Education enum.UserEducation `json:"education"`
 }
 
 func (RegisterDTO) RegisterConvertToUser(dto *RegisterDTO) *entity.User {

@@ -12,7 +12,6 @@ type UserServicePort interface {
 	GetUserByID(id string) (*dto.UserResponseDTO, error)
 	DeleteUserByID(id string) error
 	UpdateUserByID(id string, updatedUser *dto.UpdateDTO) error
-	CreateUser(newUser *dto.CreateDTO) error
 	UpdateUserStatusByID(id string, userStatus enum.UserStatus) error
 	FilterUser(info dto.FilterDTO) (*[]dto.UserResponseDTO, error)
 	Register(newUser *dto.RegisterDTO) error

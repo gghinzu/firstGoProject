@@ -5,13 +5,13 @@ import (
 )
 
 type UserResponseDTO struct {
-	ID        string             `json:"id"`
-	Email     string             `json:"email"`
-	Name      string             `json:"name"`
-	Surname   string             `json:"surname"`
-	Age       int                `json:"age"`
-	Gender    enum.UserGender    `json:"gender"`
-	Education enum.UserEducation `json:"education"`
-	Status    enum.UserStatus    `json:"status"`
-	Role      string             `json:"role,omitempty"`
+	ID        string          `json:"id"`
+	Email     string          `json:"email"`
+	Name      string          `json:"name"`
+	Surname   string          `json:"surname"`
+	Age       int             `json:"age"`
+	Gender    enum.UserGender `json:"gender"`
+	Education string          `json:"education"`
+	Status    enum.UserStatus `json:"status"`
+	Role      string          `json:"role,omitempty"`
 }

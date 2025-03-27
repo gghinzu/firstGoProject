@@ -59,7 +59,6 @@ func SetupRouter(router *gin.Engine, userHandler *handler.UserHandler) {
 		user.GET("", userHandler.FilterHandler)
 		user.GET("/:id", userHandler.GetUserByIDHandler)
 		user.PUT("/:id", userHandler.UpdateUserByIDHandler)
-		user.POST("", userHandler.CreateUserHandler)
 		user.POST("/:id/status", userHandler.UpdateUserStatusByIDHandler)
 		user.DELETE("/:id", userHandler.DeleteUserByIDHandler)
 	}

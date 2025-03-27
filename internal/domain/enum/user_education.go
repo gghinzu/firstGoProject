@@ -1,13 +1,34 @@
 package enum
 
-type UserEducation string
+type UserEducation int
 
 const (
-	None            UserEducation = "None"
-	PrimarySchool   UserEducation = "Primary School"
-	MiddleSchool    UserEducation = "Middle School"
-	HighSchool      UserEducation = "High School"
-	BachelorsDegree UserEducation = "Bachelor's Degree"
-	MastersDegree   UserEducation = "Master's Degree"
-	Doctorate       UserEducation = "Doctorate"
+	None            UserEducation = 1
+	PrimarySchool   UserEducation = 2
+	MiddleSchool    UserEducation = 3
+	HighSchool      UserEducation = 4
+	BachelorsDegree UserEducation = 5
+	MastersDegree   UserEducation = 6
+	Doctorate       UserEducation = 7
 )
+
+func (e UserEducation) String() string {
+	switch e {
+	case None:
+		return "None"
+	case PrimarySchool:
+		return "Primary School"
+	case MiddleSchool:
+		return "Middle School"
+	case HighSchool:
+		return "High School"
+	case BachelorsDegree:
+		return "Bachelor's Degree"
+	case MastersDegree:
+		return "Master's Degree"
+	case Doctorate:
+		return "Doctorate"
+	default:
+		return "Unknown"
+	}
+}

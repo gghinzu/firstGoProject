@@ -32,7 +32,7 @@ func (r *UserRepository) GetUserByID(id string) (*dto.UserResponseDTO, error) {
 		Surname:   user.Surname,
 		Age:       user.Age,
 		Gender:    user.Gender,
-		Education: user.Education,
+		Education: user.Education.String(),
 		Status:    user.Status,
 		Role:      string(user.Role.Name),
 	}
@@ -67,20 +67,12 @@ func (r *UserRepository) UpdateUserByID(id string, updatedUser *entity.User) err
 		"surname":                  updatedUser.Surname,
 		"age":                      updatedUser.Age,
 		"gender":                   updatedUser.Gender,
-		"education":                updatedUser.Education,
+		"education":                updatedUser.Education.String(),
 		"status":                   updatedUser.Status,
 		"verification_code":        updatedUser.VerificationCode,
 		"verification_code_expiry": updatedUser.VerificationCodeExpiry,
 	}
 	err := r.db.Model(&entity.User{}).Where("id = ?", id).Updates(updateData).Error
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func (r *UserRepository) CreateUser(newUser *entity.User) error {
-	err := r.db.Create(&newUser).Error
 	if err != nil {
 		return err
 	}
@@ -133,7 +125,7 @@ func (r *UserRepository) FilterUser(info dto.FilterDTO) (*[]dto.UserResponseDTO,
 			Surname:   user.Surname,
 			Age:       user.Age,
 			Gender:    user.Gender,
-			Education: user.Education,
+			Education: user.Education.String(),
 			Status:    user.Status,
 			Role:      string(user.Role.Name),
 		}

@@ -7,11 +7,11 @@ import (
 )
 
 type UpdateDTO struct {
-	Name      string             `json:"name" validate:"required,excludesall=0123456789,min=2,max=255"`
-	Surname   string             `json:"surname" validate:"required,excludesall=0123456789,min=2,max=255"`
-	Age       time.Time          `json:"age" validate:"required"`
-	Gender    enum.UserGender    `json:"gender" validate:"required,oneof=male female 'not specified'"`
-	Education enum.UserEducation `json:"education" validate:"required,oneof=None 'Primary School' 'Middle School' 'High School' 'Bachelor''s Degree' 'Master''s Degree' Doctorate"`
+	Name      string             `json:"name"`
+	Surname   string             `json:"surname"`
+	Age       time.Time          `json:"age"`
+	Gender    enum.UserGender    `json:"gender"`
+	Education enum.UserEducation `json:"education"`
 }
 
 func (UpdateDTO) UpdateConvertToUser(dto *UpdateDTO) *entity.User {

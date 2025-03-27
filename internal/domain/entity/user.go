@@ -12,8 +12,8 @@ type User struct {
 	Name                   string             `json:"name" gorm:"type:varchar(255);not null"`
 	Surname                string             `json:"surname" gorm:"type:varchar(255);not null"`
 	Age                    int                `json:"age" gorm:"type:bigint;not null"`
-	Gender                 enum.UserGender    `json:"gender" gorm:"type:varchar(255);not null"`
-	Education              enum.UserEducation `json:"education" gorm:"type:varchar(255);not null"`
+	Gender                 enum.UserGender    `json:"gender" gorm:"not null"`
+	Education              enum.UserEducation `json:"education" gorm:"not null"`
 	Status                 enum.UserStatus    `json:"status" gorm:"not null"`
 	RoleID                 string             `json:"role_id" gorm:"not null"`
 	Role                   UserRole           `json:"role" gorm:"foreignKey:RoleID;references:RoleId;not null"`
